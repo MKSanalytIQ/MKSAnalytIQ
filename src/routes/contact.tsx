@@ -185,8 +185,8 @@ function Contact() {
           <p className="text-xs font-semibold uppercase tracking-widest text-primary">Contact</p>
           <h1 className="mt-3 max-w-3xl text-4xl font-extrabold tracking-tight sm:text-5xl">Start a project conversation</h1>
           <p className="mt-4 max-w-2xl text-base leading-relaxed text-mute">
-            Share your name, what you need, and one way for us to reply. Continue in WhatsApp or prepare an email; this
-            site does not store your brief.
+            Share your name, what you need, and one way for us to reply. Choose WhatsApp or email to open a prepared
+            message in that app; you review and send it there. This site does not store your brief.
           </p>
         </div>
       </section>
@@ -289,6 +289,9 @@ function Contact() {
               </span>
             ) : null}
           </label>
+          <p className="rounded-2xl bg-paper px-4 py-3 text-xs leading-relaxed text-mute">
+            Nothing is sent automatically. The selected app opens a draft; review it and press Send there.
+          </p>
           <div className="flex flex-col gap-3 sm:flex-row">
             <Button type="submit" name="channel" value="whatsapp" disabled={busy} className="flex-1">
               {busy ? "Opening…" : "Continue in WhatsApp"}

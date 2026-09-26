@@ -131,12 +131,13 @@ const floats: {
   rx: number;
   ry: number;
   scale: number;
+  mobile?: boolean;
 }[] = [
-  { title: "AI & Automation", icon: Brain, className: "left-[26%] top-[2%]", delay: "0.2s", z: -90, rotate: -6, rx: 10, ry: -8, scale: 0.88 },
-  { title: "Web Development", icon: Code2, className: "right-[1%] top-[8%]", delay: "1.1s", z: -36, rotate: 7, rx: 8, ry: 10, scale: 0.92 },
-  { title: "Software Development", icon: Target, className: "right-[4%] top-[40%]", delay: "0.6s", z: 36, rotate: 4, rx: 4, ry: 12, scale: 1 },
-  { title: "Digital Marketing", icon: Megaphone, className: "left-[0%] bottom-[20%]", delay: "0s", z: 96, rotate: -8, rx: 2, ry: -12, scale: 1.04 },
-  { title: "App Development", icon: Smartphone, className: "left-[8%] bottom-[2%]", delay: "1.5s", z: 140, rotate: -3, rx: 0, ry: -6, scale: 1.08 },
+  { title: "AI & Automation", icon: Brain, className: "left-[3%] top-[4%] sm:left-[26%] sm:top-[2%]", delay: "0.2s", z: -72, rotate: -6, rx: 10, ry: -8, scale: 0.9, mobile: true },
+  { title: "Web Development", icon: Code2, className: "right-[1%] top-[10%]", delay: "1.1s", z: -12, rotate: 7, rx: 8, ry: 10, scale: 0.94 },
+  { title: "Software Development", icon: Target, className: "right-[3%] top-[42%]", delay: "0.6s", z: 54, rotate: 4, rx: 4, ry: 12, scale: 1 },
+  { title: "Digital Marketing", icon: Megaphone, className: "right-[5%] bottom-[12%] sm:left-[0%] sm:right-auto sm:bottom-[20%]", delay: "0s", z: 112, rotate: -8, rx: 2, ry: -12, scale: 1.02, mobile: true },
+  { title: "App Development", icon: Smartphone, className: "left-[8%] bottom-[2%]", delay: "1.5s", z: 168, rotate: -3, rx: 0, ry: -6, scale: 1.06 },
 ];
 
 function Home() {
@@ -669,12 +670,15 @@ function TechIcon({ name }: { name: string }) {
 function HeroVisual() {
   return (
     <div className="home-stage relative mx-auto h-[360px] w-full max-w-xl sm:h-[440px] lg:h-[500px] lg:max-w-none" aria-hidden>
-      <div className="absolute bottom-8 left-1/2 h-28 w-[72%] -translate-x-1/2 rounded-full bg-blue-300/40 blur-3xl" />
-      <span className="absolute right-[18%] top-[18%] size-4 rounded-full bg-blue-400/70" />
-      <span className="absolute left-[14%] top-[30%] size-3 rounded-full bg-violet-300" />
-      <span className="absolute bottom-16 right-[8%] size-6 rounded-full bg-cyan-200" />
-      <div className="absolute bottom-10 left-1/2 h-44 w-44 -translate-x-1/2 rounded-full border border-blue-200/80 bg-white/40" />
-      <div className="laptop absolute bottom-8 left-1/2 w-[88%] max-w-[30rem] -translate-x-1/2">
+      <div className="home-stage__depth" aria-hidden>
+        <div className="home-stage__disc" />
+        <div className="home-stage__ring home-stage__ring--outer" />
+        <div className="home-stage__ring home-stage__ring--inner" />
+        <span className="home-stage__spark home-stage__spark--one" />
+        <span className="home-stage__spark home-stage__spark--two" />
+        <span className="home-stage__spark home-stage__spark--three" />
+      </div>
+      <div className="laptop absolute bottom-8 left-1/2 w-[88%] max-w-[30rem]">
         <div className="rounded-t-[1.35rem] border border-white bg-gradient-to-b from-white to-slate-200 p-2 shadow-[0_28px_50px_rgba(40,80,160,0.18)]">
           <div className="laptop-screen flex h-40 flex-col items-center justify-center rounded-xl sm:h-52">
             <span className="font-display text-5xl font-extrabold leading-none text-[#2f6bff] sm:text-6xl">M</span>
@@ -682,7 +686,7 @@ function HeroVisual() {
             <span className="mt-1 text-[10px] text-[#5c6b80]">Ideas. Technology. Growth.</span>
           </div>
         </div>
-        <div className="relative mx-auto h-4 w-[114%] -translate-x-[6%] rounded-b-2xl bg-gradient-to-b from-white via-slate-200 to-slate-400 shadow-[0_16px_24px_rgba(40,80,160,0.16)]">
+        <div className="laptop-deck relative mx-auto h-5 w-[114%] -translate-x-[6%] rounded-b-2xl bg-gradient-to-b from-white via-slate-200 to-slate-400 shadow-[0_16px_24px_rgba(40,80,160,0.16)]">
           <span className="absolute left-1/2 top-1 h-1 w-14 -translate-x-1/2 rounded-full bg-slate-400/70" />
         </div>
         <div className="mx-auto h-2.5 w-32 rounded-b-md bg-slate-300" />
@@ -690,7 +694,7 @@ function HeroVisual() {
       {floats.map((card) => (
         <div
           key={card.title}
-          className={`float-card absolute hidden w-36 rounded-2xl p-3 lg:block ${card.className}`}
+          className={`float-card absolute ${card.mobile ? "block" : "hidden lg:block"} w-32 rounded-2xl p-2.5 sm:w-36 sm:p-3 ${card.className}`}
           style={{
             transform: `translateZ(${card.z}px) rotateX(${card.rx}deg) rotateY(${card.ry}deg) rotate(${card.rotate}deg) scale(${card.scale})`,
             animationDelay: card.delay,

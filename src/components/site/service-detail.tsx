@@ -36,6 +36,15 @@ export function ServiceDetail({ service }: { service: Service }) {
     : faqsFor(service.id);
   const path = `/services/${service.slug}`;
   const linked = relatedServices(service.relatedServices);
+  const pageSections = [
+    { href: "#approach", label: "Approach" },
+    { href: "#fit", label: "Who it is for" },
+    ...(service.sections.length || service.serviceMenu ? [{ href: "#details", label: "Service details" }] : []),
+    { href: "#deliverables", label: "Deliverables" },
+    { href: "#process", label: "Process" },
+    { href: "#work", label: "Relevant work" },
+    ...(questions.length ? [{ href: "#faqs", label: "FAQs" }] : []),
+  ];
 
   useEffect(() => {
     track("service_view", { service: service.slug });
@@ -130,7 +139,22 @@ export function ServiceDetail({ service }: { service: Service }) {
         </div>
       </section>
 
-      <section className="mx-auto grid max-w-6xl gap-4 px-5 py-12 md:grid-cols-2">
+      <nav aria-label="On this page" className="mx-auto max-w-6xl px-5 pt-5">
+        <div className="flex items-center gap-2 overflow-x-auto pb-2">
+          <span className="shrink-0 pr-1 text-xs font-semibold uppercase tracking-widest text-mute">On this page</span>
+          {pageSections.map((section) => (
+            <a
+              key={section.href}
+              href={section.href}
+              className="inline-flex h-10 shrink-0 items-center rounded-full border border-line bg-card px-4 text-sm font-semibold text-ink transition-colors hover:border-primary/40 hover:text-primary"
+            >
+              {section.label}
+            </a>
+          ))}
+        </div>
+      </nav>
+
+      <section id="approach" className="scroll-mt-28 mx-auto grid max-w-6xl gap-4 px-5 py-12 md:grid-cols-2">
         <article className="rounded-3xl border border-line bg-card p-5 sm:p-6">
           <h2 className="text-2xl font-extrabold">The problem</h2>
           <p className="mt-3 text-sm leading-relaxed text-mute">{service.problem}</p>
@@ -141,7 +165,7 @@ export function ServiceDetail({ service }: { service: Service }) {
         </article>
       </section>
 
-      <section className="mx-auto max-w-6xl px-5 pt-4">
+      <section id="fit" className="scroll-mt-28 mx-auto max-w-6xl px-5 pt-4">
         <article className="rounded-3xl border border-line bg-card p-5 sm:p-6">
           <h2 className="text-2xl font-extrabold">{service.audienceTitle ?? "Who it is for"}</h2>
           <p className="mt-3 text-sm leading-relaxed text-mute">{service.suitable}</p>
@@ -149,7 +173,7 @@ export function ServiceDetail({ service }: { service: Service }) {
       </section>
 
       {service.sections.length ? (
-        <section className="mx-auto max-w-6xl space-y-4 px-5 py-4">
+        <section id="details" className="scroll-mt-28 mx-auto max-w-6xl space-y-4 px-5 py-4">
           {service.sections.map((section) => (
             <article key={section.title} className="rounded-3xl border border-line bg-card p-5 sm:p-6">
               <h2 className="text-2xl font-extrabold">{section.title}</h2>
@@ -160,7 +184,7 @@ export function ServiceDetail({ service }: { service: Service }) {
       ) : null}
 
       {service.serviceMenu ? (
-        <section className="mx-auto max-w-6xl px-5 py-4">
+        <section id={service.sections.length ? undefined : "details"} className="scroll-mt-28 mx-auto max-w-6xl px-5 py-4">
           <div className="rounded-3xl border border-line bg-card p-5 sm:p-6">
             <h2 className="text-2xl font-extrabold">{service.serviceMenu.title}</h2>
             {service.serviceMenu.intro ? (
@@ -178,7 +202,7 @@ export function ServiceDetail({ service }: { service: Service }) {
         </section>
       ) : null}
 
-      <section className="mx-auto max-w-6xl px-5 pb-4">
+      <section id="deliverables" className="scroll-mt-28 mx-auto max-w-6xl px-5 pb-4">
         <div className="rounded-3xl border border-line bg-card p-5 sm:p-6">
           <h2 className="text-2xl font-extrabold">{service.deliverablesTitle ?? "Deliverables"}</h2>
           <p className="mt-2 text-sm text-mute">Typical items. The written scope lists what your project includes.</p>
@@ -220,7 +244,7 @@ export function ServiceDetail({ service }: { service: Service }) {
         </section>
       ) : null}
 
-      <section className="mx-auto max-w-6xl px-5 py-12">
+      <section id="process" className="scroll-mt-28 mx-auto max-w-6xl px-5 py-12">
         <h2 className="text-3xl font-extrabold tracking-tight">{service.processTitle ?? "Process"}</h2>
         <p className="mt-3 max-w-2xl text-sm leading-relaxed text-mute">
           {service.processIntro ??
@@ -229,7 +253,7 @@ export function ServiceDetail({ service }: { service: Service }) {
         <ProcessSteps items={service.processSteps} />
       </section>
 
-      <section className="mx-auto max-w-6xl px-5 pb-12">
+      <section id="work" className="scroll-mt-28 mx-auto max-w-6xl px-5 pb-12">
         <h2 className="text-3xl font-extrabold tracking-tight">{service.workTitle ?? "Relevant work"}</h2>
         <p className="mt-3 max-w-2xl text-sm leading-relaxed text-mute">
           Documented scope for this work is also on the{" "}
@@ -253,7 +277,7 @@ export function ServiceDetail({ service }: { service: Service }) {
         )}
       </section>
 
-      <section className="mx-auto max-w-3xl px-5 pb-16">
+      <section id="faqs" className="scroll-mt-28 mx-auto max-w-3xl px-5 pb-16">
         <FaqList items={questions} />
         <p className="mt-8 text-xs font-semibold uppercase tracking-widest text-mute">
           Based in Noida • Serving Delhi NCR and India

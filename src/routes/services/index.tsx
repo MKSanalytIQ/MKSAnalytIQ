@@ -48,6 +48,21 @@ function ServicesPage() {
         </div>
       </section>
 
+      <nav aria-label="Jump to a service" className="mx-auto max-w-6xl px-5 pt-6">
+        <div className="flex items-center gap-2 overflow-x-auto pb-2">
+          <span className="shrink-0 pr-1 text-xs font-semibold uppercase tracking-widest text-mute">Jump to</span>
+          {services.map((service) => (
+            <a
+              key={service.id}
+              href={`#${service.id}`}
+              className="inline-flex h-10 shrink-0 items-center rounded-full border border-line bg-card px-4 text-sm font-semibold text-ink transition-colors hover:border-primary/40 hover:text-primary"
+            >
+              {service.title}
+            </a>
+          ))}
+        </div>
+      </nav>
+
       <div className="mx-auto max-w-6xl space-y-6 px-5 py-12">
         {services.map((service, index) => (
           <article

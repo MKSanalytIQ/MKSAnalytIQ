@@ -38,6 +38,31 @@ function ProcessPage() {
         <ProcessSteps />
       </section>
 
+      <section className="mx-auto max-w-6xl px-5 pb-12">
+        <div className="rounded-3xl border border-line bg-card p-6 sm:p-8">
+          <p className="text-xs font-semibold uppercase tracking-widest text-primary">Before we start</p>
+          <h2 className="mt-2 text-2xl font-extrabold">Bring the context; we’ll shape the scope together.</h2>
+          <p className="mt-3 max-w-2xl text-sm leading-relaxed text-mute">
+            You don’t need a polished brief. A few notes help us use the first conversation well:
+          </p>
+          <ul className="mt-5 grid gap-3 sm:grid-cols-3">
+            {[
+              ["The goal", "What needs to change for the business or its customers."],
+              ["What exists", "Current website, campaigns, tools or event plans."],
+              ["Your constraints", "Timing, budget range, people involved or fixed dates."],
+            ].map(([title, text]) => (
+              <li key={title} className="rounded-2xl bg-paper p-4">
+                <h3 className="font-display text-base font-bold">{title}</h3>
+                <p className="mt-1 text-sm leading-relaxed text-mute">{text}</p>
+              </li>
+            ))}
+          </ul>
+          <p className="mt-4 text-xs leading-relaxed text-mute">
+            The written scope records the work, timing and fee for your approval before production starts.
+          </p>
+        </div>
+      </section>
+
       <section className="mx-auto max-w-6xl px-5 pb-16">
         <div className="grid gap-4 rounded-3xl bg-navy p-6 text-paper md:grid-cols-3 md:p-10">
           <div className="md:col-span-2">

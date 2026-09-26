@@ -94,7 +94,22 @@ function About() {
       </section>
 
       <section className="mx-auto max-w-6xl px-5 py-16">
-        <h2 className="text-3xl font-extrabold tracking-tight">How we think about the work</h2>
+        <div className="flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <h2 className="text-3xl font-extrabold tracking-tight">How we think about the work</h2>
+            <p className="mt-2 max-w-2xl text-sm leading-relaxed text-mute">
+              See the services we offer and public examples of how the work takes shape.
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm font-semibold">
+            <Link to="/services" className="text-primary hover:text-ink">
+              Explore services <span aria-hidden>→</span>
+            </Link>
+            <Link to="/portfolio" className="text-primary hover:text-ink">
+              Browse public work <span aria-hidden>→</span>
+            </Link>
+          </div>
+        </div>
         <div className="mt-8 grid gap-4 md:grid-cols-3">
           {beliefs.map((item) => (
             <article key={item.title} className="rounded-3xl border border-line bg-card p-5">
