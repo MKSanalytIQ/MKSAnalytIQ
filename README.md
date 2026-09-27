@@ -34,14 +34,14 @@ Choose a card to expand it, then follow the link to the matching service page.
   <tr>
     <td width="50%" valign="top">
       <details>
-        <summary><strong>01 · Digital Marketing</strong><br>SEO, paid campaigns, content and lead generation.</summary>
+        <summary><strong>01 · Digital Marketing</strong><br>SEO · ads · social · leads</summary>
         <p>Plan search, Google and Meta campaigns, social content and follow-up around the enquiry you want to earn.</p>
         <p><a href="https://www.mksanalytiq.in/services/digital-marketing">Explore Digital Marketing ↗</a></p>
       </details>
     </td>
     <td width="50%" valign="top">
       <details>
-        <summary><strong>02 · Web Development</strong><br>Business sites, landing pages, shops and web apps.</summary>
+        <summary><strong>02 · Web Development</strong><br>Sites · shops · web apps</summary>
         <p>Build a clear public website or web application around the way customers and staff need to use it.</p>
         <p><a href="https://www.mksanalytiq.in/services/web-development">Explore Web Development ↗</a></p>
       </details>
@@ -50,14 +50,14 @@ Choose a card to expand it, then follow the link to the matching service page.
   <tr>
     <td width="50%" valign="top">
       <details>
-        <summary><strong>03 · Software Development</strong><br>Custom software, SaaS, dashboards and APIs.</summary>
+        <summary><strong>03 · Software Development</strong><br>Custom tools · SaaS · APIs</summary>
         <p>Shape the brief and written scope before building a tool, workflow or product for your team.</p>
         <p><a href="https://www.mksanalytiq.in/services/software-development">Explore Software Development ↗</a></p>
       </details>
     </td>
     <td width="50%" valign="top">
       <details>
-        <summary><strong>04 · App Development</strong><br>Android, iOS and cross-platform apps.</summary>
+        <summary><strong>04 · App Development</strong><br>Android · iOS · cross-platform</summary>
         <p>Plan a mobile product with the screens, integrations and admin needs defined in the project scope.</p>
         <p><a href="https://www.mksanalytiq.in/services/app-development">Explore App Development ↗</a></p>
       </details>
@@ -66,14 +66,14 @@ Choose a card to expand it, then follow the link to the matching service page.
   <tr>
     <td width="50%" valign="top">
       <details>
-        <summary><strong>05 · AI Development &amp; Automation</strong><br>Chatbots, integrations and workflow automation.</summary>
+        <summary><strong>05 · AI &amp; Automation</strong><br>Chatbots · integrations · workflows</summary>
         <p>Design AI-assisted tools with a clear review step and a person responsible for the output.</p>
         <p><a href="https://www.mksanalytiq.in/services/ai-development">Explore AI Development ↗</a></p>
       </details>
     </td>
     <td width="50%" valign="top">
       <details>
-        <summary><strong>06 · Social Media</strong><br>Content planning, reels, captions and replies.</summary>
+        <summary><strong>06 · Social Media</strong><br>Content · reels · community replies</summary>
         <p>Keep a steady presence with a calendar your team reviews before it goes out.</p>
         <p><a href="https://www.mksanalytiq.in/services/social-media">Explore Social Media ↗</a></p>
       </details>
@@ -82,7 +82,7 @@ Choose a card to expand it, then follow the link to the matching service page.
   <tr>
     <td width="50%" valign="top">
       <details>
-        <summary><strong>07 · Event Management</strong><br>Planning, registration and on-site coordination.</summary>
+        <summary><strong>07 · Event Management</strong><br>Planning · registration · coordination</summary>
         <p>Bring the run of show, vendors, attendee flow and event communications into one plan.</p>
         <p><a href="https://www.mksanalytiq.in/services/event-management">Explore Event Management ↗</a></p>
       </details>
@@ -106,38 +106,40 @@ A few public product and software examples. Open a card for its case study, live
 
 <table width="100%">
   <tr>
-    <td width="33%" valign="top">
+    <td width="50%" valign="top">
       <a href="https://www.mksanalytiq.in/case-studies/shortgen">
         <img src="./public/media/work/shortgen.jpg" alt="ShortGen product preview" width="100%">
       </a>
       <h3><a href="https://www.mksanalytiq.in/case-studies/shortgen">ShortGen ↗</a></h3>
-      <p>A multi-workspace SaaS for turning a topic into short-form video with render jobs, templates and credits.</p>
+      <p>A multi-workspace SaaS for turning a topic into short-form video.</p>
       <p><a href="https://shortgen-pi.vercel.app">Live preview</a> · <a href="https://github.com/SparkxDating/ShortGen">Source</a></p>
     </td>
-    <td width="33%" valign="top">
+    <td width="50%" valign="top">
       <a href="https://www.mksanalytiq.in/case-studies/taxpilot">
         <img src="./public/media/work/taxpilot.jpg" alt="TaxPilot AI guided preparation preview" width="100%">
       </a>
       <h3><a href="https://www.mksanalytiq.in/case-studies/taxpilot">TaxPilot AI ↗</a></h3>
-      <p>Guided ITR-3 and ITR-4 preparation for AY 2026–27, with eligibility checks and official ITR-4 JSON export.</p>
+      <p>Guided ITR-3/ITR-4 preparation with eligibility checks and JSON export.</p>
       <p><a href="https://taxpilot-ai-beta.vercel.app">Live preview</a> · <a href="https://github.com/SparkxDating/taxpilot-ai">Source</a></p>
     </td>
-    <td width="33%" valign="top">
+  </tr>
+  <tr>
+    <td width="50%" valign="top">
       <a href="https://www.mksanalytiq.in/case-studies/influencer-os">
         <img src="./public/media/work/influencer-os.jpg" alt="AI Influencer OS workspace preview" width="100%">
       </a>
       <h3><a href="https://www.mksanalytiq.in/case-studies/influencer-os">AI Influencer OS ↗</a></h3>
-      <p>A workspace for AI influencer profiles, content drafts, post approval and sponsored-caption disclosure.</p>
+      <p>Draft and approve AI influencer content with sponsored-caption disclosure.</p>
       <p><a href="https://github.com/SparkxDating/ai-influencer-os">Source repository</a></p>
+    </td>
+    <td width="50%" valign="top">
+      <h3>More selected work</h3>
+      <p>Explore the wider portfolio and generated case studies for the studio’s public projects.</p>
+      <p><a href="https://www.mksanalytiq.in/case-studies"><strong>Explore all case studies →</strong></a></p>
+      <p><a href="https://www.mksanalytiq.in/portfolio"><strong>Browse the portfolio →</strong></a></p>
     </td>
   </tr>
 </table>
-
-<p align="center">
-  <a href="https://www.mksanalytiq.in/case-studies"><strong>Explore all case studies →</strong></a>
-  &nbsp; · &nbsp;
-  <a href="https://www.mksanalytiq.in/portfolio"><strong>Browse the portfolio →</strong></a>
-</p>
 
 ---
 
@@ -145,11 +147,24 @@ A few public product and software examples. Open a card for its case study, live
 
 <table width="100%">
   <tr>
-    <td align="center" width="20%"><strong>01 · Understand</strong><br>Your goals and challenges</td>
-    <td align="center" width="20%"><strong>02 · Plan</strong><br>Strategy and roadmap</td>
-    <td align="center" width="20%"><strong>03 · Build</strong><br>Design and development</td>
-    <td align="center" width="20%"><strong>04 · Launch</strong><br>Testing and deployment</td>
-    <td align="center" width="20%"><strong>05 · Grow</strong><br>Support and improvement</td>
+    <td width="34%"><strong>01 · Understand</strong></td>
+    <td width="66%">Your goals and challenges</td>
+  </tr>
+  <tr>
+    <td><strong>02 · Plan</strong></td>
+    <td>Strategy and roadmap</td>
+  </tr>
+  <tr>
+    <td><strong>03 · Build</strong></td>
+    <td>Design and development</td>
+  </tr>
+  <tr>
+    <td><strong>04 · Launch</strong></td>
+    <td>Testing and deployment</td>
+  </tr>
+  <tr>
+    <td><strong>05 · Grow</strong></td>
+    <td>Support and improvement</td>
   </tr>
 </table>
 
