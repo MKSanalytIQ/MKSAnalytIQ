@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/site/button";
 import { SiteShell } from "@/components/site/shell";
 import { WhatsAppButton } from "@/components/site/whatsapp";
+import { ServiceArtwork } from "@/components/site/service-artwork";
 import { extras, services } from "@/lib/content";
 import { track } from "@/lib/analytics";
 import { cn } from "@/lib/cn";
@@ -68,18 +69,12 @@ function ServicesPage() {
           <article
             key={service.id}
             id={service.id}
-            className="scroll-mt-24 overflow-hidden rounded-3xl border border-line bg-card"
+            className="service-listing-card scroll-mt-24 overflow-hidden rounded-3xl border border-[#dfe6f0] bg-card"
           >
             <div className="grid lg:grid-cols-2">
-              <img
-                src={service.image}
-                alt={service.imageAlt}
-                width={1792}
-                height={1008}
-                loading="lazy"
-                decoding="async"
-                className={cn("h-64 w-full object-cover lg:h-full", index % 2 === 1 && "lg:order-2")}
-              />
+              <div className={cn("service-artwork-panel relative min-h-[280px] overflow-hidden sm:min-h-[340px] lg:min-h-[500px]", index % 2 === 1 && "lg:order-2")}>
+                <ServiceArtwork serviceId={service.id} title={service.title} />
+              </div>
               <div className={cn("p-6 sm:p-8", index % 2 === 1 && "lg:order-1")}>
                 <p className="text-xs font-semibold uppercase tracking-widest text-primary">0{index + 1}</p>
                 <h2 className="mt-2 text-3xl font-extrabold">
