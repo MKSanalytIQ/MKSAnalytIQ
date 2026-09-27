@@ -3,16 +3,47 @@ import { useEffect, useRef, useState } from "react";
 import { track } from "@/lib/analytics";
 import { Button } from "./button";
 
+const EXIT_INTENT_KEY = "mks-exit-seen-v1";
+
+function hasSeenExitIntent() {
+  try {
+    if (window.localStorage.getItem(EXIT_INTENT_KEY) === "1") return true;
+  } catch {
+    // Continue with tab-scoped storage if persistent storage is unavailable.
+  }
+  try {
+    return window.sessionStorage.getItem("mks-exit") === "1";
+  } catch {
+    return false;
+  }
+}
+
+function markExitIntentSeen() {
+  try {
+    window.localStorage.setItem(EXIT_INTENT_KEY, "1");
+  } catch {
+    // The popup remains one-time per tab through the fallback below.
+  }
+  try {
+    window.sessionStorage.setItem("mks-exit", "1");
+  } catch {
+    // Storage may be disabled by the browser; the component still closes normally.
+  }
+}
+
 export function ExitIntent() {
   const [open, setOpen] = useState(false);
   const panel = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (window.matchMedia("(pointer: coarse)").matches) return;
-    if (sessionStorage.getItem("mks-exit") === "1") return;
+    if (hasSeenExitIntent()) {
+      markExitIntentSeen();
+      return;
+    }
     const onOut = (event: MouseEvent) => {
       if (event.clientY > 8 || event.relatedTarget) return;
-      sessionStorage.setItem("mks-exit", "1");
+      markExitIntentSeen();
       setOpen(true);
     };
     document.documentElement.addEventListener("mouseout", onOut);
