@@ -13,7 +13,7 @@ import { WhatsAppButton } from "./whatsapp";
 export function SiteShell({
   children,
   cta = true,
-  tone = "paper",
+  tone = "warm",
 }: {
   children: ReactNode;
   cta?: boolean;

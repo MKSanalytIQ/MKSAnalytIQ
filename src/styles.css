@@ -557,7 +557,32 @@
 }
 
 .home-warm {
+  --color-ink: #17213a;
+  --color-navy: #102344;
+  --color-paper: #fffaf2;
+  --color-card: #fffefa;
+  --color-line: #eadfce;
+  --color-mute: #5c6679;
+  --color-primary: #176ac0;
+  --color-deep: #104987;
+  --color-accent: #ed5a27;
   background-color: #fffaf2;
+}
+
+.home-warm main > section:first-of-type:not(.growth-hero) {
+  background-image:
+    radial-gradient(ellipse at 8% 15%, rgba(52, 125, 213, 0.1), transparent 34rem),
+    radial-gradient(ellipse at 94% 76%, rgba(237, 90, 39, 0.1), transparent 31rem);
+}
+
+.home-warm main > article:first-of-type::before {
+  display: block;
+  width: 7rem;
+  height: 0.25rem;
+  margin-bottom: 1.75rem;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #176ac0 0 50%, #ed5a27 50% 100%);
+  content: "";
 }
 
 .growth-home {
