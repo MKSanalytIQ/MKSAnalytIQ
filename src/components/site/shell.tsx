@@ -17,7 +17,7 @@ export function SiteShell({
 }: {
   children: ReactNode;
   cta?: boolean;
-  tone?: "paper" | "night" | "day";
+  tone?: "paper" | "night" | "day" | "warm";
 }) {
   const path = useRouterState({ select: (s) => s.location.pathname });
   const [open, setOpen] = useState(false);
@@ -25,7 +25,19 @@ export function SiteShell({
   const lastPath = useRef<string | null>(null);
   const night = tone === "night";
   const day = tone === "day";
-  const fixed = night || day;
+  const warm = tone === "warm";
+  const fixed = night || day || warm;
+  const navItems = warm
+    ? ([
+        { to: "/", label: "Home" },
+        { to: "/services", label: "Services" },
+        { to: "/case-studies", label: "Case Studies" },
+        { to: "/about", label: "About" },
+        { to: "/process", label: "Process" },
+        { to: "/digital-marketing-software-delhi-ncr", label: "Delhi NCR" },
+        { to: "/contact", label: "Contact" },
+      ] as const)
+    : nav;
 
   useEffect(() => {
     if (lastPath.current === path) return;
@@ -46,7 +58,7 @@ export function SiteShell({
   }, [fixed]);
 
   return (
-    <div className={night ? "min-h-screen bg-[#050816] text-white" : day ? "home-day min-h-screen bg-[#f7faff] text-ink" : "min-h-screen bg-paper text-ink"}>
+    <div className={night ? "min-h-screen bg-[#050816] text-white" : day ? "home-day min-h-screen bg-[#f7faff] text-ink" : warm ? "home-warm min-h-screen bg-[#fffaf2] text-[#17213a]" : "min-h-screen bg-paper text-ink"}>
       <a
         href="#main"
         className="sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-50 focus:rounded-full focus:bg-card focus:px-4 focus:py-2"
@@ -65,13 +77,18 @@ export function SiteShell({
                   "fixed inset-x-0 top-0 z-40 border-b border-[#d9e6ff] backdrop-blur-md transition-shadow duration-200",
                   scrolled ? "bg-white/90 shadow-[0_8px_30px_rgba(40,80,160,0.08)]" : "bg-white/55",
                 )
-              : "sticky top-0 z-40 border-b border-line bg-card/95 backdrop-blur"
+              : warm
+                ? cn(
+                    "fixed inset-x-0 top-0 z-40 border-b border-[#eadfce]/80 backdrop-blur-md transition-shadow duration-200",
+                    scrolled ? "bg-[#fffaf3]/95 shadow-[0_8px_30px_rgba(62,53,37,0.08)]" : "bg-[#fffaf3]/78",
+                  )
+                : "sticky top-0 z-40 border-b border-line bg-card/95 backdrop-blur"
         }
       >
         <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-5">
           <Logo tone={night ? "paper" : "ink"} />
           <nav className="hidden items-center gap-6 lg:flex" aria-label="Primary">
-            {nav.map((item) => {
+            {navItems.map((item) => {
               const active = item.to === "/" ? path === "/" : path.startsWith(item.to);
               return (
                 <Link
@@ -86,7 +103,7 @@ export function SiteShell({
                 >
                   {item.label}
                   {active ? (
-                    <span className={cn("absolute inset-x-0 -bottom-px h-0.5 rounded-full", night ? "bg-[#7aa2ff]" : "bg-primary")} />
+                    <span className={cn("absolute inset-x-0 -bottom-px h-0.5 rounded-full", night ? "bg-[#7aa2ff]" : warm ? "bg-[#ef5a27]" : "bg-primary")} />
                   ) : null}
                 </Link>
               );
@@ -104,17 +121,18 @@ export function SiteShell({
                 "hidden h-11 lg:inline-flex",
                 night && "border-0 bg-gradient-to-r from-[#2f6bff] to-[#7a4dff] text-white shadow-[0_8px_24px_rgba(80,90,255,0.28)] hover:brightness-110",
                 day && "border-0 bg-gradient-to-r from-[#3b6bff] to-[#7a4dff] text-white shadow-[0_8px_24px_rgba(80,90,255,0.22)] hover:brightness-110",
+                warm && "border-0 bg-gradient-to-r from-[#ee5424] to-[#fa842e] text-white shadow-[0_8px_24px_rgba(224,83,35,0.24)] hover:brightness-110",
               )}
             >
               <Link to="/contact" onClick={() => track("quote_click", { source: "nav" })}>
-                Let’s Talk <ArrowRight className="size-4" aria-hidden />
+                {warm ? "Get a Free Consultation" : "Let’s Talk"} <ArrowRight className="size-4" aria-hidden />
               </Link>
             </Button>
             <button
               type="button"
               className={cn(
                 "inline-flex size-11 items-center justify-center rounded-full border lg:hidden",
-                night ? "border-white/15 text-white" : "border-line",
+                night ? "border-white/15 text-white" : warm ? "border-[#e6dbc9] text-[#27334a]" : "border-line",
               )}
               aria-expanded={open}
               aria-controls="mobile-nav"
@@ -128,16 +146,16 @@ export function SiteShell({
         {open ? (
           <nav
             id="mobile-nav"
-            className={cn("border-t px-5 py-3 lg:hidden", night ? "border-white/10 bg-[#070b16]" : "border-line bg-card")}
+            className={cn("border-t px-5 py-3 lg:hidden", night ? "border-white/10 bg-[#070b16]" : warm ? "border-[#eadfce] bg-[#fffaf3]" : "border-line bg-card")}
             aria-label="Mobile"
           >
-            {nav.map((item) => (
+            {navItems.map((item) => (
               <Link
                 key={item.label}
                 to={item.to}
                 className={cn(
                   "flex h-12 items-center border-b text-base font-medium last:border-b-0",
-                  night ? "border-white/10" : "border-line",
+                  night ? "border-white/10" : warm ? "border-[#eadfce]" : "border-line",
                 )}
               >
                 {item.label}
@@ -145,9 +163,9 @@ export function SiteShell({
             ))}
             <div className="mt-3 grid gap-2 sm:grid-cols-2">
               <WhatsAppButton source="nav-menu" className="w-full" />
-              <Button asChild className="w-full">
+              <Button asChild className={cn("w-full", warm && "border-0 bg-gradient-to-r from-[#ee5424] to-[#fa842e] text-white hover:brightness-110")}>
                 <Link to="/contact" onClick={() => track("quote_click", { source: "nav-menu" })}>
-                  Let’s Talk
+                  {warm ? "Get a Free Consultation" : "Let’s Talk"}
                 </Link>
               </Button>
             </div>
@@ -279,7 +297,7 @@ export function SiteShell({
       <div
         className={cn(
           "fixed inset-x-0 bottom-0 z-40 border-t p-2 md:hidden",
-          night ? "border-white/10 bg-[#050816]/92 backdrop-blur" : "border-line bg-card",
+          night ? "border-white/10 bg-[#050816]/92 backdrop-blur" : warm ? "border-[#eadfce] bg-[#fffaf3]" : "border-line bg-card",
         )}
       >
         <div className="grid grid-cols-3 gap-2">
@@ -307,10 +325,10 @@ export function SiteShell({
           </a>
           <Link
             to="/contact"
-            className="inline-flex h-11 items-center justify-center rounded-full bg-primary text-sm font-semibold text-white"
+            className={cn("inline-flex h-11 items-center justify-center rounded-full text-sm font-semibold text-white", warm ? "bg-[#ed5725]" : "bg-primary")}
             onClick={() => track("quote_click", { source: "mobile-bar" })}
           >
-            Let’s Talk
+            {warm ? "Consultation" : "Let’s Talk"}
           </Link>
         </div>
       </div>

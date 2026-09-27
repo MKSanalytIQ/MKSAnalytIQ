@@ -10,6 +10,7 @@ import {
   ContactRound,
   FileText,
   Mail,
+  PanelsTopLeft,
   Plus,
   Send,
   Settings2,
@@ -25,10 +26,13 @@ import {
   importMarketingSubscribers,
   saveMarketingCampaign,
   sendMarketingCampaign,
+  setHomepageDesign,
   unsubscribeMarketingSubscriber,
+  type HomepageDesign,
   type MarketingCampaign,
   type MarketingStudioData,
 } from "@/lib/marketing";
+import { HomepageDesignPanel } from "@/components/studio/homepage-design";
 
 export const Route = createFileRoute("/studio")({
   head: () => ({
@@ -40,7 +44,7 @@ export const Route = createFileRoute("/studio")({
   component: Studio,
 });
 
-type Tab = "overview" | "audience" | "campaigns" | "settings";
+type Tab = "overview" | "audience" | "campaigns" | "website" | "settings";
 type CampaignFields = { id?: string; name: string; subject: string; previewText: string; bodyText: string };
 
 const emptyCampaign: CampaignFields = {
@@ -54,6 +58,7 @@ const navigation: { id: Tab; label: string; icon: typeof Activity }[] = [
   { id: "overview", label: "Overview", icon: Activity },
   { id: "audience", label: "Audience", icon: UsersRound },
   { id: "campaigns", label: "Campaigns", icon: Mail },
+  { id: "website", label: "Website", icon: PanelsTopLeft },
   { id: "settings", label: "Setup", icon: Settings2 },
 ];
 
@@ -143,6 +148,22 @@ function Studio() {
     setCampaign(emptyCampaign);
     setNotice("");
     setTab("campaigns");
+  }
+
+  async function chooseHomepageDesign(design: HomepageDesign) {
+    if (working || !studio?.canManageSiteAppearance) return;
+    setWorking(true);
+    setPageError("");
+    setNotice("");
+    try {
+      await setHomepageDesign({ data: { design } });
+      setNotice(design === "growth" ? "The Growth homepage is now live for all visitors." : "The current homepage design has been restored for all visitors.");
+      await refresh();
+    } catch (error) {
+      setPageError(error instanceof Error ? error.message : "Couldn’t update the homepage design.");
+    } finally {
+      setWorking(false);
+    }
   }
 
   if (isPending) return <StudioLoading />;
@@ -290,6 +311,14 @@ function Studio() {
                   onSend={() => void sendCampaign()}
                   onNew={startCampaign}
                   onEdit={editCampaign}
+                />
+              ) : null}
+              {tab === "website" && studio ? (
+                <HomepageDesignPanel
+                  current={studio.homepageDesign}
+                  canManage={studio.canManageSiteAppearance}
+                  working={working}
+                  onSelect={(design) => void chooseHomepageDesign(design)}
                 />
               ) : null}
               {tab === "settings" && studio ? <Setup delivery={studio.delivery} /> : null}

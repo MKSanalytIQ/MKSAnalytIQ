@@ -30,7 +30,11 @@ export type MarketingStudioData = {
   subscribers: MarketingSubscriber[];
   campaigns: MarketingCampaign[];
   delivery: { ready: boolean; missing: string[]; provider: "Brevo" };
+  homepageDesign: HomepageDesign;
+  canManageSiteAppearance: boolean;
 };
+
+export type HomepageDesign = "current" | "growth";
 
 const subscriberInput = z.object({
   email: z.email().trim().max(254),
@@ -58,6 +62,7 @@ const campaignInput = z.object({
 });
 
 const idInput = z.object({ id: z.string().uuid() });
+const homepageDesignInput = z.object({ design: z.enum(["current", "growth"]) });
 
 type WorkspaceSql = Awaited<ReturnType<typeof import("@/lib/db").getSql>>;
 
@@ -105,11 +110,27 @@ function deliveryStatus() {
   return { ready: missing.length === 0, missing, provider: "Brevo" as const };
 }
 
+/** Public, read-only choice so the active homepage is rendered for every visitor. */
+export const getHomepageDesign = createServerFn({ method: "GET" })
+  .handler(async (): Promise<HomepageDesign> => {
+    try {
+      const { getSql } = await import("@/lib/db");
+      const sql = await getSql();
+      const rows = await sql.query<{ homepage_design: HomepageDesign }>(
+        "select homepage_design from site_preferences where id = 'public-site' limit 1",
+      );
+      return rows[0]?.homepage_design === "growth" ? "growth" : "current";
+    } catch (error) {
+      console.error("[site] Could not read homepage design; using the current design:", error);
+      return "current";
+    }
+  });
+
 export const getMarketingStudio = createServerFn({ method: "GET" })
   .middleware([authMiddleware])
   .handler(async ({ context }): Promise<MarketingStudioData> => {
-    const { sql, id: workspaceId } = await workspaceForUser(context.userId);
-    const [counts, subscribers, campaigns] = await Promise.all([
+    const { sql, id: workspaceId, role } = await workspaceForUser(context.userId);
+    const [counts, subscribers, campaigns, appearance] = await Promise.all([
       sql.query<{ active: number; unsubscribed: number; campaigns: number; drafts: number }>(
         `select
            count(*) filter (where status = 'active')::int as active,
@@ -134,13 +155,41 @@ export const getMarketingStudio = createServerFn({ method: "GET" })
          order by updated_at desc limit 50`,
         [workspaceId],
       ),
+      sql.query<{ homepage_design: HomepageDesign }>(
+        "select homepage_design from site_preferences where id = 'public-site' limit 1",
+      ),
     ]);
     return {
       totals: counts[0] ?? { active: 0, unsubscribed: 0, campaigns: 0, drafts: 0 },
       subscribers,
       campaigns,
       delivery: deliveryStatus(),
+      homepageDesign: appearance[0]?.homepage_design === "growth" ? "growth" : "current",
+      canManageSiteAppearance:
+        workspaceId === "mksanalytIQ" && (role === "owner" || role === "admin"),
     };
+  });
+
+export const setHomepageDesign = createServerFn({ method: "POST" })
+  .middleware([authMiddleware])
+  .inputValidator(homepageDesignInput)
+  .handler(async ({ data, context }): Promise<{ design: HomepageDesign }> => {
+    const { sql, id: workspaceId, role } = await workspaceForUser(context.userId);
+    if (
+      workspaceId !== "mksanalytIQ" ||
+      (role !== "owner" && role !== "admin")
+    ) {
+      throw new Error("Only workspace owners and admins can change the public homepage.");
+    }
+    const saved = await sql.query<{ homepage_design: HomepageDesign }>(
+      `update site_preferences
+       set homepage_design = $1, updated_by = $2, updated_at = now()
+       where id = 'public-site'
+       returning homepage_design`,
+      [data.design, context.userId],
+    );
+    if (!saved[0]) throw new Error("Site settings are not initialized. Apply database migrations and try again.");
+    return { design: saved[0].homepage_design };
   });
 
 export const addMarketingSubscriber = createServerFn({ method: "POST" })

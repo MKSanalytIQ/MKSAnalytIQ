@@ -22,8 +22,10 @@ import { Preview } from "@/components/site/previews";
 import { SiteShell } from "@/components/site/shell";
 import { Testimonials } from "@/components/site/testimonials";
 import { WhatsAppButton } from "@/components/site/whatsapp";
+import { GrowthHome } from "@/components/site/growth-home";
 import { track } from "@/lib/analytics";
 import { faqsFor, projects } from "@/lib/content";
+import { getHomepageDesign } from "@/lib/marketing";
 import { faqSchema, pageMeta } from "@/lib/seo";
 
 const homeFaqs = faqsFor("home");
@@ -31,6 +33,7 @@ const description =
   "MKSANALYTIQ is a Noida-based technology and digital growth studio offering digital marketing, web development, software, app and AI solutions across Delhi NCR and India.";
 
 export const Route = createFileRoute("/")({
+  loader: () => getHomepageDesign(),
   head: () =>
     pageMeta({
       title: "MKSANALYTIQ | Digital Marketing & Software Development Company in Noida",
@@ -141,6 +144,11 @@ const floats: {
 ];
 
 function Home() {
+  const homepageDesign = Route.useLoaderData();
+  return homepageDesign === "growth" ? <GrowthHome /> : <CurrentHomepage />;
+}
+
+function CurrentHomepage() {
   return (
     <SiteShell cta={false} tone="day">
       <JsonLd data={faqSchema(homeFaqs)} />
