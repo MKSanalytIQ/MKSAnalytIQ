@@ -225,8 +225,8 @@ function Contact() {
           <p className="text-xs font-semibold uppercase tracking-widest text-primary">Contact</p>
           <h1 className="mt-3 max-w-3xl text-4xl font-extrabold tracking-tight sm:text-5xl">Start a project conversation</h1>
           <p className="mt-4 max-w-2xl text-base leading-relaxed text-mute">
-            Send a brief directly to the studio, or open a prepared message in WhatsApp or email and send it yourself.
-            We use enquiry details only to reply; this website does not save them in a database.
+            Submit your brief to the studio, or open a prepared message in WhatsApp or email and send it yourself.
+            Submitted web enquiries are saved in the private studio inbox for follow-up, and are never added to marketing emails.
           </p>
         </div>
       </section>

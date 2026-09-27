@@ -22,10 +22,10 @@ function Privacy() {
       </p>
       <h2>What this website collects</h2>
       <p>
-        If you submit a consultation or enquiry form, the details are sent through Brevo to {company.email} so we can
-        reply using your chosen contact method. The website does not save enquiry details in its database, and enquiry
-        details are not added to the marketing email list. WhatsApp and email links remain available if you prefer to
-        contact us yourself. Brevo processes the information to deliver the notification under its own privacy terms.
+        If you submit a consultation or enquiry form, the details are saved in the private MKSAnalytIQ workspace so the
+        team can review and follow up. The site also sends an email notification through Brevo to {company.email} when
+        delivery is available. Enquiry details are not added to the marketing email list. WhatsApp and email links remain
+        available if you prefer to contact us yourself. Brevo processes the notification under its own privacy terms.
       </p>
       <h2>Marketing email contacts</h2>
       <p>
@@ -47,8 +47,8 @@ function Privacy() {
       </p>
       <h2>Questions</h2>
       <p>
-        Write to {company.email} if you want a copy of an email thread you started with us, or if you want us to stop
-        using those details for the enquiry.
+        Write to {company.email} if you want a copy of an email thread or want us to delete or stop using enquiry
+        details.
       </p>
     </LegalLayout>
   );

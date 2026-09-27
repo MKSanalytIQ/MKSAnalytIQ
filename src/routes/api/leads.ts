@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { z } from "zod";
+import type { Sql } from "@/lib/db";
 import { budgetOptions, company, services, timelineOptions } from "@/lib/content";
 
 const contactSchema = z
@@ -172,6 +173,46 @@ function emailForSubmission(data: z.infer<typeof submissionSchema>) {
   };
 }
 
+async function persistLead(data: z.infer<typeof submissionSchema>) {
+  const { getSql } = await import("@/lib/db");
+  const sql = await getSql();
+  const id = crypto.randomUUID();
+  const isContact = data.kind === "contact";
+  const name = data.name;
+  const business = isContact ? data.company : data.business;
+  const phone = isContact ? data.phone : data.whatsapp;
+  const email = isContact ? data.email : "";
+  const website = isContact ? data.website : "";
+  const service = isContact ? serviceLabel(data.service) : data.service;
+  const budget = data.budget;
+  const timeline = isContact ? data.timeline : "";
+  const preferredReply = isContact ? data.preferred : "whatsapp";
+  const message = isContact
+    ? data.message
+    : `Requested ${data.service}. Budget: ${data.budget}.`;
+  const source = isContact ? "Contact page" : data.source;
+
+  await sql.query(
+    `insert into website_leads
+       (id, workspace_id, name, business, phone, email, website, service,
+        budget, timeline, preferred_reply, message, source)
+     values ($1, 'mksanalytIQ', $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12)`,
+    [id, name, business, phone, email, website, service, budget, timeline, preferredReply, message, source],
+  );
+  return { sql, id };
+}
+
+async function setNotificationStatus(
+  sql: Sql,
+  id: string,
+  status: "sent" | "failed",
+) {
+  await sql.query(
+    "update website_leads set notification_status = $2, updated_at = now() where id = $1",
+    [id, status],
+  );
+}
+
 export const Route = createFileRoute("/api/leads")({
   server: {
     handlers: {
@@ -225,18 +266,28 @@ export const Route = createFileRoute("/api/leads")({
           );
         }
 
-        const apiKey = process.env.BREVO_API_KEY?.trim();
-        const senderEmail = process.env.BREVO_SENDER_EMAIL?.trim();
-        const senderName = process.env.BREVO_SENDER_NAME?.trim();
-        if (!apiKey || !senderEmail || !senderName) {
+        let lead: Awaited<ReturnType<typeof persistLead>>;
+        try {
+          lead = await persistLead(parsed.data);
+        } catch {
+          console.error("[leads] Could not save website enquiry.");
           return Response.json(
             {
               ok: false,
               message:
-                "Enquiry delivery is temporarily unavailable. Please use WhatsApp or email below.",
+                "We couldn’t save the enquiry right now. Please use WhatsApp or email below.",
             },
             { status: 503 },
           );
+        }
+
+        const apiKey = process.env.BREVO_API_KEY?.trim();
+        const senderEmail = process.env.BREVO_SENDER_EMAIL?.trim();
+        const senderName = process.env.BREVO_SENDER_NAME?.trim();
+        if (!apiKey || !senderEmail || !senderName) {
+          await setNotificationStatus(lead.sql, lead.id, "failed").catch(() => {});
+          console.error("[leads] Saved enquiry; Brevo notification is not configured.");
+          return Response.json({ ok: true, notification: "failed" }, { status: 202 });
         }
 
         const email = emailForSubmission(parsed.data);
@@ -260,26 +311,15 @@ export const Route = createFileRoute("/api/leads")({
           });
           if (!response.ok) {
             console.error(`[leads] Brevo notification failed with status ${response.status}.`);
-            return Response.json(
-              {
-                ok: false,
-                message:
-                  "We couldn’t send the enquiry right now. Please use WhatsApp or email below.",
-              },
-              { status: 502 },
-            );
+            await setNotificationStatus(lead.sql, lead.id, "failed").catch(() => {});
+            return Response.json({ ok: true, notification: "failed" }, { status: 202 });
           }
-          return Response.json({ ok: true }, { status: 202 });
+          await setNotificationStatus(lead.sql, lead.id, "sent").catch(() => {});
+          return Response.json({ ok: true, notification: "sent" }, { status: 202 });
         } catch {
           console.error("[leads] Brevo notification request failed.");
-          return Response.json(
-            {
-              ok: false,
-              message:
-                "We couldn’t send the enquiry right now. Please use WhatsApp or email below.",
-            },
-            { status: 502 },
-          );
+          await setNotificationStatus(lead.sql, lead.id, "failed").catch(() => {});
+          return Response.json({ ok: true, notification: "failed" }, { status: 202 });
         }
       },
     },

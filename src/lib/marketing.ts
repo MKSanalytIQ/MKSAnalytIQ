@@ -25,10 +25,31 @@ export type MarketingCampaign = {
   queued_at: string | null;
 };
 
+export type WebsiteLeadStatus = "new" | "contacted" | "qualified" | "closed";
+
+export type WebsiteLead = {
+  id: string;
+  name: string;
+  business: string;
+  phone: string;
+  email: string;
+  website: string;
+  service: string;
+  budget: string;
+  timeline: string;
+  preferred_reply: string;
+  message: string;
+  source: string;
+  status: WebsiteLeadStatus;
+  notification_status: "pending" | "sent" | "failed";
+  created_at: string;
+};
+
 export type MarketingStudioData = {
-  totals: { active: number; unsubscribed: number; campaigns: number; drafts: number };
+  totals: { active: number; unsubscribed: number; campaigns: number; drafts: number; leads: number; newLeads: number };
   subscribers: MarketingSubscriber[];
   campaigns: MarketingCampaign[];
+  leads: WebsiteLead[];
   delivery: { ready: boolean; missing: string[]; provider: "Brevo" };
   homepageDesign: HomepageDesign;
   canManageSiteAppearance: boolean;
@@ -63,6 +84,7 @@ const campaignInput = z.object({
 
 const idInput = z.object({ id: z.string().uuid() });
 const homepageDesignInput = z.object({ design: z.enum(["current", "growth"]) });
+const websiteLeadStatusInput = z.object({ id: z.string().uuid(), status: z.enum(["new", "contacted", "qualified", "closed"]) });
 
 type WorkspaceSql = Awaited<ReturnType<typeof import("@/lib/db").getSql>>;
 
@@ -130,13 +152,15 @@ export const getMarketingStudio = createServerFn({ method: "GET" })
   .middleware([authMiddleware])
   .handler(async ({ context }): Promise<MarketingStudioData> => {
     const { sql, id: workspaceId, role } = await workspaceForUser(context.userId);
-    const [counts, subscribers, campaigns, appearance] = await Promise.all([
-      sql.query<{ active: number; unsubscribed: number; campaigns: number; drafts: number }>(
+    const [counts, subscribers, campaigns, leads, appearance] = await Promise.all([
+      sql.query<{ active: number; unsubscribed: number; campaigns: number; drafts: number; leads: number; newLeads: number }>(
         `select
            count(*) filter (where status = 'active')::int as active,
            count(*) filter (where status = 'unsubscribed')::int as unsubscribed,
            (select count(*)::int from marketing_campaigns where workspace_id = $1) as campaigns,
-           (select count(*)::int from marketing_campaigns where workspace_id = $1 and status = 'draft') as drafts
+           (select count(*)::int from marketing_campaigns where workspace_id = $1 and status = 'draft') as drafts,
+           (select count(*)::int from website_leads where workspace_id = $1) as leads,
+           (select count(*)::int from website_leads where workspace_id = $1 and status = 'new') as "newLeads"
          from marketing_subscribers where workspace_id = $1`,
         [workspaceId],
       ),
@@ -155,19 +179,43 @@ export const getMarketingStudio = createServerFn({ method: "GET" })
          order by updated_at desc limit 50`,
         [workspaceId],
       ),
+      sql.query<WebsiteLead>(
+        `select id, name, business, phone, email, website, service, budget, timeline,
+                preferred_reply, message, source, status, notification_status,
+                created_at::text as created_at
+         from website_leads where workspace_id = $1
+         order by created_at desc limit 250`,
+        [workspaceId],
+      ),
       sql.query<{ homepage_design: HomepageDesign }>(
         "select homepage_design from site_preferences where id = 'public-site' limit 1",
       ),
     ]);
     return {
-      totals: counts[0] ?? { active: 0, unsubscribed: 0, campaigns: 0, drafts: 0 },
+      totals: counts[0] ?? { active: 0, unsubscribed: 0, campaigns: 0, drafts: 0, leads: 0, newLeads: 0 },
       subscribers,
       campaigns,
+      leads,
       delivery: deliveryStatus(),
       homepageDesign: appearance[0]?.homepage_design === "growth" ? "growth" : "current",
       canManageSiteAppearance:
         workspaceId === "mksanalytIQ" && (role === "owner" || role === "admin"),
     };
+  });
+
+export const updateWebsiteLeadStatus = createServerFn({ method: "POST" })
+  .middleware([authMiddleware])
+  .inputValidator(websiteLeadStatusInput)
+  .handler(async ({ data, context }) => {
+    const { sql, id: workspaceId } = await workspaceForUser(context.userId);
+    const updated = await sql.query<{ id: string }>(
+      `update website_leads set status = $3, updated_at = now()
+       where id = $1 and workspace_id = $2
+       returning id`,
+      [data.id, workspaceId, data.status],
+    );
+    if (!updated[0]) throw new Error("This website enquiry could not be found.");
+    return { id: updated[0].id, status: data.status };
   });
 
 export const setHomepageDesign = createServerFn({ method: "POST" })

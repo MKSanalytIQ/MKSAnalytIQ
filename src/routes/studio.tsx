@@ -8,14 +8,19 @@ import {
   ChevronRight,
   CircleAlert,
   ContactRound,
+  Inbox,
+  MessageCircle,
   FileText,
   Mail,
   PanelsTopLeft,
+  Phone,
   Plus,
+  Search,
   Send,
   Settings2,
   ShieldCheck,
   UsersRound,
+  Building2,
 } from "lucide-react";
 import { Logo } from "@/components/site/logo";
 import { authEnabled, signOut } from "@/lib/auth/client";
@@ -31,6 +36,8 @@ import {
   type HomepageDesign,
   type MarketingCampaign,
   type MarketingStudioData,
+  type WebsiteLeadStatus,
+  updateWebsiteLeadStatus,
 } from "@/lib/marketing";
 import { HomepageDesignPanel } from "@/components/studio/homepage-design";
 
@@ -44,7 +51,7 @@ export const Route = createFileRoute("/studio")({
   component: Studio,
 });
 
-type Tab = "overview" | "audience" | "campaigns" | "website" | "settings";
+type Tab = "overview" | "leads" | "audience" | "campaigns" | "website" | "settings";
 type CampaignFields = { id?: string; name: string; subject: string; previewText: string; bodyText: string };
 
 const emptyCampaign: CampaignFields = {
@@ -56,6 +63,7 @@ const emptyCampaign: CampaignFields = {
 
 const navigation: { id: Tab; label: string; icon: typeof Activity }[] = [
   { id: "overview", label: "Overview", icon: Activity },
+  { id: "leads", label: "Leads", icon: Inbox },
   { id: "audience", label: "Audience", icon: UsersRound },
   { id: "campaigns", label: "Campaigns", icon: Mail },
   { id: "website", label: "Website", icon: PanelsTopLeft },
@@ -88,6 +96,7 @@ function Studio() {
   }, [isPending, userId, refresh]);
 
   const recentCampaigns = studio?.campaigns.slice(0, 5) ?? [];
+  const recentLeads = studio?.leads.slice(0, 5) ?? [];
   const activeCampaigns = studio?.campaigns.filter((item) => item.status === "draft" || item.status === "failed") ?? [];
 
   function editCampaign(item: MarketingCampaign) {
@@ -166,6 +175,22 @@ function Studio() {
     }
   }
 
+  async function changeLeadStatus(id: string, status: WebsiteLeadStatus) {
+    if (working) return;
+    setWorking(true);
+    setPageError("");
+    setNotice("");
+    try {
+      await updateWebsiteLeadStatus({ data: { id, status } });
+      setNotice(`Lead marked ${status}.`);
+      await refresh();
+    } catch (error) {
+      setPageError(error instanceof Error ? error.message : "Couldn’t update the lead.");
+    } finally {
+      setWorking(false);
+    }
+  }
+
   if (isPending) return <StudioLoading />;
   if (!authEnabled) {
     return <div className="grid min-h-screen place-items-center bg-[#070b16] px-5 text-center text-white"><div className="max-w-md"><h1 className="text-xl font-bold">Private studio unavailable</h1><p className="mt-2 text-sm leading-relaxed text-white/55">Owner sign-in and the studio database still need to be configured for this deployment.</p></div></div>;
@@ -208,7 +233,7 @@ function Studio() {
             <Link to="/" className="flex items-center gap-2 text-xs font-medium text-white/50 hover:text-white">
               <ArrowLeft className="size-3.5" aria-hidden /> Back to public website
             </Link>
-            <p className="mt-6 text-[11px] leading-relaxed text-white/35">Only approved workspace members can access your contacts and campaigns.</p>
+            <p className="mt-6 text-[11px] leading-relaxed text-white/35">Only approved workspace members can access website leads, contacts and campaigns.</p>
           </div>
         </aside>
 
@@ -217,7 +242,7 @@ function Studio() {
             <div>
               <p className="text-xs font-semibold uppercase tracking-[0.18em] text-cyan-200/75">MKSAnalytIQ · Email Studio</p>
               <h1 className="mt-2 text-2xl font-bold tracking-tight sm:text-3xl">{navigation.find((item) => item.id === tab)?.label}</h1>
-              <p className="mt-1 text-sm text-white/50">Build your list with permission. Send only when you’re ready.</p>
+              <p className="mt-1 text-sm text-white/50">Manage enquiries and email campaigns in your private workspace.</p>
             </div>
             <div className="flex items-center gap-3">
               <div className="hidden text-right sm:block">
@@ -254,6 +279,7 @@ function Studio() {
                 <Overview
                   studio={studio}
                   campaigns={recentCampaigns}
+                  leads={recentLeads}
                   onGo={setTab}
                   onCompose={startCampaign}
                   onEdit={editCampaign}
@@ -313,6 +339,15 @@ function Studio() {
                   onEdit={editCampaign}
                 />
               ) : null}
+              {tab === "leads" && studio ? (
+                <Leads
+                  leads={studio.leads}
+                  total={studio.totals.leads}
+                  newTotal={studio.totals.newLeads}
+                  working={working}
+                  onStatusChange={changeLeadStatus}
+                />
+              ) : null}
               {tab === "website" && studio ? (
                 <HomepageDesignPanel
                   current={studio.homepageDesign}
@@ -333,12 +368,14 @@ function Studio() {
 function Overview({
   studio,
   campaigns,
+  leads,
   onGo,
   onCompose,
   onEdit,
 }: {
   studio: MarketingStudioData;
   campaigns: MarketingCampaign[];
+  leads: MarketingStudioData["leads"];
   onGo: (tab: Tab) => void;
   onCompose: () => void;
   onEdit: (campaign: MarketingCampaign) => void;
@@ -346,6 +383,8 @@ function Overview({
   const metrics = [
     { label: "Active contacts", value: studio.totals.active, icon: UsersRound, tint: "text-cyan-200 bg-cyan-300/10" },
     { label: "Unsubscribed", value: studio.totals.unsubscribed, icon: ContactRound, tint: "text-amber-200 bg-amber-300/10" },
+    { label: "Website leads", value: studio.totals.leads, icon: Inbox, tint: "text-emerald-200 bg-emerald-300/10" },
+    { label: "New enquiries", value: studio.totals.newLeads, icon: MessageCircle, tint: "text-orange-200 bg-orange-300/10" },
     { label: "Campaigns", value: studio.totals.campaigns, icon: Mail, tint: "text-violet-200 bg-violet-300/10" },
     { label: "Drafts", value: studio.totals.drafts, icon: FileText, tint: "text-blue-200 bg-blue-300/10" },
   ];
@@ -361,7 +400,7 @@ function Overview({
         <div className="flex items-center gap-2 rounded-2xl border border-emerald-300/20 bg-emerald-300/[0.07] px-4 py-3 text-sm text-emerald-100"><ShieldCheck className="size-4" aria-hidden /> Delivery connected with Brevo</div>
       )}
 
-      <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+      <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
         {metrics.map(({ label, value, icon: Icon, tint }) => (
           <div key={label} className="rounded-2xl border border-white/10 bg-white/[0.035] p-4 sm:p-5">
             <div className="flex items-center justify-between"><p className="text-xs font-medium text-white/50">{label}</p><span className={`grid size-9 place-items-center rounded-xl ${tint}`}><Icon className="size-4" aria-hidden /></span></div>
@@ -370,7 +409,23 @@ function Overview({
         ))}
       </div>
 
-      <section className="grid gap-4 xl:grid-cols-[1.35fr_0.65fr]">
+      <section className="grid gap-4 xl:grid-cols-[1.2fr_1.2fr_0.75fr]">
+        <div className="rounded-3xl border border-white/10 bg-white/[0.035] p-5 sm:p-6">
+          <div className="flex items-end justify-between gap-4">
+            <div><h2 className="text-base font-bold">Recent enquiries</h2><p className="mt-1 text-xs text-white/45">New requests from your website.</p></div>
+            <button type="button" onClick={() => onGo("leads")} className="text-xs font-semibold text-cyan-200 hover:text-white">Open inbox</button>
+          </div>
+          {leads.length ? (
+            <ul className="mt-5 divide-y divide-white/10">
+              {leads.slice(0, 4).map((lead) => <li key={lead.id} className="flex items-center gap-3 py-3 first:pt-0 last:pb-0">
+                <span className="grid size-9 shrink-0 place-items-center rounded-xl bg-emerald-400/10 text-emerald-200"><Inbox className="size-4" aria-hidden /></span>
+                <span className="min-w-0 flex-1"><span className="block truncate text-sm font-semibold">{lead.name}</span><span className="mt-0.5 block truncate text-xs text-white/45">{lead.business || lead.service}</span></span>
+                <span className={`rounded-full px-2.5 py-1 text-[10px] font-semibold capitalize ${lead.status === "new" ? "bg-orange-300/10 text-orange-200" : lead.status === "closed" ? "bg-white/10 text-white/50" : "bg-blue-300/10 text-blue-200"}`}>{lead.status}</span>
+              </li>)}
+            </ul>
+          ) : <EmptyState text="Website enquiries will appear here. They stay separate from your marketing audience." />}
+        </div>
+
         <div className="rounded-3xl border border-white/10 bg-white/[0.035] p-5 sm:p-6">
           <div className="flex items-end justify-between gap-4">
             <div><h2 className="text-base font-bold">Recent campaigns</h2><p className="mt-1 text-xs text-white/45">Your saved messages and recent sends.</p></div>
@@ -399,6 +454,156 @@ function Overview({
       </section>
     </div>
   );
+}
+
+function Leads({
+  leads,
+  total,
+  newTotal,
+  working,
+  onStatusChange,
+}: {
+  leads: MarketingStudioData["leads"];
+  total: number;
+  newTotal: number;
+  working: boolean;
+  onStatusChange: (id: string, status: WebsiteLeadStatus) => Promise<void>;
+}) {
+  const [query, setQuery] = useState("");
+  const [statusFilter, setStatusFilter] = useState<WebsiteLeadStatus | "all">("all");
+  const filtered = useMemo(() => {
+    const normalized = query.trim().toLowerCase();
+    return leads.filter((lead) => {
+      const matchesStatus = statusFilter === "all" || lead.status === statusFilter;
+      const searchable = [lead.name, lead.business, lead.phone, lead.email, lead.service, lead.source, lead.message]
+        .join(" ")
+        .toLowerCase();
+      return matchesStatus && (!normalized || searchable.includes(normalized));
+    });
+  }, [leads, query, statusFilter]);
+
+  return (
+    <div className="space-y-5">
+      <section className="rounded-3xl border border-emerald-300/15 bg-gradient-to-br from-emerald-300/[0.08] to-blue-500/[0.05] p-5 sm:p-6">
+        <div className="flex flex-wrap items-end justify-between gap-4">
+          <div>
+            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-emerald-200/80">Website enquiries</p>
+            <h2 className="mt-2 text-xl font-bold">Lead inbox</h2>
+            <p className="mt-1 text-sm text-white/55">Review requests, contact the person, and keep follow-up status current.</p>
+          </div>
+          <div className="rounded-2xl border border-white/10 bg-[#070b16]/45 px-4 py-3">
+            <p className="text-[10px] font-semibold uppercase tracking-wider text-white/40">New leads</p>
+            <p className="mt-1 text-2xl font-bold">{newTotal.toLocaleString()}</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="rounded-3xl border border-white/10 bg-white/[0.035] p-4 sm:p-6">
+        <div className="flex flex-wrap items-center justify-between gap-3">
+          <div>
+            <h2 className="font-bold">All website leads</h2>
+            <p className="mt-1 text-xs text-white/45">{total.toLocaleString()} total · newest first{total > leads.length ? ` · showing latest ${leads.length}` : ""}</p>
+          </div>
+          <div className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row">
+            <label className="relative block min-w-0 flex-1 sm:w-64">
+              <Search className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-white/35" aria-hidden />
+              <input
+                aria-label="Search website leads"
+                value={query}
+                onChange={(event) => setQuery(event.target.value)}
+                placeholder="Search name, service, message…"
+                className="h-10 w-full rounded-xl border border-white/10 bg-[#090f1d] pl-9 pr-3 text-sm text-white placeholder:text-white/35"
+              />
+            </label>
+            <select
+              aria-label="Filter website leads by status"
+              value={statusFilter}
+              onChange={(event) => setStatusFilter(event.target.value as WebsiteLeadStatus | "all")}
+              className="h-10 rounded-xl border border-white/10 bg-[#090f1d] px-3 text-sm text-white"
+            >
+              <option value="all">All statuses</option>
+              <option value="new">New</option>
+              <option value="contacted">Contacted</option>
+              <option value="qualified">Qualified</option>
+              <option value="closed">Closed</option>
+            </select>
+          </div>
+        </div>
+
+        {filtered.length ? (
+          <ul className="mt-5 space-y-3">
+            {filtered.map((lead) => {
+              const phoneDigits = lead.phone.replace(/\D/g, "");
+              const statusTone = lead.status === "new"
+                ? "bg-orange-300/10 text-orange-200"
+                : lead.status === "closed"
+                  ? "bg-white/10 text-white/55"
+                  : lead.status === "qualified"
+                    ? "bg-emerald-300/10 text-emerald-200"
+                    : "bg-blue-300/10 text-blue-200";
+              return (
+                <li key={lead.id} className="rounded-2xl border border-white/10 bg-[#0a101d] p-4 sm:p-5">
+                  <div className="flex flex-wrap items-start justify-between gap-4">
+                    <div className="min-w-0">
+                      <div className="flex flex-wrap items-center gap-2">
+                        <h3 className="text-base font-bold">{lead.name}</h3>
+                        <span className={`rounded-full px-2.5 py-1 text-[10px] font-semibold capitalize ${statusTone}`}>{lead.status}</span>
+                      </div>
+                      <p className="mt-1 flex items-center gap-1.5 text-sm text-white/55">
+                        <Building2 className="size-3.5 shrink-0" aria-hidden />{lead.business || "Business not provided"}
+                      </p>
+                    </div>
+                    <label className="flex items-center gap-2 text-[11px] font-medium text-white/45">
+                      Update status
+                      <select
+                        aria-label={`Status for ${lead.name}`}
+                        value={lead.status}
+                        disabled={working}
+                        onChange={(event) => void onStatusChange(lead.id, event.target.value as WebsiteLeadStatus)}
+                        className="h-9 rounded-lg border border-white/10 bg-[#111a2b] px-2.5 text-xs font-semibold capitalize text-white disabled:opacity-50"
+                      >
+                        <option value="new">New</option>
+                        <option value="contacted">Contacted</option>
+                        <option value="qualified">Qualified</option>
+                        <option value="closed">Closed</option>
+                      </select>
+                    </label>
+                  </div>
+
+                  <div className="mt-4 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+                    <LeadDetail label="Service" value={lead.service} />
+                    <LeadDetail label="Budget" value={lead.budget || "Not specified"} />
+                    <LeadDetail label="Timeline" value={lead.timeline || "Not specified"} />
+                    <LeadDetail label="Source" value={lead.source || "Website"} />
+                  </div>
+
+                  <p className="mt-4 whitespace-pre-wrap break-words rounded-xl border border-white/[0.07] bg-white/[0.025] p-3 text-sm leading-relaxed text-white/70">{lead.message || "No additional note provided."}</p>
+
+                  <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-2 border-t border-white/[0.08] pt-3">
+                    {lead.phone ? <a href={`tel:${lead.phone}`} className="inline-flex items-center gap-1.5 text-xs font-semibold text-cyan-200 hover:text-white"><Phone className="size-3.5" aria-hidden />{lead.phone}</a> : null}
+                    {lead.phone ? <a href={`https://wa.me/91${phoneDigits}`} target="_blank" rel="noreferrer" className="inline-flex items-center gap-1.5 text-xs font-semibold text-emerald-200 hover:text-white"><MessageCircle className="size-3.5" aria-hidden />WhatsApp</a> : null}
+                    {lead.email ? <a href={`mailto:${lead.email}`} className="break-all text-xs font-semibold text-cyan-200 hover:text-white">{lead.email}</a> : null}
+                    {lead.website ? <span className="break-all text-xs text-white/50">{lead.website}</span> : null}
+                    <span className="ml-auto text-[11px] text-white/35">{new Intl.DateTimeFormat("en-IN", { dateStyle: "medium", timeStyle: "short" }).format(new Date(lead.created_at))}</span>
+                  </div>
+
+                  <p className={`mt-2 flex items-center gap-1.5 text-[10px] ${lead.notification_status === "sent" ? "text-emerald-200/65" : lead.notification_status === "failed" ? "text-amber-200/80" : "text-white/35"}`}>
+                    <Mail className="size-3" aria-hidden />
+                    {lead.notification_status === "sent" ? "Email alert sent to the studio" : lead.notification_status === "failed" ? "Saved in inbox · email alert needs attention" : "Email alert pending"}
+                  </p>
+                </li>
+              );
+            })}
+          </ul>
+        ) : <EmptyState text={query || statusFilter !== "all" ? "No leads match these filters." : "New website enquiries will appear here."} />}
+      </section>
+      <p className="px-1 text-[11px] leading-relaxed text-white/35">Website enquiries are stored privately for follow-up and are not added to marketing email campaigns.</p>
+    </div>
+  );
+}
+
+function LeadDetail({ label, value }: { label: string; value: string }) {
+  return <div className="min-w-0"><p className="text-[10px] font-semibold uppercase tracking-wider text-white/35">{label}</p><p className="mt-1 truncate text-xs text-white/70" title={value}>{value}</p></div>;
 }
 
 function Audience({
