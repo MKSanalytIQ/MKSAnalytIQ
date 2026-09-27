@@ -78,7 +78,7 @@ export const Route = createFileRoute("/contact")({
     pageMeta({
       title: "Contact MKSAnalytIQ | Start a Project Conversation",
       description:
-        "Start a project conversation with MKSAnalytIQ in Noida. Send a short brief by WhatsApp or email, or call the studio.",
+        "Contact MKSAnalytIQ in Noida. Send a project enquiry to the studio or continue by WhatsApp or email.",
       path: "/contact",
     }),
   component: Contact,
@@ -88,7 +88,8 @@ function Contact() {
   const rawPreset = Route.useSearch().service ?? "";
   const preset = rawPreset === "unsure" ? "other" : rawPreset;
   const [errors, setErrors] = useState<Partial<Record<FieldName, string>>>({});
-  const [status, setStatus] = useState<"idle" | "invalid" | "opened" | "duplicate">("idle");
+  const [status, setStatus] = useState<"idle" | "invalid" | "opened" | "duplicate" | "sent" | "failed">("idle");
+  const [deliveryMessage, setDeliveryMessage] = useState("");
   const started = useRef(false);
   const lastKey = useRef("");
   const [busy, setBusy] = useState(false);
@@ -123,11 +124,13 @@ function Contact() {
     window.location.href = href;
   }
 
-  function onSubmit(event: FormEvent<HTMLFormElement>) {
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (busy) return;
     const submitter = (event.nativeEvent as SubmitEvent).submitter;
-    const channel = submitter instanceof HTMLButtonElement && submitter.value === "email" ? "email" : "whatsapp";
+    const channel = submitter instanceof HTMLButtonElement && ["email", "website"].includes(submitter.value)
+      ? submitter.value as "email" | "website"
+      : "whatsapp";
     const data = Object.fromEntries(new FormData(event.currentTarget));
     if (typeof data.fax === "string" && data.fax.trim().length > 0) {
       setErrors({});
@@ -149,6 +152,43 @@ function Contact() {
       setStatus("invalid");
       const first = Object.keys(next)[0];
       if (first) document.getElementById(first)?.focus();
+      return;
+    }
+
+    if (channel === "website") {
+      setBusy(true);
+      setErrors({});
+      setDeliveryMessage("");
+      setStatus("idle");
+      draft.current = { data: parsed.data, channel: "whatsapp" };
+      try {
+        const response = await fetch("/api/leads", {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({
+            kind: "contact",
+            ...parsed.data,
+            fax: typeof data.fax === "string" ? data.fax : "",
+          }),
+        });
+        const result = await response.json().catch(() => null) as { ok?: boolean; message?: string } | null;
+        if (!response.ok || !result?.ok) {
+          throw new Error(result?.message || "We couldn’t send the enquiry right now. Please use WhatsApp or email below.");
+        }
+        setStatus("sent");
+        track("contact_form_submit", {
+          service: parsed.data.service,
+          budget: parsed.data.budget || "not_specified",
+          timeline: parsed.data.timeline || "not_specified",
+          preferred: parsed.data.preferred,
+          delivery_channel: "website",
+        });
+      } catch (error) {
+        setStatus("failed");
+        setDeliveryMessage(error instanceof Error ? error.message : "We couldn’t send the enquiry right now. Please use WhatsApp or email below.");
+      } finally {
+        setBusy(false);
+      }
       return;
     }
 
@@ -185,8 +225,8 @@ function Contact() {
           <p className="text-xs font-semibold uppercase tracking-widest text-primary">Contact</p>
           <h1 className="mt-3 max-w-3xl text-4xl font-extrabold tracking-tight sm:text-5xl">Start a project conversation</h1>
           <p className="mt-4 max-w-2xl text-base leading-relaxed text-mute">
-            Share your name, what you need, and one way for us to reply. Choose WhatsApp or email to open a prepared
-            message in that app; you review and send it there. This site does not store your brief.
+            Send a brief directly to the studio, or open a prepared message in WhatsApp or email and send it yourself.
+            We use enquiry details only to reply; this website does not save them in a database.
           </p>
         </div>
       </section>
@@ -194,6 +234,12 @@ function Contact() {
       <section className="mx-auto grid max-w-6xl gap-8 px-5 py-12 lg:grid-cols-5">
         <form
           onSubmit={onSubmit}
+          onChange={() => {
+            if (status === "sent" || status === "failed") {
+              setStatus("idle");
+              setDeliveryMessage("");
+            }
+          }}
           onFocus={onStart}
           className="relative space-y-4 rounded-3xl border border-line bg-card p-5 sm:p-6 lg:col-span-3"
           noValidate
@@ -206,7 +252,8 @@ function Contact() {
           ) : null}
           <p className="text-sm leading-relaxed text-mute">
             Required: name, service, project description, how you prefer we reply, and either a mobile number or email.
-            Business, website, budget and timing are optional. This page does not store the brief.
+            Business, website, budget and timing are optional. We send your brief to the studio through our email provider
+            so we can reply.
           </p>
           <div className="absolute -left-[9999px] h-px w-px overflow-hidden" aria-hidden="true">
             <label>
@@ -290,20 +337,46 @@ function Contact() {
             ) : null}
           </label>
           <p className="rounded-2xl bg-paper px-4 py-3 text-xs leading-relaxed text-mute">
-            Nothing is sent automatically. The selected app opens a draft; review it and press Send there.
+            Choose “Send enquiry” for delivery to the studio, or use WhatsApp / email to review and send a prepared message yourself.
           </p>
           <div className="flex flex-col gap-3 sm:flex-row">
-            <Button type="submit" name="channel" value="whatsapp" disabled={busy} className="flex-1">
-              {busy ? "Opening…" : "Continue in WhatsApp"}
+            <Button type="submit" name="channel" value="website" disabled={busy || status === "sent"} className="flex-1">
+              {busy ? "Sending…" : "Send enquiry"}
+            </Button>
+            <Button type="submit" name="channel" value="whatsapp" disabled={busy} variant="line" className="flex-1">
+              {busy ? "Please wait…" : "WhatsApp"}
             </Button>
             <Button type="submit" name="channel" value="email" variant="line" disabled={busy} className="flex-1">
-              {busy ? "Opening…" : "Prepare email"}
+              {busy ? "Please wait…" : "Prepare email"}
             </Button>
           </div>
+          {status === "sent" ? (
+            <p className="rounded-2xl border border-emerald-200 bg-emerald-50 p-4 text-sm leading-relaxed text-ink" role="status">
+              Your enquiry has been submitted. The studio will reply using your preferred contact method.
+            </p>
+          ) : null}
+          {status === "failed" ? (
+            <div className="rounded-2xl bg-paper p-4 text-sm leading-relaxed text-ink" role="alert">
+              <p>{deliveryMessage}</p>
+              <div className="mt-3 flex flex-wrap gap-4 font-semibold text-primary">
+                <button type="button" onClick={() => {
+                  if (draft.current) {
+                    setStatus("opened");
+                    openComposer(draft.current.data, "whatsapp");
+                  }
+                }}>Continue in WhatsApp</button>
+                <button type="button" onClick={() => {
+                  if (draft.current) {
+                    setStatus("opened");
+                    openComposer(draft.current.data, "email");
+                  }
+                }}>Prepare an email</button>
+              </div>
+            </div>
+          ) : null}
           {status === "opened" ? (
             <p className="rounded-2xl bg-paper p-4 text-sm leading-relaxed text-ink" role="status">
-              Your email or WhatsApp app should open with this brief. Review it there before you send. This website does
-              not store the form. If nothing opened, use the button below.
+              Your email or WhatsApp app should open with this brief. Review it there before you send.
             </p>
           ) : null}
           {status === "duplicate" ? (

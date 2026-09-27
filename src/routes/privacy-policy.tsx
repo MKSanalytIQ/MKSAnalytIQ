@@ -22,9 +22,10 @@ function Privacy() {
       </p>
       <h2>What this website collects</h2>
       <p>
-        The consultation form does not save your message on this website. Submitting it opens your email app with a
-        draft addressed to {company.email}. If you send that email, call, or message on WhatsApp, we use those details
-        to reply to the enquiry.
+        If you submit a consultation or enquiry form, the details are sent through Brevo to {company.email} so we can
+        reply using your chosen contact method. The website does not save enquiry details in its database, and enquiry
+        details are not added to the marketing email list. WhatsApp and email links remain available if you prefer to
+        contact us yourself. Brevo processes the information to deliver the notification under its own privacy terms.
       </p>
       <h2>Marketing email contacts</h2>
       <p>
