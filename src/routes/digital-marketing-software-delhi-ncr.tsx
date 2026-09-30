@@ -8,12 +8,19 @@ import { SiteShell } from "@/components/site/shell";
 import { WhatsAppButton } from "@/components/site/whatsapp";
 import { company, site, steps } from "@/lib/content";
 import { track } from "@/lib/analytics";
-import { absoluteUrl, breadcrumbSchema, faqSchema, pageMeta } from "@/lib/seo";
+import { absoluteUrl, breadcrumbSchema, faqSchema, pageMeta, serviceSchema } from "@/lib/seo";
 
 const path = "/digital-marketing-software-delhi-ncr";
-const title = "Digital Marketing & Software Development in Delhi NCR | MKSAnalytIQ";
+const title = "Digital Marketing & Software in Delhi NCR | MKSAnalytIQ";
 const description =
-  "MKSAnalytIQ is a Noida-based digital marketing and software development company serving businesses across Delhi NCR with websites, apps, custom software, AI and growth services.";
+  "Based in Noida, MKSAnalytIQ builds digital marketing, websites and software for businesses across Delhi NCR. Get a clear scope before the work begins.";
+
+const geoMeta = [
+  { name: "geo.region", content: "IN-UP" },
+  { name: "geo.placename", content: "Noida" },
+  { name: "geo.position", content: "28.5968;77.3178" },
+  { name: "ICBM", content: "28.5968, 77.3178" },
+];
 
 const questions = [
   {
@@ -76,7 +83,10 @@ const offers = [
 ] as const;
 
 export const Route = createFileRoute("/digital-marketing-software-delhi-ncr")({
-  head: () => pageMeta({ title, description, path }),
+  head: () => {
+    const metadata = pageMeta({ title, description, path });
+    return { ...metadata, meta: [...metadata.meta, ...geoMeta] };
+  },
   component: DelhiNcrPage,
 });
 
@@ -90,6 +100,14 @@ function DelhiNcrPage() {
         ])}
       />
       <JsonLd data={faqSchema(questions)} />
+      <JsonLd
+        data={serviceSchema({
+          name: "Digital marketing and software development in Delhi NCR",
+          description,
+          serviceType: "Digital marketing, website, app, and software development",
+          path,
+        })}
+      />
       <JsonLd
         data={{
           "@context": "https://schema.org",

@@ -32,8 +32,10 @@ export const company = {
    * Example once confirmed: "Mon–Sat, 10:00–18:00 IST"
    */
   hours: "",
-  github: "https://github.com/SparkxDating",
-  githubHandle: "SparkxDating",
+  github: "https://github.com/MKSanalytIQ",
+  githubHandle: "MKSanalytIQ",
+  socialLinks: [] as string[],
+  twitterHandle: undefined as string | undefined,
 } as const;
 
 export function whatsappHref(text?: string) {
@@ -807,7 +809,7 @@ export const projects: {
       "Multi-tenant SaaS that turns a topic into short-form video — workspaces, jobs, templates and credits.",
     features: ["Multi-tenant workspaces", "Render jobs", "Templates", "Credits"],
     stack: ["Next.js", "Python", "Postgres"],
-    github: "https://github.com/SparkxDating/ShortGen",
+    github: "https://github.com/MKSanalytIQ/ShortGen",
     live: "https://shortgen-pi.vercel.app",
     seoTitle: "ShortGen — Short-Form Video SaaS | MKSAnalytIQ",
     seoDescription:
@@ -832,7 +834,7 @@ export const projects: {
       "Android SMS gateway",
     ],
     stack: ["NestJS", "Next.js", "Kotlin"],
-    github: "https://github.com/SparkxDating/cpaas",
+    github: "https://github.com/MKSanalytIQ/cpaas",
     live: "",
     seoTitle: "Open CPaaS — Messaging and Communications Platform | MKSAnalytIQ",
     seoDescription:
@@ -853,7 +855,7 @@ export const projects: {
       "Official ITR-4 JSON export",
     ],
     stack: ["Next.js", "Prisma", "TypeScript"],
-    github: "https://github.com/SparkxDating/taxpilot-ai",
+    github: "https://github.com/MKSanalytIQ/taxpilot-ai",
     live: "https://taxpilot-ai-beta.vercel.app",
     seoTitle: "TaxPilot AI — Guided ITR Preparation | MKSAnalytIQ",
     seoDescription:
@@ -876,7 +878,7 @@ export const projects: {
       "Admin desk",
     ],
     stack: ["TypeScript", "Postgres"],
-    github: "https://github.com/SparkxDating/QRLogin",
+    github: "https://github.com/MKSanalytIQ/QRLogin",
     live: "https://qr-login-six.vercel.app",
     seoTitle: "Eye Camp Registration — Hindi Registration System | MKSAnalytIQ",
     seoDescription:
@@ -893,7 +895,7 @@ export const projects: {
       "Fundraising and volunteer site for the Navi Zindagi Foundation’s flood-relief work in Nepal and Assam.",
     features: ["Fundraising pages", "Volunteer information", "Flood-relief context for Nepal and Assam"],
     stack: ["TypeScript"],
-    github: "https://github.com/SparkxDating/Navizindagi",
+    github: "https://github.com/MKSanalytIQ/Navizindagi",
     live: "https://navizindagi.vercel.app",
     seoTitle: "Navi Zindagi — Fundraising and Volunteer Site | MKSAnalytIQ",
     seoDescription:
@@ -915,7 +917,7 @@ export const projects: {
       "Sponsored caption disclosure",
     ],
     stack: ["Next.js", "Prisma"],
-    github: "https://github.com/SparkxDating/ai-influencer-os",
+    github: "https://github.com/MKSanalytIQ/ai-influencer-os",
     live: "",
     seoTitle: "AI Influencer OS — Content Workspace | MKSAnalytIQ",
     seoDescription:

@@ -14,7 +14,7 @@ export function Preview({
   const name = project?.name ?? "Project";
   const alt = project ? `${project.name}, a ${project.kind.toLowerCase()} project by MKSAnalytIQ` : `${name} project image`;
   return (
-    <div className={cn("relative h-44 overflow-hidden bg-navy", className)}>
+    <div className={cn("relative aspect-video overflow-hidden bg-navy", className)}>
       <img
         src={`/media/work/${slug}.jpg`}
         alt={alt}

@@ -2,6 +2,6 @@ User-agent: *
 Allow: /
 Disallow: /studio
 Disallow: /login
-Disallow: /api
+Disallow: /api/
 
-Sitemap: https://www.mksanalytiq.in/sitemap.xml
+Sitemap: https://mksanalytiq.in/sitemap.xml

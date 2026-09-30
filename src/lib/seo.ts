@@ -1,7 +1,45 @@
 import { company, site } from "@/lib/content";
 
 export function absoluteUrl(path: string) {
-  return new URL(path, site.url).toString();
+  const base = new URL(site.url);
+  const basePath = normalizePathname(base.pathname);
+  const rawPath = String(path ?? "/").trim();
+
+  if (/^https?:\/\//i.test(rawPath)) {
+    const absolute = new URL(rawPath);
+    absolute.pathname = normalizePathname(absolute.pathname);
+    return absolute.toString();
+  }
+
+  const suffixIndex = rawPath.search(/[?#]/);
+  const rawPathname = suffixIndex === -1 ? rawPath : rawPath.slice(0, suffixIndex);
+  const suffix = suffixIndex === -1 ? "" : rawPath.slice(suffixIndex);
+  const relativePath =
+    rawPathname.replaceAll("\\", "/").replace(/^\/+/, "").replace(/\/{2,}/g, "/") + suffix;
+  const baseDirectory = `${base.origin}${basePath === "/" ? "/" : `${basePath}/`}`;
+  const url = new URL(relativePath || ".", baseDirectory);
+  const basePrefix = basePath === "/" ? "/" : `${basePath}/`;
+  if (url.origin !== base.origin || !url.pathname.startsWith(basePrefix)) {
+    url.pathname = basePath;
+    url.search = "";
+    url.hash = "";
+  }
+  url.pathname = normalizePathname(url.pathname);
+  return url.toString();
+}
+
+function normalizePathname(pathname: string) {
+  const normalized = pathname.replace(/\\/g, "/").replace(/\/{2,}/g, "/");
+  return normalized === "/" ? "/" : normalized.replace(/\/+$/, "");
+}
+
+function sanitizeSchemaText(value: string) {
+  return String(value)
+    .replace(/<(script|style)\b[^>]*>[\s\S]*?<\/\1\s*>/gi, " ")
+    .replace(/<[^>]*>/g, " ")
+    .replace(/[\u0000-\u0008\u000B\u000C\u000E-\u001F\u007F]/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
 }
 
 /** Cities and regions MKSAnalytIQ serves. The studio address is in Noida. */
@@ -37,6 +75,12 @@ export function businessGraph(description: string) {
   };
   const logo = absoluteUrl("/media/logo.png");
   const image = absoluteUrl("/media/office.jpg");
+  const sameAs = company.socialLinks ?? [];
+  const geo = {
+    "@type": "GeoCoordinates",
+    latitude: 28.5968,
+    longitude: 77.3178,
+  };
 
   return {
     "@context": "https://schema.org",
@@ -50,6 +94,7 @@ export function businessGraph(description: string) {
         telephone: company.phoneTel,
         logo,
         image,
+        sameAs,
         founder,
         address,
       },
@@ -60,6 +105,9 @@ export function businessGraph(description: string) {
         url: origin,
         image,
         logo,
+        geo,
+        priceRange: "₹₹",
+        sameAs,
         email: company.email,
         telephone: company.phoneTel,
         founder,
@@ -87,11 +135,13 @@ export function pageMeta({
   description,
   path,
   image,
+  noindex = false,
 }: {
   title: string;
   description: string;
   path: string;
   image?: string;
+  noindex?: boolean;
 }) {
   const url = absoluteUrl(path);
   const imageUrl = absoluteUrl(image ?? site.ogImage);
@@ -99,6 +149,7 @@ export function pageMeta({
     meta: [
       { title },
       { name: "description", content: description },
+      { name: "robots", content: noindex ? "noindex, nofollow" : "index, follow" },
       { property: "og:title", content: title },
       { property: "og:description", content: description },
       { property: "og:type", content: "website" },
@@ -110,16 +161,24 @@ export function pageMeta({
       { name: "twitter:title", content: title },
       { name: "twitter:description", content: description },
       { name: "twitter:image", content: imageUrl },
+      ...(company.twitterHandle
+        ? [
+            { name: "twitter:site", content: company.twitterHandle },
+            { name: "twitter:creator", content: company.twitterHandle },
+          ]
+        : []),
     ],
     links: [{ rel: "canonical", href: url }],
   };
 }
 
 export function breadcrumbSchema(items: { name: string; path: string }[]) {
+  const rest = items.filter((item) => item.path !== "/");
+  const ordered = [{ name: "Home", path: "/" }, ...rest];
   return {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
-    itemListElement: items.map((item, index) => ({
+    itemListElement: ordered.map((item, index) => ({
       "@type": "ListItem",
       position: index + 1,
       name: item.name,
@@ -134,11 +193,34 @@ export function faqSchema(items: { q: string; a: string }[]) {
     "@type": "FAQPage",
     mainEntity: items.map((item) => ({
       "@type": "Question",
-      name: item.q,
+      name: sanitizeSchemaText(item.q),
       acceptedAnswer: {
         "@type": "Answer",
-        text: item.a,
+        text: sanitizeSchemaText(item.a),
       },
     })),
+  };
+}
+
+export function serviceSchema({
+  name,
+  description,
+  serviceType,
+  path,
+}: {
+  name: string;
+  description: string;
+  serviceType: string;
+  path: string;
+}) {
+  return {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    name: sanitizeSchemaText(name),
+    description: sanitizeSchemaText(description),
+    serviceType: sanitizeSchemaText(serviceType),
+    url: absoluteUrl(path),
+    provider: { "@id": `${new URL(site.url).origin}/#organization` },
+    areaServed: areaServedPlaces(),
   };
 }

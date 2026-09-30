@@ -112,7 +112,7 @@ A few public product and software examples. Open a card for its case study, live
       </a>
       <h3><a href="https://www.mksanalytiq.in/case-studies/shortgen">ShortGen ↗</a></h3>
       <p>A multi-workspace SaaS for turning a topic into short-form video.</p>
-      <p><a href="https://shortgen-pi.vercel.app">Live preview</a> · <a href="https://github.com/SparkxDating/ShortGen">Source</a></p>
+      <p><a href="https://shortgen-pi.vercel.app">Live preview</a> · <a href="https://github.com/MKSanalytIQ/ShortGen">Source</a></p>
     </td>
     <td width="50%" valign="top">
       <a href="https://www.mksanalytiq.in/case-studies/taxpilot">
@@ -120,7 +120,7 @@ A few public product and software examples. Open a card for its case study, live
       </a>
       <h3><a href="https://www.mksanalytiq.in/case-studies/taxpilot">TaxPilot AI ↗</a></h3>
       <p>Guided ITR-3/ITR-4 preparation with eligibility checks and JSON export.</p>
-      <p><a href="https://taxpilot-ai-beta.vercel.app">Live preview</a> · <a href="https://github.com/SparkxDating/taxpilot-ai">Source</a></p>
+      <p><a href="https://taxpilot-ai-beta.vercel.app">Live preview</a> · <a href="https://github.com/MKSanalytIQ/taxpilot-ai">Source</a></p>
     </td>
   </tr>
   <tr>
@@ -130,7 +130,7 @@ A few public product and software examples. Open a card for its case study, live
       </a>
       <h3><a href="https://www.mksanalytiq.in/case-studies/influencer-os">AI Influencer OS ↗</a></h3>
       <p>Draft and approve AI influencer content with sponsored-caption disclosure.</p>
-      <p><a href="https://github.com/SparkxDating/ai-influencer-os">Source repository</a></p>
+      <p><a href="https://github.com/MKSanalytIQ/ai-influencer-os">Source repository</a></p>
     </td>
     <td width="50%" valign="top">
       <h3>More selected work</h3>

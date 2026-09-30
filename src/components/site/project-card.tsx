@@ -9,7 +9,7 @@ type Project = (typeof projects)[number];
 export function ProjectCard({ project }: { project: Project }) {
   return (
     <article className="flex h-full flex-col overflow-hidden rounded-3xl border border-line bg-card shadow-sm">
-      <Preview slug={project.slug} loading="lazy" />
+      <Preview slug={project.slug} loading="lazy" className="h-auto aspect-video" />
       <div className="flex flex-1 flex-col p-4">
         <p className="text-xs font-semibold uppercase tracking-widest text-primary">{project.kind}</p>
         <h3 className="mt-1 font-display text-lg font-bold">

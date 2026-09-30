@@ -2,13 +2,20 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { LeadForm } from "@/components/site/lead-form";
 import { JsonLd } from "@/components/site/json-ld";
 import { SiteShell } from "@/components/site/shell";
-import { company, site } from "@/lib/content";
-import { absoluteUrl, breadcrumbSchema, faqSchema, pageMeta } from "@/lib/seo";
+import { company } from "@/lib/content";
+import { breadcrumbSchema, faqSchema, pageMeta, serviceSchema } from "@/lib/seo";
 
 const path = "/seo-services-noida";
-const title = "SEO Services in Noida | MKSAnalytIQ";
+const title = "SEO Services in Noida | Local SEO Experts | MKSAnalytIQ";
 const description =
-  "SEO and content from MKSAnalytIQ in Sector 8, Noida: page plans, on-page structure and a monthly read for Delhi NCR businesses. No ranking guarantee.";
+  "Noida SEO services for local businesses: technical checks, useful content and page optimization. MKSAnalytIQ serves Delhi NCR without ranking guarantees.";
+
+const geoMeta = [
+  { name: "geo.region", content: "IN-UP" },
+  { name: "geo.placename", content: "Noida" },
+  { name: "geo.position", content: "28.5968;77.3178" },
+  { name: "ICBM", content: "28.5968, 77.3178" },
+];
 
 const questions = [
   {
@@ -51,7 +58,10 @@ const sections = [
 ];
 
 export const Route = createFileRoute("/seo-services-noida")({
-  head: () => pageMeta({ title, description, path }),
+  head: () => {
+    const metadata = pageMeta({ title, description, path });
+    return { ...metadata, meta: [...metadata.meta, ...geoMeta] };
+  },
   component: SeoNoidaPage,
 });
 
@@ -61,15 +71,12 @@ function SeoNoidaPage() {
       <JsonLd data={breadcrumbSchema([{ name: "Home", path: "/" }, { name: "SEO in Noida", path }])} />
       <JsonLd data={faqSchema(questions)} />
       <JsonLd
-        data={{
-          "@context": "https://schema.org",
-          "@type": "Service",
+        data={serviceSchema({
           name: "SEO and content in Noida",
           description,
-          url: absoluteUrl(path),
-          areaServed: "Delhi NCR",
-          provider: { "@id": `${site.url}/#organization` },
-        }}
+          serviceType: "Search engine optimization and content",
+          path,
+        })}
       />
       <section className="border-b border-line bg-card">
         <div className="mx-auto max-w-6xl px-5 py-14">

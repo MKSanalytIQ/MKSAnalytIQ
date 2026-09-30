@@ -2,13 +2,20 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { LeadForm } from "@/components/site/lead-form";
 import { JsonLd } from "@/components/site/json-ld";
 import { SiteShell } from "@/components/site/shell";
-import { company, site } from "@/lib/content";
-import { absoluteUrl, breadcrumbSchema, faqSchema, pageMeta } from "@/lib/seo";
+import { company } from "@/lib/content";
+import { breadcrumbSchema, faqSchema, pageMeta, serviceSchema } from "@/lib/seo";
 
 const path = "/google-ads-agency-noida";
-const title = "Google Ads Agency in Noida | MKSAnalytIQ";
+const title = "Google Ads Agency in Noida | PPC Management | MKSAnalytIQ";
 const description =
-  "Google Ads and landing pages from MKSAnalytIQ in Sector 8, Noida. Spend, tracking and the page are scoped together for Delhi NCR businesses.";
+  "Google Ads management in Noida with campaign setup, landing pages, conversion tracking and monthly reporting. MKSAnalytIQ serves Delhi NCR with clear scopes.";
+
+const geoMeta = [
+  { name: "geo.region", content: "IN-UP" },
+  { name: "geo.placename", content: "Noida" },
+  { name: "geo.position", content: "28.5968;77.3178" },
+  { name: "ICBM", content: "28.5968, 77.3178" },
+];
 
 const questions = [
   {
@@ -39,7 +46,10 @@ const included = [
 ];
 
 export const Route = createFileRoute("/google-ads-agency-noida")({
-  head: () => pageMeta({ title, description, path }),
+  head: () => {
+    const metadata = pageMeta({ title, description, path });
+    return { ...metadata, meta: [...metadata.meta, ...geoMeta] };
+  },
   component: AdsPage,
 });
 
@@ -49,15 +59,12 @@ function AdsPage() {
       <JsonLd data={breadcrumbSchema([{ name: "Home", path: "/" }, { name: "Google Ads in Noida", path }])} />
       <JsonLd data={faqSchema(questions)} />
       <JsonLd
-        data={{
-          "@context": "https://schema.org",
-          "@type": "Service",
-          name: "Google Ads in Noida",
+        data={serviceSchema({
+          name: "Google Ads management in Noida",
           description,
-          url: absoluteUrl(path),
-          areaServed: "Delhi NCR",
-          provider: { "@id": `${site.url}/#organization` },
-        }}
+          serviceType: "Google Ads campaign management",
+          path,
+        })}
       />
       <section className="border-b border-line bg-card">
         <div className="mx-auto max-w-6xl px-5 py-14">
