@@ -120,7 +120,11 @@ export function ServiceDetail({ service }: { service: Service }) {
                   SEO services in Noida
                 </Link>{" "}
                 and{" "}
-                <Link to="/google-ads-agency-noida" className="font-semibold text-primary">
+                <Link
+                  to="/services/$service"
+                  params={{ service: "google-ads-management" }}
+                  className="font-semibold text-primary"
+                >
                   Google Ads in Noida
                 </Link>
                 .

@@ -68,7 +68,12 @@ export const Route = createFileRoute("/seo-services-noida")({
 function SeoNoidaPage() {
   return (
     <SiteShell>
-      <JsonLd data={breadcrumbSchema([{ name: "Home", path: "/" }, { name: "SEO in Noida", path }])} />
+      <JsonLd
+        data={breadcrumbSchema([
+          { name: "Home", path: "/" },
+          { name: "SEO in Noida", path },
+        ])}
+      />
       <JsonLd data={faqSchema(questions)} />
       <JsonLd
         data={serviceSchema({
@@ -81,23 +86,37 @@ function SeoNoidaPage() {
       <section className="border-b border-line bg-card">
         <div className="mx-auto max-w-6xl px-5 py-14">
           <p className="text-xs font-semibold uppercase tracking-widest text-primary">Noida</p>
-          <h1 className="mt-3 max-w-3xl text-4xl font-extrabold tracking-tight sm:text-5xl">SEO services in Noida</h1>
+          <h1 className="mt-3 max-w-3xl text-4xl font-extrabold tracking-tight sm:text-5xl">
+            SEO services in Noida
+          </h1>
           <p className="mt-4 max-w-2xl text-base leading-relaxed text-mute">
-            MKSAnalytIQ plans the pages a business should be found for, then writes them so they match the offer. The
-            studio is at {company.addressOneLine} and takes this work for businesses across Delhi NCR. This page does
-            not promise a ranking.
+            MKSAnalytIQ plans the pages a business should be found for, then writes them so they
+            match the offer. The studio is at {company.addressOneLine} and takes this work for
+            businesses across Delhi NCR. This page does not promise a ranking.
           </p>
           <p className="mt-4 text-sm leading-relaxed text-mute">
             SEO sits inside{" "}
-            <Link to="/services/$service" params={{ service: "digital-marketing" }} className="font-semibold text-primary">
+            <Link
+              to="/services/$service"
+              params={{ service: "digital-marketing" }}
+              className="font-semibold text-primary"
+            >
               digital marketing
             </Link>
             . A new site, when you need one, is{" "}
-            <Link to="/services/$service" params={{ service: "web-development" }} className="font-semibold text-primary">
+            <Link
+              to="/services/$service"
+              params={{ service: "web-development" }}
+              className="font-semibold text-primary"
+            >
               web development
             </Link>
             . Paid search is covered on the{" "}
-            <Link to="/google-ads-agency-noida" className="font-semibold text-primary">
+            <Link
+              to="/services/$service"
+              params={{ service: "google-ads-management" }}
+              className="font-semibold text-primary"
+            >
               Google Ads page
             </Link>
             .

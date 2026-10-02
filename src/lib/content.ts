@@ -112,7 +112,11 @@ export type ServiceId =
   | "crm"
   | "email"
   | "maintenance"
-  | "linkedin";
+  | "linkedin"
+  | "metaads"
+  | "instagramads"
+  | "youtubeads"
+  | "googleads";
 
 export type ProjectCategory = "software" | "marketing" | "events" | "campaigns";
 
@@ -211,10 +215,10 @@ export const services: {
     closingCta: "Talk About Your Marketing Goals",
     related: ["marketing", "campaigns"],
     relatedServices: [
-      "google-business-profile-management",
-      "email-marketing-automation",
-      "linkedin-automation",
-      "web-development",
+      "google-ads-management",
+      "meta-ads-management",
+      "instagram-ads-management",
+      "youtube-ads-management",
     ],
     image: "/media/desk.jpg",
     imageAlt: "Digital marketing planning desk at MKSAnalytIQ",
@@ -1562,6 +1566,314 @@ export const services: {
       },
     ],
   },
+  {
+    id: "metaads",
+    slug: "meta-ads-management",
+    title: "Meta Ads Management",
+    h1: "Meta Ads Management Services in Delhi NCR & India",
+    blurb:
+      "Plan and manage Facebook and Instagram advertising around a clear offer, useful creative and measurable enquiry paths. MKSAnalytIQ serves businesses in Delhi NCR and across India.",
+    problem:
+      "Campaigns launch with broad audiences, disconnected creative and no reliable way to see which ad produced an enquiry.",
+    solution:
+      "Connect campaign structure, audience, creative, landing page and conversion tracking in one approved plan, then review spend and results regularly.",
+    deliverables: [
+      "Meta Ads account and campaign audit",
+      "Campaign structure and audience plan",
+      "Ad copy and creative direction",
+      "Landing-page recommendations",
+      "Lead, form and website conversion tracking",
+      "Budget and performance reporting",
+    ],
+    sections: [
+      {
+        title: "Facebook and Instagram campaigns with one plan",
+        text: "Choose campaign objectives and placements around the customer journey. The proposal identifies the accounts, markets, creative formats and landing pages included.",
+      },
+      {
+        title: "Measure enquiries and useful actions",
+        text: "Configure supported conversion events and consistent campaign naming, then review spend, reach, clicks and enquiries. Advertising spend and third-party production costs are separate from the management fee.",
+      },
+    ],
+    linkLabel: "meta ads management",
+    suitable:
+      "Businesses in Noida, Delhi, Gurugram, Ghaziabad and Faridabad, with campaign management available remotely across India.",
+    cta: "Discuss Meta Ads Management",
+    related: ["marketing"],
+    relatedServices: [
+      "instagram-ads-management",
+      "youtube-ads-management",
+      "google-ads-management",
+      "digital-marketing",
+    ],
+    image: "/media/services/metaads-service.svg",
+    imageAlt: "Meta Ads Management campaign planning illustration",
+    seoTitle: "Meta Ads Management in Delhi NCR & India | MKSAnalytIQ",
+    seoDescription:
+      "Meta Ads management in Delhi NCR and India: campaign setup, audiences, creative direction, landing pages, conversion tracking and reporting from MKSAnalytIQ.",
+    faqIds: ["metaads-scope", "metaads-results"],
+    processTitle: "Paid advertising management process",
+    processIntro:
+      "Share your offer, audience, current account and budget range. We agree campaign deliverables and measurement before launch.",
+    processSteps: [
+      {
+        n: "01",
+        title: "Audit",
+        text: "Review the offer, advertising account, audience, landing page and existing tracking.",
+      },
+      {
+        n: "02",
+        title: "Plan",
+        text: "Agree campaign goals, targeting, creative requirements, budget and conversion actions.",
+      },
+      {
+        n: "03",
+        title: "Launch",
+        text: "Build and launch approved campaigns using the agreed accounts and assets.",
+      },
+      {
+        n: "04",
+        title: "Measure",
+        text: "Review spend, delivery, website actions and enquiries using available platform data.",
+      },
+      {
+        n: "05",
+        title: "Improve",
+        text: "Adjust targeting, creative and campaign controls within the agreed scope.",
+      },
+    ],
+  },
+  {
+    id: "instagramads",
+    slug: "instagram-ads-management",
+    title: "Instagram Ads Management",
+    h1: "Instagram Ads Management Services in Delhi NCR & India",
+    blurb:
+      "Reach relevant audiences with Instagram Feed, Stories and Reels advertising built around your offer and enquiry path. Campaign support is available across India.",
+    problem:
+      "Instagram ads attract views but the creative, audience and next step do not work together, making results difficult to understand.",
+    solution:
+      "Plan placements, audience, creative direction and conversion tracking together, then improve campaigns using available performance and enquiry data.",
+    deliverables: [
+      "Instagram ad account review",
+      "Feed, Stories and Reels campaign plan",
+      "Audience and placement setup",
+      "Ad copy and creative briefs",
+      "Lead and website conversion tracking",
+      "Campaign reporting and optimization",
+    ],
+    sections: [
+      {
+        title: "Creative planned for Instagram placements",
+        text: "Prepare clear briefs for Feed, Stories and Reels so each format communicates the offer quickly. Agree whether your team or the studio supplies design, editing and source footage.",
+      },
+      {
+        title: "A clear path after the ad",
+        text: "Send people to an appropriate lead form, WhatsApp conversation or landing page and track the agreed actions. Media spend, creator fees and production costs are listed separately.",
+      },
+    ],
+    linkLabel: "instagram ads management",
+    suitable:
+      "Businesses in Noida, Delhi, Gurugram, Ghaziabad and Faridabad, with campaign management available remotely across India.",
+    cta: "Discuss Instagram Ads Management",
+    related: ["marketing"],
+    relatedServices: [
+      "meta-ads-management",
+      "youtube-ads-management",
+      "google-ads-management",
+      "digital-marketing",
+    ],
+    image: "/media/services/instagramads-service.svg",
+    imageAlt: "Instagram Ads Management campaign planning illustration",
+    seoTitle: "Instagram Ads Management in Delhi NCR | MKSAnalytIQ",
+    seoDescription:
+      "Instagram Ads management in Delhi NCR and India: Feed, Stories and Reels campaigns, audiences, creative briefs, conversion tracking and reporting.",
+    faqIds: ["instagramads-scope", "instagramads-results"],
+    processTitle: "Paid advertising management process",
+    processIntro:
+      "Share your offer, audience, current account and budget range. We agree campaign deliverables and measurement before launch.",
+    processSteps: [
+      {
+        n: "01",
+        title: "Audit",
+        text: "Review the offer, advertising account, audience, landing page and existing tracking.",
+      },
+      {
+        n: "02",
+        title: "Plan",
+        text: "Agree campaign goals, targeting, creative requirements, budget and conversion actions.",
+      },
+      {
+        n: "03",
+        title: "Launch",
+        text: "Build and launch approved campaigns using the agreed accounts and assets.",
+      },
+      {
+        n: "04",
+        title: "Measure",
+        text: "Review spend, delivery, website actions and enquiries using available platform data.",
+      },
+      {
+        n: "05",
+        title: "Improve",
+        text: "Adjust targeting, creative and campaign controls within the agreed scope.",
+      },
+    ],
+  },
+  {
+    id: "youtubeads",
+    slug: "youtube-ads-management",
+    title: "YouTube Ads Management",
+    h1: "YouTube Ads Management Services in Delhi NCR & India",
+    blurb:
+      "Plan YouTube video advertising with focused audiences, clear video briefs, landing pages and conversion measurement. Work with our Noida studio from anywhere in India.",
+    problem:
+      "Video campaigns spend budget before the audience, message, landing page and measurement plan are agreed.",
+    solution:
+      "Define the campaign goal, audience, video requirements and conversion path, then monitor performance and improve the agreed campaign elements.",
+    deliverables: [
+      "YouTube Ads account and campaign audit",
+      "Audience and placement planning",
+      "Video ad brief and script direction",
+      "Campaign setup and exclusions",
+      "Website conversion tracking",
+      "Budget and performance reporting",
+    ],
+    sections: [
+      {
+        title: "Video ads built around one clear action",
+        text: "Plan the opening, message, format and call to action before production. Identify whether existing video can be used or whether scripting, filming and editing should be included.",
+      },
+      {
+        title: "Campaign controls and measurement",
+        text: "Set agreed audiences, placements, exclusions and conversions, then review spend, views, website actions and enquiries. Google charges media spend directly to the advertiser.",
+      },
+    ],
+    linkLabel: "youtube ads management",
+    suitable:
+      "Businesses in Noida, Delhi, Gurugram, Ghaziabad and Faridabad, with campaign management available remotely across India.",
+    cta: "Discuss YouTube Ads Management",
+    related: ["marketing"],
+    relatedServices: [
+      "meta-ads-management",
+      "instagram-ads-management",
+      "google-ads-management",
+      "digital-marketing",
+    ],
+    image: "/media/services/youtubeads-service.svg",
+    imageAlt: "YouTube Ads Management campaign planning illustration",
+    seoTitle: "YouTube Ads Management in Delhi NCR & India | MKSAnalytIQ",
+    seoDescription:
+      "YouTube Ads management in Delhi NCR and India: campaign setup, audiences, video briefs, landing pages, conversion tracking and performance reporting.",
+    faqIds: ["youtubeads-scope", "youtubeads-results"],
+    processTitle: "Paid advertising management process",
+    processIntro:
+      "Share your offer, audience, current account and budget range. We agree campaign deliverables and measurement before launch.",
+    processSteps: [
+      {
+        n: "01",
+        title: "Audit",
+        text: "Review the offer, advertising account, audience, landing page and existing tracking.",
+      },
+      {
+        n: "02",
+        title: "Plan",
+        text: "Agree campaign goals, targeting, creative requirements, budget and conversion actions.",
+      },
+      {
+        n: "03",
+        title: "Launch",
+        text: "Build and launch approved campaigns using the agreed accounts and assets.",
+      },
+      {
+        n: "04",
+        title: "Measure",
+        text: "Review spend, delivery, website actions and enquiries using available platform data.",
+      },
+      {
+        n: "05",
+        title: "Improve",
+        text: "Adjust targeting, creative and campaign controls within the agreed scope.",
+      },
+    ],
+  },
+  {
+    id: "googleads",
+    slug: "google-ads-management",
+    title: "Google Ads Management",
+    h1: "Google Ads Management Services in Noida & Delhi NCR",
+    blurb:
+      "Manage Google Search and supported campaign formats with clear keyword targeting, useful landing pages and conversion tracking. Serving Delhi NCR and clients across India.",
+    problem:
+      "Paid search spend begins before keywords, exclusions, landing pages and enquiry tracking agree, making qualified results hard to identify.",
+    solution:
+      "Map search intent to campaigns and landing pages, configure supported conversion actions and review spend and enquiries against the approved plan.",
+    deliverables: [
+      "Google Ads account and campaign audit",
+      "Keyword, search-intent and negative-keyword plan",
+      "Campaign and advertisement setup",
+      "Landing-page recommendations",
+      "Call, form and website conversion tracking",
+      "Budget and performance reporting",
+    ],
+    sections: [
+      {
+        title: "Search campaigns matched to the offer",
+        text: "Group keywords by intent and direct each campaign to the most relevant page. Agree locations, schedules, budgets and exclusions before launch.",
+      },
+      {
+        title: "Reporting tied to business enquiries",
+        text: "Review search terms, clicks, costs and tracked actions, then adjust bids, targeting and ads within the agreed scope. Advertising spend is paid separately to Google.",
+      },
+    ],
+    linkLabel: "google ads management",
+    suitable:
+      "Businesses in Noida, Delhi, Gurugram, Ghaziabad and Faridabad, with campaign management available remotely across India.",
+    cta: "Discuss Google Ads Management",
+    related: ["marketing"],
+    relatedServices: [
+      "meta-ads-management",
+      "instagram-ads-management",
+      "youtube-ads-management",
+      "digital-marketing",
+    ],
+    image: "/media/services/googleads-service.svg",
+    imageAlt: "Google Ads Management campaign planning illustration",
+    seoTitle: "Google Ads Management in Noida & Delhi NCR | MKSAnalytIQ",
+    seoDescription:
+      "Google Ads management in Noida, Delhi NCR and India: keyword planning, campaign setup, landing pages, conversion tracking and performance reporting.",
+    faqIds: ["googleads-scope", "googleads-results"],
+    processTitle: "Paid advertising management process",
+    processIntro:
+      "Share your offer, audience, current account and budget range. We agree campaign deliverables and measurement before launch.",
+    processSteps: [
+      {
+        n: "01",
+        title: "Audit",
+        text: "Review the offer, advertising account, audience, landing page and existing tracking.",
+      },
+      {
+        n: "02",
+        title: "Plan",
+        text: "Agree campaign goals, targeting, creative requirements, budget and conversion actions.",
+      },
+      {
+        n: "03",
+        title: "Launch",
+        text: "Build and launch approved campaigns using the agreed accounts and assets.",
+      },
+      {
+        n: "04",
+        title: "Measure",
+        text: "Review spend, delivery, website actions and enquiries using available platform data.",
+      },
+      {
+        n: "05",
+        title: "Improve",
+        text: "Adjust targeting, creative and campaign controls within the agreed scope.",
+      },
+    ],
+  },
 ];
 
 export function getService(slug: string) {
@@ -2195,6 +2507,54 @@ export const timelineOptions = [
 ] as const;
 
 export const faqs: { id: string; q: string; a: string; tags: string[] }[] = [
+  {
+    id: "metaads-scope",
+    q: "What is included in Meta Ads management?",
+    a: "A typical scope can include account review, campaign setup, audience planning, ad copy, creative direction, conversion tracking and reporting. The proposal lists the exact channels and volume.",
+    tags: ["metaads"],
+  },
+  {
+    id: "metaads-results",
+    q: "Do you guarantee leads or sales from Meta Ads?",
+    a: "No. Results depend on the offer, market, creative, budget and sales follow-up. We report available campaign and enquiry data and use it to guide improvements.",
+    tags: ["metaads"],
+  },
+  {
+    id: "instagramads-scope",
+    q: "Can Instagram ads run separately from Facebook ads?",
+    a: "Yes. An Instagram-focused scope can prioritize Instagram placements, while the account and campaign tools may still be managed through Meta's advertising platform.",
+    tags: ["instagramads"],
+  },
+  {
+    id: "instagramads-results",
+    q: "Are Reels production and ad spend included?",
+    a: "Only when the proposal includes them. Creative production, creator fees and platform advertising spend are separated from campaign-management fees.",
+    tags: ["instagramads"],
+  },
+  {
+    id: "youtubeads-scope",
+    q: "What types of YouTube advertising can you manage?",
+    a: "The suitable format depends on your campaign goal and available video assets. The plan can cover skippable video, short-form placements, audience settings and conversion measurement where supported.",
+    tags: ["youtubeads"],
+  },
+  {
+    id: "youtubeads-results",
+    q: "Do you create the YouTube video advertisement?",
+    a: "Script direction, editing or production can be included as separate deliverables. The campaign scope states which assets you provide and which the studio creates.",
+    tags: ["youtubeads"],
+  },
+  {
+    id: "googleads-scope",
+    q: "What does Google Ads management include?",
+    a: "A typical scope includes account review, keyword planning, campaign setup, advertisements, negative keywords, conversion tracking and reporting. Landing-page work is listed separately when needed.",
+    tags: ["googleads"],
+  },
+  {
+    id: "googleads-results",
+    q: "Can you guarantee the top ad position or a number of leads?",
+    a: "No. Auction results and enquiry volume depend on competition, budget, offer, website and follow-up. We manage toward agreed goals and report the available evidence.",
+    tags: ["googleads"],
+  },
   {
     id: "whatsapp-scope",
     q: "Can you connect WhatsApp to my existing CRM?",

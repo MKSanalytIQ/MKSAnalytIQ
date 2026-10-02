@@ -19,6 +19,10 @@ const serviceLabel: Record<ServiceId, string> = {
   email: "EMAIL MARKETING & AUTOMATION",
   maintenance: "WEBSITE MAINTENANCE & SPEED OPTIMIZATION",
   linkedin: "LINKEDIN AUTOMATION & B2B WORKFLOWS",
+  metaads: "META ADS MANAGEMENT",
+  instagramads: "INSTAGRAM ADS MANAGEMENT",
+  youtubeads: "YOUTUBE ADS MANAGEMENT",
+  googleads: "GOOGLE ADS MANAGEMENT",
 };
 
 export function ServiceArtwork({ serviceId, title }: { serviceId: ServiceId; title: string }) {
