@@ -8,9 +8,25 @@ const serviceLabel: Record<ServiceId, string> = {
   ai: "AI & AUTOMATION",
   social: "SOCIAL MEDIA",
   events: "EVENT MANAGEMENT",
+  twitter: "X / TWITTER GROWTH",
+  instagram: "INSTAGRAM GROWTH",
+  youtube: "YOUTUBE GROWTH",
 };
 
 export function ServiceArtwork({ serviceId, title }: { serviceId: ServiceId; title: string }) {
+  if (["twitter", "instagram", "youtube"].includes(serviceId)) {
+    return (
+      <img
+        src={`/media/services/${serviceId}-growth.svg`}
+        alt={`${title} content planning illustration`}
+        width={1000}
+        height={640}
+        loading="lazy"
+        decoding="async"
+        className="h-full w-full object-cover"
+      />
+    );
+  }
   const id = `service-${serviceId}`;
   return (
     <div

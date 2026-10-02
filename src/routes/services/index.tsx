@@ -30,9 +30,10 @@ function ServicesPage() {
             Digital marketing, websites, software, apps and AI.
           </h1>
           <p className="mt-4 max-w-2xl text-base leading-relaxed text-mute">
-            Hire one practice or several. Digital marketing, web development, custom software, app development and AI
-            development are the main work. Social media sits with the marketing. Event management is available when a
-            launch or gathering is part of the brief. The Noida studio serves businesses across{" "}
+            Hire one practice or several. Digital marketing, web development, custom software, app
+            development and AI development are the main work. Explore dedicated X / Twitter,
+            Instagram and YouTube growth services below. Event management is available when a launch
+            or gathering is part of the brief. The Noida studio serves businesses across{" "}
             <Link to="/digital-marketing-software-delhi-ncr" className="font-semibold text-primary">
               Delhi NCR
             </Link>{" "}
@@ -51,7 +52,9 @@ function ServicesPage() {
 
       <nav aria-label="Jump to a service" className="mx-auto max-w-6xl px-5 pt-6">
         <div className="flex items-center gap-2 overflow-x-auto pb-2">
-          <span className="shrink-0 pr-1 text-xs font-semibold uppercase tracking-widest text-mute">Jump to</span>
+          <span className="shrink-0 pr-1 text-xs font-semibold uppercase tracking-widest text-mute">
+            Jump to
+          </span>
           {services.map((service) => (
             <a
               key={service.id}
@@ -72,22 +75,38 @@ function ServicesPage() {
             className="service-listing-card scroll-mt-24 overflow-hidden rounded-3xl border border-[#dfe6f0] bg-card"
           >
             <div className="grid lg:grid-cols-2">
-              <div className={cn("service-artwork-panel relative min-h-[280px] overflow-hidden sm:min-h-[340px] lg:min-h-[500px]", index % 2 === 1 && "lg:order-2")}>
+              <div
+                className={cn(
+                  "service-artwork-panel relative min-h-[280px] overflow-hidden sm:min-h-[340px] lg:min-h-[500px]",
+                  index % 2 === 1 && "lg:order-2",
+                )}
+              >
                 <ServiceArtwork serviceId={service.id} title={service.title} />
               </div>
               <div className={cn("p-6 sm:p-8", index % 2 === 1 && "lg:order-1")}>
-                <p className="text-xs font-semibold uppercase tracking-widest text-primary">0{index + 1}</p>
+                <p className="text-xs font-semibold uppercase tracking-widest text-primary">
+                  {String(index + 1).padStart(2, "0")}
+                </p>
                 <h2 className="mt-2 text-3xl font-extrabold">
-                  <Link to="/services/$service" params={{ service: service.slug }} className="hover:text-primary">
+                  <Link
+                    to="/services/$service"
+                    params={{ service: service.slug }}
+                    className="hover:text-primary"
+                  >
                     {service.title}
                   </Link>
                 </h2>
                 <p className="mt-3 text-sm leading-relaxed text-mute">{service.blurb}</p>
-                <p className="mt-4 text-xs font-semibold uppercase tracking-widest text-mute">Deliverables</p>
+                <p className="mt-4 text-xs font-semibold uppercase tracking-widest text-mute">
+                  Deliverables
+                </p>
                 <ul className="mt-3 grid gap-2 sm:grid-cols-2">
                   {service.deliverables.map((point) => (
                     <li key={point} className="flex gap-3 text-sm">
-                      <span className="mt-1.5 size-1.5 shrink-0 rounded-full bg-primary" aria-hidden />
+                      <span
+                        className="mt-1.5 size-1.5 shrink-0 rounded-full bg-primary"
+                        aria-hidden
+                      />
                       {point}
                     </li>
                   ))}

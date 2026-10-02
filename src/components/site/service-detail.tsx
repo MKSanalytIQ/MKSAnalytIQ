@@ -2,7 +2,15 @@ import { Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
 import { useEffect } from "react";
 import { track } from "@/lib/analytics";
-import { faqsFor, faqs, projectsForService, relatedServices, steps, site, type services } from "@/lib/content";
+import {
+  faqsFor,
+  faqs,
+  projectsForService,
+  relatedServices,
+  steps,
+  site,
+  type services,
+} from "@/lib/content";
 import { absoluteUrl, areaServedPlaces, breadcrumbSchema, faqSchema } from "@/lib/seo";
 import { Button } from "./button";
 import { FaqList } from "./faq";
@@ -39,10 +47,12 @@ export function ServiceDetail({ service }: { service: Service }) {
   const pageSections = [
     { href: "#approach", label: "Approach" },
     { href: "#fit", label: "Who it is for" },
-    ...(service.sections.length || service.serviceMenu ? [{ href: "#details", label: "Service details" }] : []),
+    ...(service.sections.length || service.serviceMenu
+      ? [{ href: "#details", label: "Service details" }]
+      : []),
     { href: "#deliverables", label: "Deliverables" },
     { href: "#process", label: "Process" },
-    { href: "#work", label: "Relevant work" },
+    ...(related.length ? [{ href: "#work", label: "Relevant work" }] : []),
     ...(questions.length ? [{ href: "#faqs", label: "FAQs" }] : []),
   ];
 
@@ -93,8 +103,12 @@ export function ServiceDetail({ service }: { service: Service }) {
                 <li className="text-ink">{service.title}</li>
               </ol>
             </nav>
-            <p className="mt-6 text-xs font-semibold uppercase tracking-widest text-primary">Noida</p>
-            <h1 className="mt-3 text-4xl font-extrabold tracking-tight sm:text-5xl">{service.h1}</h1>
+            <p className="mt-6 text-xs font-semibold uppercase tracking-widest text-primary">
+              Noida
+            </p>
+            <h1 className="mt-3 text-4xl font-extrabold tracking-tight sm:text-5xl">
+              {service.h1}
+            </h1>
             <p className="mt-4 text-base leading-relaxed text-mute">{service.blurb}</p>
             <p className="mt-4 text-xs font-semibold uppercase tracking-widest text-mute">
               Based in Noida • Serving Delhi NCR and India
@@ -125,7 +139,10 @@ export function ServiceDetail({ service }: { service: Service }) {
                   {heroConsultationLabel(service)} <ArrowRight className="size-4" aria-hidden />
                 </Link>
               </Button>
-              <WhatsAppButton source={`service-${service.slug}`} message={`Hello, I need help with ${service.title}.`} />
+              <WhatsAppButton
+                source={`service-${service.slug}`}
+                message={`Hello, I need help with ${service.title}.`}
+              />
             </div>
           </div>
           <img
@@ -141,7 +158,9 @@ export function ServiceDetail({ service }: { service: Service }) {
 
       <nav aria-label="On this page" className="mx-auto max-w-6xl px-5 pt-5">
         <div className="flex items-center gap-2 overflow-x-auto pb-2">
-          <span className="shrink-0 pr-1 text-xs font-semibold uppercase tracking-widest text-mute">On this page</span>
+          <span className="shrink-0 pr-1 text-xs font-semibold uppercase tracking-widest text-mute">
+            On this page
+          </span>
           {pageSections.map((section) => (
             <a
               key={section.href}
@@ -154,7 +173,10 @@ export function ServiceDetail({ service }: { service: Service }) {
         </div>
       </nav>
 
-      <section id="approach" className="scroll-mt-28 mx-auto grid max-w-6xl gap-4 px-5 py-12 md:grid-cols-2">
+      <section
+        id="approach"
+        className="scroll-mt-28 mx-auto grid max-w-6xl gap-4 px-5 py-12 md:grid-cols-2"
+      >
         <article className="rounded-3xl border border-line bg-card p-5 sm:p-6">
           <h2 className="text-2xl font-extrabold">The problem</h2>
           <p className="mt-3 text-sm leading-relaxed text-mute">{service.problem}</p>
@@ -175,7 +197,10 @@ export function ServiceDetail({ service }: { service: Service }) {
       {service.sections.length ? (
         <section id="details" className="scroll-mt-28 mx-auto max-w-6xl space-y-4 px-5 py-4">
           {service.sections.map((section) => (
-            <article key={section.title} className="rounded-3xl border border-line bg-card p-5 sm:p-6">
+            <article
+              key={section.title}
+              className="rounded-3xl border border-line bg-card p-5 sm:p-6"
+            >
               <h2 className="text-2xl font-extrabold">{section.title}</h2>
               <p className="mt-3 text-sm leading-relaxed text-mute">{section.text}</p>
             </article>
@@ -184,7 +209,10 @@ export function ServiceDetail({ service }: { service: Service }) {
       ) : null}
 
       {service.serviceMenu ? (
-        <section id={service.sections.length ? undefined : "details"} className="scroll-mt-28 mx-auto max-w-6xl px-5 py-4">
+        <section
+          id={service.sections.length ? undefined : "details"}
+          className="scroll-mt-28 mx-auto max-w-6xl px-5 py-4"
+        >
           <div className="rounded-3xl border border-line bg-card p-5 sm:p-6">
             <h2 className="text-2xl font-extrabold">{service.serviceMenu.title}</h2>
             {service.serviceMenu.intro ? (
@@ -205,7 +233,9 @@ export function ServiceDetail({ service }: { service: Service }) {
       <section id="deliverables" className="scroll-mt-28 mx-auto max-w-6xl px-5 pb-4">
         <div className="rounded-3xl border border-line bg-card p-5 sm:p-6">
           <h2 className="text-2xl font-extrabold">{service.deliverablesTitle ?? "Deliverables"}</h2>
-          <p className="mt-2 text-sm text-mute">Typical items. The written scope lists what your project includes.</p>
+          <p className="mt-2 text-sm text-mute">
+            Typical items. The written scope lists what your project includes.
+          </p>
           <ul className="mt-5 grid gap-2 sm:grid-cols-2">
             {(service.pageDeliverables ?? service.deliverables).map((item) => (
               <li key={item} className="flex gap-3 text-sm">
@@ -234,7 +264,11 @@ export function ServiceDetail({ service }: { service: Service }) {
             <ul className="mt-4 flex flex-col gap-2 text-sm font-semibold sm:flex-row sm:flex-wrap sm:gap-x-6">
               {linked.map((item) => (
                 <li key={item.slug}>
-                  <Link to="/services/$service" params={{ service: item.slug }} className="text-primary hover:text-ink">
+                  <Link
+                    to="/services/$service"
+                    params={{ service: item.slug }}
+                    className="text-primary hover:text-ink"
+                  >
                     {item.linkLabel}
                   </Link>
                 </li>
@@ -245,7 +279,9 @@ export function ServiceDetail({ service }: { service: Service }) {
       ) : null}
 
       <section id="process" className="scroll-mt-28 mx-auto max-w-6xl px-5 py-12">
-        <h2 className="text-3xl font-extrabold tracking-tight">{service.processTitle ?? "Process"}</h2>
+        <h2 className="text-3xl font-extrabold tracking-tight">
+          {service.processTitle ?? "Process"}
+        </h2>
         <p className="mt-3 max-w-2xl text-sm leading-relaxed text-mute">
           {service.processIntro ??
             `${steps.length} steps, the same shape as every other engagement: you always know what happens next.`}
@@ -253,30 +289,34 @@ export function ServiceDetail({ service }: { service: Service }) {
         <ProcessSteps items={service.processSteps} />
       </section>
 
-      <section id="work" className="scroll-mt-28 mx-auto max-w-6xl px-5 pb-12">
-        <h2 className="text-3xl font-extrabold tracking-tight">{service.workTitle ?? "Relevant work"}</h2>
-        <p className="mt-3 max-w-2xl text-sm leading-relaxed text-mute">
-          Documented scope for this work is also on the{" "}
-          <Link to="/case-studies" className="font-semibold text-primary hover:text-ink">
-            case studies
-          </Link>{" "}
-          page. Those pages do not add traffic or revenue figures.
-        </p>
-        {related.length ? (
-          <ul className="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-            {related.map((project) => (
-              <li key={project.slug}>
-                <ProjectCard project={project} />
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p className="mt-4 max-w-2xl text-sm leading-relaxed text-mute">
-            Client work in this practice isn’t listed publicly. Ask on a call and we’ll walk through relevant examples.
+      {related.length > 0 ? (
+        <section id="work" className="scroll-mt-28 mx-auto max-w-6xl px-5 pb-12">
+          <h2 className="text-3xl font-extrabold tracking-tight">
+            {service.workTitle ?? "Relevant work"}
+          </h2>
+          <p className="mt-3 max-w-2xl text-sm leading-relaxed text-mute">
+            Documented scope for this work is also on the{" "}
+            <Link to="/case-studies" className="font-semibold text-primary hover:text-ink">
+              case studies
+            </Link>{" "}
+            page. Those pages do not add traffic or revenue figures.
           </p>
-        )}
-      </section>
-
+          {related.length ? (
+            <ul className="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+              {related.map((project) => (
+                <li key={project.slug}>
+                  <ProjectCard project={project} />
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className="mt-4 max-w-2xl text-sm leading-relaxed text-mute">
+              Client work in this practice isn’t listed publicly. Ask on a call and we’ll walk
+              through relevant examples.
+            </p>
+          )}
+        </section>
+      ) : null}
       <section id="faqs" className="scroll-mt-28 mx-auto max-w-3xl px-5 pb-16">
         <FaqList items={questions} />
         <p className="mt-8 text-xs font-semibold uppercase tracking-widest text-mute">
@@ -322,7 +362,11 @@ function ServiceBridges({ slug }: { slug: string }) {
           a page people can land on
         </Link>
         . If the enquiry has to enter a tool your team already runs, that build is{" "}
-        <Link to="/services/$service" params={{ service: "software-development" }} className={linkClass}>
+        <Link
+          to="/services/$service"
+          params={{ service: "software-development" }}
+          className={linkClass}
+        >
           custom software
         </Link>
         . A draft or answer a person still checks is{" "}
@@ -337,7 +381,11 @@ function ServiceBridges({ slug }: { slug: string }) {
     return (
       <p className="mt-3 max-w-2xl text-sm font-normal leading-relaxed text-mute">
         When the brief is a system your staff use, rather than a public site, see{" "}
-        <Link to="/services/$service" params={{ service: "software-development" }} className={linkClass}>
+        <Link
+          to="/services/$service"
+          params={{ service: "software-development" }}
+          className={linkClass}
+        >
           the software practice
         </Link>
         . A phone or tablet version of the same job is{" "}
@@ -345,7 +393,11 @@ function ServiceBridges({ slug }: { slug: string }) {
           an app
         </Link>
         . Once the site is up and you want enquiries from it, that is{" "}
-        <Link to="/services/$service" params={{ service: "digital-marketing" }} className={linkClass}>
+        <Link
+          to="/services/$service"
+          params={{ service: "digital-marketing" }}
+          className={linkClass}
+        >
           marketing the offer
         </Link>
         .
@@ -375,7 +427,11 @@ function ServiceBridges({ slug }: { slug: string }) {
     return (
       <p className="mt-3 max-w-2xl text-sm font-normal leading-relaxed text-mute">
         The admin side and the API are{" "}
-        <Link to="/services/$service" params={{ service: "software-development" }} className={linkClass}>
+        <Link
+          to="/services/$service"
+          params={{ service: "software-development" }}
+          className={linkClass}
+        >
           software behind the app
         </Link>
         . The same job in a browser is{" "}
@@ -394,7 +450,11 @@ function ServiceBridges({ slug }: { slug: string }) {
     return (
       <p className="mt-3 max-w-2xl text-sm font-normal leading-relaxed text-mute">
         The feature still has to ship as{" "}
-        <Link to="/services/$service" params={{ service: "software-development" }} className={linkClass}>
+        <Link
+          to="/services/$service"
+          params={{ service: "software-development" }}
+          className={linkClass}
+        >
           software your team can run
         </Link>
         . On a public site, that same job is{" "}
@@ -402,7 +462,11 @@ function ServiceBridges({ slug }: { slug: string }) {
           part of the website
         </Link>
         . When the work is enquiries or content rather than a product feature, it sits with{" "}
-        <Link to="/services/$service" params={{ service: "digital-marketing" }} className={linkClass}>
+        <Link
+          to="/services/$service"
+          params={{ service: "digital-marketing" }}
+          className={linkClass}
+        >
           marketing
         </Link>
         .

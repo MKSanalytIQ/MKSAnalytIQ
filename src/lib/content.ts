@@ -85,7 +85,17 @@ export const footerCompany = [
   { to: "/refund-policy", label: "Refund Policy" },
 ] as const;
 
-export type ServiceId = "marketing" | "social" | "events" | "software" | "web" | "app" | "ai";
+export type ServiceId =
+  | "marketing"
+  | "social"
+  | "events"
+  | "software"
+  | "web"
+  | "app"
+  | "ai"
+  | "twitter"
+  | "instagram"
+  | "youtube";
 
 export type ProjectCategory = "software" | "marketing" | "events" | "campaigns";
 
@@ -514,7 +524,14 @@ export const services: {
       },
     ],
     workTitle: "Relevant App Projects",
-    faqIds: ["app-platforms-page", "app-cross", "app-admin", "app-handover", "app-care", "app-begin"],
+    faqIds: [
+      "app-platforms-page",
+      "app-cross",
+      "app-admin",
+      "app-handover",
+      "app-care",
+      "app-begin",
+    ],
     technologyNote:
       "Where a published project names a mobile stack, it is Expo, Swift or Kotlin, sometimes with TypeScript and Supabase. The stack for a new app is chosen in the scope, not copied from another project.",
   },
@@ -623,8 +640,7 @@ export const services: {
     linkLabel: "social media",
     blurb:
       "A steady presence on the platforms your customers already use, written in your voice and posted on a calendar you approve.",
-    suitable:
-      "Teams that need a regular presence without staffing a full in-house social desk.",
+    suitable: "Teams that need a regular presence without staffing a full in-house social desk.",
     problem:
       "Posting stalls, or it runs in a voice that doesn’t sound like the business. Replies pile up and nobody owns the calendar.",
     solution:
@@ -645,7 +661,13 @@ export const services: {
     ],
     cta: "Get a Content Plan",
     related: ["marketing"],
-    relatedServices: ["digital-marketing", "web-development"],
+    relatedServices: [
+      "twitter-account-growth",
+      "instagram-account-growth",
+      "youtube-channel-growth",
+      "digital-marketing",
+      "web-development",
+    ],
     image: "/media/studio.jpg",
     imageAlt: "Social content setup at the MKSAnalytIQ studio",
     seoTitle: "Social Media Marketing in Noida | MKSAnalytIQ",
@@ -688,6 +710,162 @@ export const services: {
     seoTitle: "Event Management in Noida | MKSAnalytIQ",
     seoDescription:
       "Event management for launches, corporate gatherings and community programmes — planning, registration and promotion. MKSAnalytIQ, Noida.",
+  },
+  {
+    id: "twitter",
+    slug: "twitter-account-growth",
+    title: "X / Twitter Account Growth",
+    h1: "X / Twitter Account Growth Services in Delhi NCR & India",
+    blurb:
+      "Build a recognizable voice on X with profile positioning, original posts, threads and relevant conversations. Our Noida team works with businesses and creators across India.",
+    problem:
+      "An account posts regularly but lacks a clear topic, consistent voice or reason for the right audience to follow.",
+    solution:
+      "Start with an account audit, define the audience and content themes, then publish an approved calendar and review which topics earn relevant attention.",
+    deliverables: [
+      "Profile and bio review",
+      "Audience and topic research",
+      "Original posts and thread outlines",
+      "Monthly publishing calendar",
+      "Community engagement guidelines",
+      "Monthly performance review",
+    ],
+    sections: [
+      {
+        title: "Content that gives people a reason to follow",
+        text: "Turn your expertise, product updates and customer questions into useful posts and threads. We agree the voice, content volume and approval workflow before publishing.",
+      },
+      {
+        title: "Relevant conversations and reporting",
+        text: "Plan thoughtful replies and community participation around your niche. Review reach, profile visits, engagement and website clicks where account analytics make them available.",
+      },
+    ],
+    linkLabel: "x / twitter account growth",
+    suitable:
+      "Businesses, founders and creators in Noida, Delhi, Gurugram, Ghaziabad and Faridabad, with remote collaboration available across India.",
+    cta: "Discuss My Account",
+    related: [],
+    relatedServices: ["instagram-account-growth", "youtube-channel-growth", "social-media"],
+    image: "/media/services/twitter-growth.svg",
+    imageAlt: "Illustration of x / twitter account growth content planning",
+    seoTitle: "Twitter Account Growth in Delhi NCR & India | MKSAnalytIQ",
+    seoDescription:
+      "X / Twitter account growth services in Delhi NCR and India: profile audits, posts, threads, content planning and reporting. Talk to MKSAnalytIQ.",
+    faqIds: ["twitter-offer", "twitter-expectations", "growth-location"],
+    processSteps: [
+      { n: "01", title: "Audit", text: "Review the account, audience, existing content and business goals." },
+      { n: "02", title: "Plan", text: "Agree the topics, formats, publishing volume and approval calendar." },
+      { n: "03", title: "Create", text: "Prepare the agreed content and review it with your team." },
+      { n: "04", title: "Publish", text: "Publish approved content through the agreed account workflow." },
+      { n: "05", title: "Review", text: "Review available analytics and enquiries to improve the next content plan." },
+    ],
+    processTitle: "Your content growth process",
+    processIntro:
+      "Share your account and goals. We agree the deliverables, approval process and reporting schedule before work begins.",
+  },
+  {
+    id: "instagram",
+    slug: "instagram-account-growth",
+    title: "Instagram Account Growth",
+    h1: "Instagram Account Growth Services in Delhi NCR & India",
+    blurb:
+      "Make your Instagram profile easier to discover and worth following with a clear bio, useful Reels, carousels and a consistent content plan. Available in Delhi NCR and across India.",
+    problem:
+      "A profile has attractive posts but no clear audience, repeatable content themes or easy path from interest to an enquiry.",
+    solution:
+      "Connect profile positioning, content planning and calls to action. Build a calendar around your offer, then use performance reviews to improve the next batch of content.",
+    deliverables: [
+      "Profile, bio and highlights audit",
+      "Reels concepts and script outlines",
+      "Carousel and caption planning",
+      "Monthly content calendar",
+      "Comment and enquiry workflow",
+      "Monthly content performance review",
+    ],
+    sections: [
+      {
+        title: "Reels, carousels and a recognizable profile",
+        text: "Plan content around demonstrations, common questions, behind-the-scenes work and useful advice. Agree which assets you supply and which design or editing work the studio produces.",
+      },
+      {
+        title: "Turn profile visits into conversations",
+        text: "Make contact details, highlights and calls to action clear. Review reach, saves, shares, profile activity and enquiries where available, then use those findings to choose the next topics.",
+      },
+    ],
+    linkLabel: "instagram account growth",
+    suitable:
+      "Businesses, founders and creators in Noida, Delhi, Gurugram, Ghaziabad and Faridabad, with remote collaboration available across India.",
+    cta: "Discuss My Account",
+    related: [],
+    relatedServices: ["twitter-account-growth", "youtube-channel-growth", "social-media"],
+    image: "/media/services/instagram-growth.svg",
+    imageAlt: "Illustration of instagram account growth content planning",
+    seoTitle: "Instagram Account Growth in Delhi NCR & India | MKSAnalytIQ",
+    seoDescription:
+      "Instagram account growth services in Delhi NCR and India: profile audits, Reels, carousels, captions and content planning. Talk to MKSAnalytIQ about your goals.",
+    faqIds: ["instagram-offer", "instagram-expectations", "growth-location"],
+    processSteps: [
+      { n: "01", title: "Audit", text: "Review the account, audience, existing content and business goals." },
+      { n: "02", title: "Plan", text: "Agree the topics, formats, publishing volume and approval calendar." },
+      { n: "03", title: "Create", text: "Prepare the agreed content and review it with your team." },
+      { n: "04", title: "Publish", text: "Publish approved content through the agreed account workflow." },
+      { n: "05", title: "Review", text: "Review available analytics and enquiries to improve the next content plan." },
+    ],
+    processTitle: "Your content growth process",
+    processIntro:
+      "Share your account and goals. We agree the deliverables, approval process and reporting schedule before work begins.",
+  },
+  {
+    id: "youtube",
+    slug: "youtube-channel-growth",
+    title: "YouTube Channel Growth",
+    h1: "YouTube Channel Growth Services in Delhi NCR & India",
+    blurb:
+      "Give your YouTube channel a clear direction with audience research, video topics, titles, thumbnails and a practical publishing plan. Work with our Noida studio from anywhere in India.",
+    problem:
+      "Videos take time to produce, but the channel has no consistent topic strategy, clear packaging or structured review of what viewers watch.",
+    solution:
+      "Audit the channel, map audience questions to video ideas, and plan titles, thumbnails and scripts together. Use available channel analytics to improve future uploads.",
+    deliverables: [
+      "Channel and audience audit",
+      "Video topic and keyword research",
+      "Title and thumbnail planning",
+      "Script outlines and Shorts ideas",
+      "Upload and playlist guidance",
+      "Monthly channel performance review",
+    ],
+    sections: [
+      {
+        title: "Plan videos around audience questions",
+        text: "Build a focused topic calendar with long-form videos and Shorts where they fit. Clarify the promise of each video in its title, thumbnail and opening before production starts.",
+      },
+      {
+        title: "Improve packaging and viewer experience",
+        text: "Review impressions, click-through rate, watch time and audience retention where available. Use the findings to improve titles, thumbnails, pacing and the next video brief. Editing and production are specified in the proposal.",
+      },
+    ],
+    linkLabel: "youtube channel growth",
+    suitable:
+      "Businesses, founders and creators in Noida, Delhi, Gurugram, Ghaziabad and Faridabad, with remote collaboration available across India.",
+    cta: "Discuss My Channel",
+    related: [],
+    relatedServices: ["twitter-account-growth", "instagram-account-growth", "social-media"],
+    image: "/media/services/youtube-growth.svg",
+    imageAlt: "Illustration of youtube channel growth content planning",
+    seoTitle: "YouTube Channel Growth in Delhi NCR & India | MKSAnalytIQ",
+    seoDescription:
+      "YouTube channel growth services in Delhi NCR and India: channel audits, video topics, titles, thumbnail planning and analytics. Talk to MKSAnalytIQ.",
+    faqIds: ["youtube-offer", "youtube-expectations", "growth-location"],
+    processSteps: [
+      { n: "01", title: "Audit", text: "Review the account, audience, existing content and business goals." },
+      { n: "02", title: "Plan", text: "Agree the topics, formats, publishing volume and approval calendar." },
+      { n: "03", title: "Create", text: "Prepare the agreed content and review it with your team." },
+      { n: "04", title: "Publish", text: "Publish approved content through the agreed account workflow." },
+      { n: "05", title: "Review", text: "Review available analytics and enquiries to improve the next content plan." },
+    ],
+    processTitle: "Your content growth process",
+    processIntro:
+      "Share your account and goals. We agree the deliverables, approval process and reporting schedule before work begins.",
   },
 ];
 
@@ -824,8 +1002,10 @@ export const projects: {
     seoDescription:
       "See how Postroom organises permission-based email lists, campaign drafts and SMTP delivery with tracking and unsubscribe controls.",
     serviceSlugs: ["software-development", "digital-marketing"],
-    objective: "Give a business a focused workspace for preparing and tracking permission-based email campaigns using its own SMTP provider.",
-    approach: "Postroom manages contacts, lists, drafts, review and the send queue. A configured SMTP provider delivers messages; without one, the app stores messages in capture mode for flow testing rather than delivering to inboxes.",
+    objective:
+      "Give a business a focused workspace for preparing and tracking permission-based email campaigns using its own SMTP provider.",
+    approach:
+      "Postroom manages contacts, lists, drafts, review and the send queue. A configured SMTP provider delivers messages; without one, the app stores messages in capture mode for flow testing rather than delivering to inboxes.",
   },
   {
     slug: "clientline",
@@ -849,8 +1029,10 @@ export const projects: {
     seoDescription:
       "Explore ClientLine, an Android prototype for a separate business line, with a Node.js carrier integration and clear setup requirements.",
     serviceSlugs: ["app-development", "software-development"],
-    objective: "Explore a separate business phone-line experience for India-based operators who contact US clients.",
-    approach: "The Android app pairs with a Node.js service for carrier actions. The repository is private and this build is a prototype: without configured carrier credentials it stays in demo mode; live calling and messaging depend on carrier setup, required registrations, consent and applicable approvals. Incoming push calls are not included.",
+    objective:
+      "Explore a separate business phone-line experience for India-based operators who contact US clients.",
+    approach:
+      "The Android app pairs with a Node.js service for carrier actions. The repository is private and this build is a prototype: without configured carrier credentials it stays in demo mode; live calling and messaging depend on carrier setup, required registrations, consent and applicable approvals. Incoming push calls are not included.",
   },
   {
     slug: "shortgen",
@@ -868,7 +1050,8 @@ export const projects: {
       "Project overview of ShortGen, a multi-tenant SaaS for short-form video: workspaces, jobs, templates and credits.",
     serviceSlugs: ["software-development", "ai-development"],
     objective: "Turn a topic into short-form video for more than one workspace.",
-    approach: "The published product is a multi-tenant SaaS with workspaces, render jobs, templates and credits.",
+    approach:
+      "The published product is a multi-tenant SaaS with workspaces, render jobs, templates and credits.",
   },
   {
     slug: "cpaas",
@@ -877,14 +1060,7 @@ export const projects: {
     kind: "Software",
     summary:
       "Twilio-style communications platform: messaging, verify, voice, email, provider routing and an Android SMS gateway.",
-    features: [
-      "Messaging",
-      "Verify",
-      "Voice",
-      "Email",
-      "Provider routing",
-      "Android SMS gateway",
-    ],
+    features: ["Messaging", "Verify", "Voice", "Email", "Provider routing", "Android SMS gateway"],
     stack: ["NestJS", "Next.js", "Kotlin"],
     github: "https://github.com/MKSanalytIQ/cpaas",
     live: "",
@@ -914,7 +1090,8 @@ export const projects: {
       "Project overview of TaxPilot AI: guided ITR-3 and ITR-4 preparation for AY 2026–27, with eligibility checks and ITR-4 JSON export.",
     serviceSlugs: ["ai-development", "software-development"],
     objective: "Guide ITR-3 and ITR-4 preparation for AY 2026–27.",
-    approach: "The published product includes eligibility checks and an official ITR-4 JSON export.",
+    approach:
+      "The published product includes eligibility checks and an official ITR-4 JSON export.",
   },
   {
     slug: "eye-camp",
@@ -923,12 +1100,7 @@ export const projects: {
     kind: "Events",
     summary:
       "Hindi, mobile-first registration for a free cataract camp by Trishakti Seva Foundation and RJ Shankara Eye Hospital, Varanasi — slips, QR codes and an admin desk.",
-    features: [
-      "Hindi, mobile-first registration",
-      "Registration slips",
-      "QR codes",
-      "Admin desk",
-    ],
+    features: ["Hindi, mobile-first registration", "Registration slips", "QR codes", "Admin desk"],
     stack: ["TypeScript", "Postgres"],
     github: "https://github.com/MKSanalytIQ/QRLogin",
     live: "https://qr-login-six.vercel.app",
@@ -945,7 +1117,11 @@ export const projects: {
     kind: "Campaigns",
     summary:
       "Fundraising and volunteer site for the Navi Zindagi Foundation’s flood-relief work in Nepal and Assam.",
-    features: ["Fundraising pages", "Volunteer information", "Flood-relief context for Nepal and Assam"],
+    features: [
+      "Fundraising pages",
+      "Volunteer information",
+      "Flood-relief context for Nepal and Assam",
+    ],
     stack: ["TypeScript"],
     github: "https://github.com/MKSanalytIQ/Navizindagi",
     live: "https://navizindagi.vercel.app",
@@ -975,7 +1151,8 @@ export const projects: {
     seoDescription:
       "Project overview of AI Influencer OS: profiles, content drafts, post approval and disclosed sponsored captions.",
     serviceSlugs: ["ai-development", "software-development", "digital-marketing"],
-    objective: "Draft and approve influencer content, including a disclosure on sponsored captions.",
+    objective:
+      "Draft and approve influencer content, including a disclosure on sponsored captions.",
     approach: "The published workspace covers profiles, drafts, approval and that disclosure step.",
   },
   {
@@ -989,10 +1166,12 @@ export const projects: {
     github: "",
     live: "https://buildsite-one.vercel.app",
     seoTitle: "BuildSite — Construction Operations Software | MKSAnalytIQ",
-    seoDescription: "Project overview of BuildSite, a construction product for roles, attendance, stock and billing.",
+    seoDescription:
+      "Project overview of BuildSite, a construction product for roles, attendance, stock and billing.",
     serviceSlugs: ["software-development", "web-development"],
     objective: "Handle roles, attendance, stock and billing for a construction product.",
-    approach: "The published product lists those functions and a mobile view. No further operating detail is published here.",
+    approach:
+      "The published product lists those functions and a mobile view. No further operating detail is published here.",
   },
   {
     slug: "brokerfree",
@@ -1005,7 +1184,8 @@ export const projects: {
     github: "",
     live: "",
     seoTitle: "BrokerFree — Real Estate CRM and Listings | MKSAnalytIQ",
-    seoDescription: "Project overview of BrokerFree, a multi-tenant real estate system with CRM, listings and a pipeline.",
+    seoDescription:
+      "Project overview of BrokerFree, a multi-tenant real estate system with CRM, listings and a pipeline.",
     serviceSlugs: ["software-development"],
   },
   {
@@ -1015,7 +1195,12 @@ export const projects: {
     kind: "Campaigns",
     summary:
       "Bilingual website for Bhartiya Rashtriya Jansatta, with volunteer, contact, newsletter and contribution forms, a news feed and an admin console.",
-    features: ["English and Hindi", "Volunteer and contribution forms", "News feed", "Admin console"],
+    features: [
+      "English and Hindi",
+      "Volunteer and contribution forms",
+      "News feed",
+      "Admin console",
+    ],
     stack: ["JavaScript", "Postgres"],
     github: "",
     live: "https://brjbharat.vercel.app",
@@ -1065,7 +1250,8 @@ export const projects: {
     github: "",
     live: "https://dating-app-me-5f01.vercel.app",
     seoTitle: "Spark — Dating App with Chat | MKSAnalytIQ",
-    seoDescription: "Project overview of Spark, a dating app with accounts, a swipe deck, matches and chat.",
+    seoDescription:
+      "Project overview of Spark, a dating app with accounts, a swipe deck, matches and chat.",
     serviceSlugs: ["software-development", "web-development"],
   },
   {
@@ -1095,7 +1281,8 @@ export const projects: {
     github: "",
     live: "",
     seoTitle: "KrushnaAI — Agent Marketplace | MKSAnalytIQ",
-    seoDescription: "Project overview of KrushnaAI, an agent marketplace and agent-as-a-service product.",
+    seoDescription:
+      "Project overview of KrushnaAI, an agent marketplace and agent-as-a-service product.",
     serviceSlugs: ["ai-development", "software-development"],
   },
   {
@@ -1109,7 +1296,8 @@ export const projects: {
     github: "",
     live: "https://krushnalabs.vercel.app",
     seoTitle: "KrushnaLabs — AI Software Builder | MKSAnalytIQ",
-    seoDescription: "Project overview of KrushnaLabs, a product for building software by talking to AI.",
+    seoDescription:
+      "Project overview of KrushnaLabs, a product for building software by talking to AI.",
     serviceSlugs: ["ai-development", "software-development"],
   },
   {
@@ -1123,7 +1311,8 @@ export const projects: {
     github: "",
     live: "",
     seoTitle: "Ludo Kingdom — Multiplayer Mobile Game | MKSAnalytIQ",
-    seoDescription: "Project overview of Ludo Kingdom, an Android and iOS Ludo app with multiplayer.",
+    seoDescription:
+      "Project overview of Ludo Kingdom, an Android and iOS Ludo app with multiplayer.",
     serviceSlugs: ["app-development"],
   },
   {
@@ -1152,7 +1341,8 @@ export const projects: {
     github: "",
     live: "https://metasocial-mu.vercel.app",
     seoTitle: "MetaSocial — Social Post Scheduler | MKSAnalytIQ",
-    seoDescription: "Project overview of MetaSocial, a scheduler for posts, mentions, rules and AI drafts.",
+    seoDescription:
+      "Project overview of MetaSocial, a scheduler for posts, mentions, rules and AI drafts.",
     serviceSlugs: ["digital-marketing", "ai-development"],
   },
   {
@@ -1180,7 +1370,8 @@ export const projects: {
     github: "",
     live: "https://rajput-rishta-mocha.vercel.app",
     seoTitle: "Rajput Rishta — Community Matrimony Product | MKSAnalytIQ",
-    seoDescription: "Project overview of Rajput Rishta, a community matrimony product for web and mobile.",
+    seoDescription:
+      "Project overview of Rajput Rishta, a community matrimony product for web and mobile.",
     serviceSlugs: ["web-development", "app-development"],
   },
   {
@@ -1222,7 +1413,8 @@ export const projects: {
     github: "",
     live: "",
     seoTitle: "TubeForge — YouTube Publishing Tool | MKSAnalytIQ",
-    seoDescription: "Project overview of TubeForge, a YouTube channel tool for scripts, video and publishing.",
+    seoDescription:
+      "Project overview of TubeForge, a YouTube channel tool for scripts, video and publishing.",
     serviceSlugs: ["digital-marketing", "software-development"],
   },
 ];
@@ -1230,7 +1422,6 @@ export const projects: {
 export function getProject(slug: string) {
   return projects.find((project) => project.slug === slug);
 }
-
 
 export function relatedServices(slugs: readonly string[]) {
   return slugs.flatMap((slug) => {
@@ -1301,9 +1492,56 @@ export const publishedTestimonials = testimonials.filter((item) => item.publishe
 
 export const budgetOptions = ["₹10k–₹25k", "₹25k–₹50k", "₹50k–₹1L", "₹1L+", "Not sure"] as const;
 
-export const timelineOptions = ["Immediately", "This month", "1–3 months", "Just exploring"] as const;
+export const timelineOptions = [
+  "Immediately",
+  "This month",
+  "1–3 months",
+  "Just exploring",
+] as const;
 
 export const faqs: { id: string; q: string; a: string; tags: string[] }[] = [
+  {
+    id: "twitter-offer",
+    q: "What does your Twitter account growth service include?",
+    a: "A profile review, audience research, a content calendar, posts or threads, engagement guidance and reporting. The proposal sets the publishing volume and who handles replies.",
+    tags: ["twitter"],
+  },
+  {
+    id: "twitter-expectations",
+    q: "Do you guarantee followers or sell engagement?",
+    a: "No. This service focuses on original content and relevant audience engagement. Followers, reach and enquiries depend on the audience and content; there is no fixed growth promise.",
+    tags: ["twitter"],
+  },
+  {
+    id: "instagram-offer",
+    q: "Can you help grow an Instagram account for my business?",
+    a: "Yes. We plan profile improvements, content themes, Reels and carousels around your business and audience. The aim is relevant attention and clearer enquiry paths.",
+    tags: ["instagram"],
+  },
+  {
+    id: "instagram-expectations",
+    q: "Are shoots and paid Instagram ads included?",
+    a: "Filming, editing and paid campaigns are agreed separately in the proposal. Remote work can use footage you provide. Any ad spend is identified separately from the service fee.",
+    tags: ["instagram"],
+  },
+  {
+    id: "youtube-offer",
+    q: "What does your YouTube channel growth service cover?",
+    a: "Channel review, audience and topic research, video planning, title and thumbnail direction, upload guidance and reporting. Production and editing are agreed according to your needs.",
+    tags: ["youtube"],
+  },
+  {
+    id: "youtube-expectations",
+    q: "Can you guarantee subscribers, views or monetization?",
+    a: "No. We focus on content quality, clear packaging and a consistent publishing process. Viewer response and platform eligibility determine outcomes; we do not promise subscriber counts or monetization.",
+    tags: ["youtube"],
+  },
+  {
+    id: "growth-location",
+    q: "Do you work only with clients in Delhi NCR?",
+    a: "The studio is based in Noida and serves Delhi NCR, including Delhi, Gurugram, Ghaziabad and Faridabad. Businesses and creators across India can collaborate remotely through briefs, shared assets and content approvals.",
+    tags: ["twitter", "instagram", "youtube"],
+  },
   {
     id: "cost",
     q: "How much does digital marketing cost?",
