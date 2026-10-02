@@ -78,7 +78,7 @@ function toCaseStudy(project: (typeof projects)[number]): CaseStudyRecord {
     technologies,
     projectType: project.kind,
     ...(clientName ? { clientName } : {}),
-    heroImage: `/media/work/${project.slug}.jpg`,
+    heroImage: project.image ?? `/media/work/${project.slug}.jpg`,
     heroAlt: `${project.name}, a ${project.kind.toLowerCase()} project by MKSAnalytIQ`,
     ...(project.objective ? { objective: project.objective } : {}),
     ...(project.approach ? { solution: project.approach } : {}),

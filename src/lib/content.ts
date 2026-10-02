@@ -799,7 +799,59 @@ export const projects: {
   approach?: string;
   /** Organisation already named in the summary. Omit for the studio’s own products. */
   builtFor?: string;
+  /** Optional portfolio artwork override when the source asset uses another format. */
+  image?: string;
 }[] = [
+  {
+    slug: "postroom",
+    name: "Postroom",
+    category: "software",
+    kind: "Email Campaign Software",
+    summary:
+      "A self-hosted-SMTP email campaign app for contact lists, campaign drafts, review, delivery tracking and unsubscribes.",
+    features: [
+      "Contact lists and CSV import",
+      "Campaign drafts, templates and merge tags",
+      "Review step and queued sending through your SMTP provider",
+      "Open and signed click tracking",
+      "One-click unsubscribe and required postal footer",
+    ],
+    stack: ["Next.js", "TypeScript", "PostgreSQL", "SMTP"],
+    github: "https://github.com/MKSanalytIQ/Postroom",
+    live: "https://postroom-sooty.vercel.app",
+    image: "/media/work/postroom.webp",
+    seoTitle: "Postroom Email Campaign Software Case Study | MKSAnalytIQ",
+    seoDescription:
+      "See how Postroom organises permission-based email lists, campaign drafts and SMTP delivery with tracking and unsubscribe controls.",
+    serviceSlugs: ["software-development", "digital-marketing"],
+    objective: "Give a business a focused workspace for preparing and tracking permission-based email campaigns using its own SMTP provider.",
+    approach: "Postroom manages contacts, lists, drafts, review and the send queue. A configured SMTP provider delivers messages; without one, the app stores messages in capture mode for flow testing rather than delivering to inboxes.",
+  },
+  {
+    slug: "clientline",
+    name: "ClientLine",
+    category: "software",
+    kind: "Android App Prototype",
+    summary:
+      "An Android prototype exploring a separate business line for India-based operators contacting US clients. Live carrier service requires account configuration and applicable registrations and approvals.",
+    features: [
+      "Android app built with Jetpack Compose",
+      "Node.js service for carrier-connected actions",
+      "Demo mode when carrier credentials are not configured",
+      "Live calls and texts depend on an authorised carrier account",
+      "US application-to-person messaging requires the relevant registration and client consent",
+    ],
+    stack: ["Kotlin", "Jetpack Compose", "Node.js", "Twilio"],
+    github: "",
+    live: "",
+    image: "/media/work/clientline.webp",
+    seoTitle: "ClientLine Android App Prototype Case Study | MKSAnalytIQ",
+    seoDescription:
+      "Explore ClientLine, an Android prototype for a separate business line, with a Node.js carrier integration and clear setup requirements.",
+    serviceSlugs: ["app-development", "software-development"],
+    objective: "Explore a separate business phone-line experience for India-based operators who contact US clients.",
+    approach: "The Android app pairs with a Node.js service for carrier actions. The repository is private and this build is a prototype: without configured carrier credentials it stays in demo mode; live calling and messaging depend on carrier setup, required registrations, consent and applicable approvals. Incoming push calls are not included.",
+  },
   {
     slug: "shortgen",
     name: "ShortGen",
@@ -1194,6 +1246,7 @@ export function servicesForProject(project: {
   features: readonly string[];
   stack: readonly string[];
   serviceSlugs?: readonly string[];
+  image?: string;
 }) {
   if (project.serviceSlugs?.length) return relatedServices(project.serviceSlugs);
   const blob = `${project.name} ${project.summary} ${project.features.join(" ")} ${project.stack.join(" ")}`;

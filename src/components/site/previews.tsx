@@ -16,7 +16,7 @@ export function Preview({
   return (
     <div className={cn("relative aspect-video overflow-hidden bg-navy", className)}>
       <img
-        src={`/media/work/${slug}.jpg`}
+        src={project?.image ?? `/media/work/${slug}.jpg`}
         alt={alt}
         width={1280}
         height={720}
