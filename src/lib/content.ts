@@ -26,6 +26,7 @@ export const company = {
   proprietor: "Manoj Kumar Singh",
   proprietorSocialLinks: [
     { platform: "X", handle: "@mksanalytiq", url: "https://x.com/mksanalytiq" },
+    { platform: "Facebook", handle: "MKBRJ", url: "https://www.facebook.com/MKBRJ/" },
   ],
   phoneDisplay: "+91 95608 14623",
   phoneTel: "+919560814623",
