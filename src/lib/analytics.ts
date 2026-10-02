@@ -61,6 +61,15 @@ function forward(name: string, clean: Record<string, string | number | boolean>)
     host.dataLayer.push(detail);
   }
   if (typeof host.gtag === "function") {
-    host.gtag("event", name, clean);
+    const params =
+      name === "page_view" && typeof clean.path === "string"
+        ? {
+            ...clean,
+            page_path: clean.path,
+            page_location: new URL(clean.path, window.location.origin).toString(),
+            page_title: document.title,
+          }
+        : clean;
+    host.gtag("event", name, params);
   }
 }

@@ -12,6 +12,12 @@ function analyticsScripts() {
   const scripts: { children: string }[] = [];
   const gtm = import.meta.env.VITE_GTM_ID;
   const pixel = import.meta.env.VITE_META_PIXEL_ID;
+  const measurementId = "G-3J1MSKFG69";
+
+  scripts.push({
+    children: `(function(w,d){w.dataLayer=w.dataLayer||[];w.gtag=w.gtag||function(){w.dataLayer.push(arguments);};w.gtag('js',new Date());w.gtag('config','${measurementId}',{send_page_view:false});var s=d.createElement('script');s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id=${measurementId}';d.head.appendChild(s);})(window,document);`,
+  });
+
   if (typeof gtm === "string" && /^GTM-[A-Z0-9]+$/.test(gtm)) {
     scripts.push({
       children: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','${gtm}');`,

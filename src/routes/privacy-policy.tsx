@@ -37,8 +37,10 @@ function Privacy() {
       </p>
       <h2>What we don’t do here</h2>
       <p>
-        The public website does not ask visitors to create an account or publish enquiry details. Analytics, if added,
-        should receive event names such as “form submitted” — not your name, phone number, email or message.
+        The public website does not ask visitors to create an account or publish enquiry details. Google Analytics 4
+        records page views and campaign attribution, along with device and browser information and approximate location
+        signals. Website interaction events do not include your name, phone number, email address or message. Google may
+        use cookies and process analytics data under its own privacy terms. You can limit cookies in your browser.
       </p>
       <h2>Links that leave the site</h2>
       <p>
