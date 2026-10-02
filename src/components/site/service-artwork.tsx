@@ -1,4 +1,4 @@
-import type { ServiceId } from "@/lib/content";
+import { services, type ServiceId } from "@/lib/content";
 
 const serviceLabel: Record<ServiceId, string> = {
   marketing: "DIGITAL MARKETING",
@@ -11,14 +11,23 @@ const serviceLabel: Record<ServiceId, string> = {
   twitter: "X / TWITTER GROWTH",
   instagram: "INSTAGRAM GROWTH",
   youtube: "YOUTUBE GROWTH",
+  whatsapp: "WHATSAPP BUSINESS AUTOMATION",
+  chatbot: "AI CHATBOT DEVELOPMENT",
+  local: "GOOGLE BUSINESS PROFILE MANAGEMENT",
+  ecommerce: "ECOMMERCE WEBSITE DEVELOPMENT",
+  crm: "CRM SETUP & SALES AUTOMATION",
+  email: "EMAIL MARKETING & AUTOMATION",
+  maintenance: "WEBSITE MAINTENANCE & SPEED OPTIMIZATION",
+  linkedin: "LINKEDIN AUTOMATION & B2B WORKFLOWS",
 };
 
 export function ServiceArtwork({ serviceId, title }: { serviceId: ServiceId; title: string }) {
-  if (["twitter", "instagram", "youtube"].includes(serviceId)) {
+  const service = services.find((item) => item.id === serviceId);
+  if (service?.image.endsWith(".svg")) {
     return (
       <img
-        src={`/media/services/${serviceId}-growth.svg`}
-        alt={`${title} content planning illustration`}
+        src={service.image}
+        alt={service.imageAlt}
         width={1000}
         height={640}
         loading="lazy"

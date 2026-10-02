@@ -14,7 +14,7 @@ export const Route = createFileRoute("/services/")({
     pageMeta({
       title: "Services | Digital Marketing, Web, Software, Apps and AI | MKSAnalytIQ",
       description:
-        "Digital marketing, web development, software, app and AI development from MKSAnalytIQ in Noida, serving Delhi NCR and India. Event management remains available.",
+        "Explore marketing, websites, ecommerce, CRM, AI chatbots and business automation from MKSAnalytIQ in Noida. Services for Delhi NCR and clients across India.",
       path: "/services",
     }),
   component: ServicesPage,

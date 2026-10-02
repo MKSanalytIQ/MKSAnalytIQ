@@ -95,7 +95,15 @@ export type ServiceId =
   | "ai"
   | "twitter"
   | "instagram"
-  | "youtube";
+  | "youtube"
+  | "whatsapp"
+  | "chatbot"
+  | "local"
+  | "ecommerce"
+  | "crm"
+  | "email"
+  | "maintenance"
+  | "linkedin";
 
 export type ProjectCategory = "software" | "marketing" | "events" | "campaigns";
 
@@ -193,7 +201,12 @@ export const services: {
     cta: "Book Free Consultation",
     closingCta: "Talk About Your Marketing Goals",
     related: ["marketing", "campaigns"],
-    relatedServices: ["web-development", "software-development", "ai-development"],
+    relatedServices: [
+      "google-business-profile-management",
+      "email-marketing-automation",
+      "linkedin-automation",
+      "web-development",
+    ],
     image: "/media/desk.jpg",
     imageAlt: "Digital marketing planning desk at MKSAnalytIQ",
     seoTitle: "Digital Marketing Company in Noida | MKSAnalytIQ",
@@ -285,7 +298,12 @@ export const services: {
     heroCta: "Discuss Your Website",
     closingCta: "Start a Web Project",
     related: ["software"],
-    relatedServices: ["software-development", "app-development", "digital-marketing"],
+    relatedServices: [
+      "ecommerce-website-development",
+      "website-maintenance",
+      "software-development",
+      "digital-marketing",
+    ],
     image: "/media/work/buildsite.jpg",
     imageAlt: "BuildSite, a custom web application developed by MKSAnalytIQ",
     seoTitle: "Web Development Company in Noida | MKSAnalytIQ",
@@ -385,7 +403,12 @@ export const services: {
     heroCta: "Discuss Your Software Idea",
     closingCta: "Start Your Software Project",
     related: ["software"],
-    relatedServices: ["web-development", "app-development", "ai-development"],
+    relatedServices: [
+      "crm-sales-automation",
+      "whatsapp-business-automation",
+      "web-development",
+      "ai-development",
+    ],
     image: "/media/devices.jpg",
     imageAlt: "Laptop and phone used for software development at MKSAnalytIQ",
     seoTitle: "Custom Software Development Company in Noida | MKSAnalytIQ",
@@ -586,7 +609,12 @@ export const services: {
     heroCta: "Discuss an AI Project",
     closingCta: "Explore AI for Your Business",
     related: ["software"],
-    relatedServices: ["software-development", "web-development", "digital-marketing"],
+    relatedServices: [
+      "ai-chatbot-development",
+      "whatsapp-business-automation",
+      "software-development",
+      "digital-marketing",
+    ],
     image: "/media/work/taxpilot.jpg",
     imageAlt: "TaxPilot AI, a guided software project developed by MKSAnalytIQ",
     seoTitle: "AI Development & Automation Company in Noida | MKSAnalytIQ",
@@ -753,11 +781,31 @@ export const services: {
       "X / Twitter account growth services in Delhi NCR and India: profile audits, posts, threads, content planning and reporting. Talk to MKSAnalytIQ.",
     faqIds: ["twitter-offer", "twitter-expectations", "growth-location"],
     processSteps: [
-      { n: "01", title: "Audit", text: "Review the account, audience, existing content and business goals." },
-      { n: "02", title: "Plan", text: "Agree the topics, formats, publishing volume and approval calendar." },
-      { n: "03", title: "Create", text: "Prepare the agreed content and review it with your team." },
-      { n: "04", title: "Publish", text: "Publish approved content through the agreed account workflow." },
-      { n: "05", title: "Review", text: "Review available analytics and enquiries to improve the next content plan." },
+      {
+        n: "01",
+        title: "Audit",
+        text: "Review the account, audience, existing content and business goals.",
+      },
+      {
+        n: "02",
+        title: "Plan",
+        text: "Agree the topics, formats, publishing volume and approval calendar.",
+      },
+      {
+        n: "03",
+        title: "Create",
+        text: "Prepare the agreed content and review it with your team.",
+      },
+      {
+        n: "04",
+        title: "Publish",
+        text: "Publish approved content through the agreed account workflow.",
+      },
+      {
+        n: "05",
+        title: "Review",
+        text: "Review available analytics and enquiries to improve the next content plan.",
+      },
     ],
     processTitle: "Your content growth process",
     processIntro:
@@ -805,11 +853,31 @@ export const services: {
       "Instagram account growth services in Delhi NCR and India: profile audits, Reels, carousels, captions and content planning. Talk to MKSAnalytIQ about your goals.",
     faqIds: ["instagram-offer", "instagram-expectations", "growth-location"],
     processSteps: [
-      { n: "01", title: "Audit", text: "Review the account, audience, existing content and business goals." },
-      { n: "02", title: "Plan", text: "Agree the topics, formats, publishing volume and approval calendar." },
-      { n: "03", title: "Create", text: "Prepare the agreed content and review it with your team." },
-      { n: "04", title: "Publish", text: "Publish approved content through the agreed account workflow." },
-      { n: "05", title: "Review", text: "Review available analytics and enquiries to improve the next content plan." },
+      {
+        n: "01",
+        title: "Audit",
+        text: "Review the account, audience, existing content and business goals.",
+      },
+      {
+        n: "02",
+        title: "Plan",
+        text: "Agree the topics, formats, publishing volume and approval calendar.",
+      },
+      {
+        n: "03",
+        title: "Create",
+        text: "Prepare the agreed content and review it with your team.",
+      },
+      {
+        n: "04",
+        title: "Publish",
+        text: "Publish approved content through the agreed account workflow.",
+      },
+      {
+        n: "05",
+        title: "Review",
+        text: "Review available analytics and enquiries to improve the next content plan.",
+      },
     ],
     processTitle: "Your content growth process",
     processIntro:
@@ -857,15 +925,633 @@ export const services: {
       "YouTube channel growth services in Delhi NCR and India: channel audits, video topics, titles, thumbnail planning and analytics. Talk to MKSAnalytIQ.",
     faqIds: ["youtube-offer", "youtube-expectations", "growth-location"],
     processSteps: [
-      { n: "01", title: "Audit", text: "Review the account, audience, existing content and business goals." },
-      { n: "02", title: "Plan", text: "Agree the topics, formats, publishing volume and approval calendar." },
-      { n: "03", title: "Create", text: "Prepare the agreed content and review it with your team." },
-      { n: "04", title: "Publish", text: "Publish approved content through the agreed account workflow." },
-      { n: "05", title: "Review", text: "Review available analytics and enquiries to improve the next content plan." },
+      {
+        n: "01",
+        title: "Audit",
+        text: "Review the account, audience, existing content and business goals.",
+      },
+      {
+        n: "02",
+        title: "Plan",
+        text: "Agree the topics, formats, publishing volume and approval calendar.",
+      },
+      {
+        n: "03",
+        title: "Create",
+        text: "Prepare the agreed content and review it with your team.",
+      },
+      {
+        n: "04",
+        title: "Publish",
+        text: "Publish approved content through the agreed account workflow.",
+      },
+      {
+        n: "05",
+        title: "Review",
+        text: "Review available analytics and enquiries to improve the next content plan.",
+      },
     ],
     processTitle: "Your content growth process",
     processIntro:
       "Share your account and goals. We agree the deliverables, approval process and reporting schedule before work begins.",
+  },
+  {
+    id: "whatsapp",
+    slug: "whatsapp-business-automation",
+    title: "WhatsApp Business Automation",
+    h1: "WhatsApp Business Automation in Delhi NCR & India",
+    blurb:
+      "Connect customer conversations to appointments, orders and sales follow-up with WhatsApp Business automation. Our Noida team helps businesses across India design clear messaging workflows.",
+    problem:
+      "Enquiries are scattered across chats, reminders are manual and the next person on the team cannot see what happened.",
+    solution:
+      "Map the customer journey, configure the agreed messaging tools and connect useful conversation events to your CRM.",
+    suitable:
+      "Clinics, coaching centres, retailers and sales teams handling repeat customer enquiries.",
+    deliverables: [
+      "Messaging workflow audit",
+      "Business Platform setup guidance",
+      "Message template preparation",
+      "Appointment and order reminders",
+      "CRM and enquiry routing",
+      "Staff handover and reporting",
+    ],
+    sections: [
+      {
+        title: "Customer journeys that save staff time",
+        text: "Agree the questions to collect, the person responsible for each enquiry and when a human should take over. Build reminders and updates around your actual appointment or order process.",
+      },
+      {
+        title: "Setup and running costs",
+        text: "We check account access, provider compatibility and the templates needed before implementation. Provider subscriptions, messaging charges and any approval requirements are identified in the proposal.",
+      },
+      {
+        title: "Based in Noida, working across India",
+        text: "Work with our Noida studio from Delhi, Gurugram, Ghaziabad or Faridabad, or collaborate remotely from elsewhere in India. Share your current setup and priorities so we can propose deliverables, a timeline and a fee.",
+      },
+    ],
+    linkLabel: "whatsapp business automation",
+    cta: "Discuss WhatsApp Business Automation",
+    related: [],
+    relatedServices: [
+      "crm-sales-automation",
+      "ai-chatbot-development",
+      "email-marketing-automation",
+    ],
+    image: "/media/services/whatsapp-service.svg",
+    imageAlt: "WhatsApp Business Automation planning workflow illustration",
+    seoTitle: "WhatsApp Business Automation in Delhi NCR | MKSAnalytIQ",
+    seoDescription:
+      "WhatsApp Business automation in Delhi NCR and India: enquiry routing, reminders, message templates and CRM integration. Discuss your workflow with MKSAnalytIQ.",
+    faqIds: ["whatsapp-scope", "whatsapp-details"],
+    processTitle: "From your brief to a working service",
+    processSteps: [
+      {
+        n: "01",
+        title: "Review",
+        text: "Review your goals, current tools and the customer journey.",
+      },
+      {
+        n: "02",
+        title: "Plan",
+        text: "Agree deliverables, access, responsibilities, timeline and pricing.",
+      },
+      {
+        n: "03",
+        title: "Implement",
+        text: "Build or configure the agreed work with your feedback.",
+      },
+      {
+        n: "04",
+        title: "Check",
+        text: "Review the important user journeys and hand over the workflow.",
+      },
+      {
+        n: "05",
+        title: "Improve",
+        text: "Review results and agree the next improvements or support plan.",
+      },
+    ],
+  },
+  {
+    id: "chatbot",
+    slug: "ai-chatbot-development",
+    title: "AI Chatbot Development",
+    h1: "AI Chatbot Development in Noida & Delhi NCR",
+    blurb:
+      "Help visitors find answers and reach your team with an AI chatbot built around your business information. Available for websites and customer support workflows across India.",
+    problem:
+      "Staff repeatedly answer the same questions while visitors leave without finding the right product, service or contact.",
+    solution:
+      "Create a knowledge base from approved information, define the questions the bot can handle and provide a clear handover to your team.",
+    suitable:
+      "Service businesses, online stores and software companies with recurring product or support questions.",
+    deliverables: [
+      "Knowledge-base preparation",
+      "Conversation and enquiry flows",
+      "Website chat integration",
+      "Human handover workflow",
+      "Answer evaluation and refinement",
+      "Usage and maintenance guidance",
+    ],
+    sections: [
+      {
+        title: "Answers grounded in your business",
+        text: "Use your approved pages, documents and FAQs as the source material. Decide which questions require a staff response and how the assistant should handle missing information.",
+      },
+      {
+        title: "A useful enquiry path",
+        text: "Collect only the details needed for follow-up and connect them to the agreed inbox or CRM. We test representative questions and failure cases before launch, then plan how content updates will be reviewed.",
+      },
+      {
+        title: "Based in Noida, working across India",
+        text: "Work with our Noida studio from Delhi, Gurugram, Ghaziabad or Faridabad, or collaborate remotely from elsewhere in India. Share your current setup and priorities so we can propose deliverables, a timeline and a fee.",
+      },
+    ],
+    linkLabel: "ai chatbot development",
+    cta: "Discuss AI Chatbot Development",
+    related: [],
+    relatedServices: ["whatsapp-business-automation", "crm-sales-automation", "ai-development"],
+    image: "/media/services/chatbot-service.svg",
+    imageAlt: "AI Chatbot Development planning workflow illustration",
+    seoTitle: "AI Chatbot Development in Noida & Delhi NCR | MKSAnalytIQ",
+    seoDescription:
+      "AI chatbot development in Noida, Delhi NCR and India. Build website assistants with your business knowledge, enquiry capture and human handover. Talk to us.",
+    faqIds: ["chatbot-scope", "chatbot-details"],
+    processTitle: "From your brief to a working service",
+    processSteps: [
+      {
+        n: "01",
+        title: "Review",
+        text: "Review your goals, current tools and the customer journey.",
+      },
+      {
+        n: "02",
+        title: "Plan",
+        text: "Agree deliverables, access, responsibilities, timeline and pricing.",
+      },
+      {
+        n: "03",
+        title: "Implement",
+        text: "Build or configure the agreed work with your feedback.",
+      },
+      {
+        n: "04",
+        title: "Check",
+        text: "Review the important user journeys and hand over the workflow.",
+      },
+      {
+        n: "05",
+        title: "Improve",
+        text: "Review results and agree the next improvements or support plan.",
+      },
+    ],
+  },
+  {
+    id: "local",
+    slug: "google-business-profile-management",
+    title: "Google Business Profile Management",
+    h1: "Google Business Profile Management in Noida & Delhi NCR",
+    blurb:
+      "Keep your business information useful and consistent on Google with profile setup support, service updates, photos and review-response planning. We support eligible businesses across India.",
+    problem:
+      "Customers find incomplete hours, unclear service information or outdated photos when they look up the business.",
+    solution:
+      "Review the profile and business details, agree accurate updates and create a manageable routine for keeping the listing current.",
+    suitable:
+      "Local shops, clinics, professional practices and businesses serving customers at a location or within a service area.",
+    deliverables: [
+      "Profile audit and setup guidance",
+      "Category and service review",
+      "Hours and contact information updates",
+      "Photo and update planning",
+      "Review-response support",
+      "Profile performance review",
+    ],
+    sections: [
+      {
+        title: "Make local business details clear",
+        text: "Check the business name, address or service area, contact details, opening hours and service descriptions against the real business. Coordinate relevant information on your website.",
+      },
+      {
+        title: "Maintain the profile over time",
+        text: "Plan useful photos and updates, help staff respond to genuine reviews and review available profile interactions. Verification is completed by the owner using Google's available process.",
+      },
+      {
+        title: "Based in Noida, working across India",
+        text: "Work with our Noida studio from Delhi, Gurugram, Ghaziabad or Faridabad, or collaborate remotely from elsewhere in India. Share your current setup and priorities so we can propose deliverables, a timeline and a fee.",
+      },
+    ],
+    linkLabel: "google business profile management",
+    cta: "Discuss Google Business Profile Management",
+    related: [],
+    relatedServices: ["digital-marketing", "web-development", "website-maintenance"],
+    image: "/media/services/local-service.svg",
+    imageAlt: "Google Business Profile Management planning workflow illustration",
+    seoTitle: "Google Business Profile Management in Noida | MKSAnalytIQ",
+    seoDescription:
+      "Google Business Profile management in Noida and Delhi NCR: profile audits, service updates, photos and review responses. Remote support across India.",
+    faqIds: ["local-scope", "local-details"],
+    processTitle: "From your brief to a working service",
+    processSteps: [
+      {
+        n: "01",
+        title: "Review",
+        text: "Review your goals, current tools and the customer journey.",
+      },
+      {
+        n: "02",
+        title: "Plan",
+        text: "Agree deliverables, access, responsibilities, timeline and pricing.",
+      },
+      {
+        n: "03",
+        title: "Implement",
+        text: "Build or configure the agreed work with your feedback.",
+      },
+      {
+        n: "04",
+        title: "Check",
+        text: "Review the important user journeys and hand over the workflow.",
+      },
+      {
+        n: "05",
+        title: "Improve",
+        text: "Review results and agree the next improvements or support plan.",
+      },
+    ],
+  },
+  {
+    id: "ecommerce",
+    slug: "ecommerce-website-development",
+    title: "Ecommerce Website Development",
+    h1: "Ecommerce Website Development in Noida & Delhi NCR",
+    blurb:
+      "Launch an online store with a clear catalogue, usable checkout and manageable order workflow. MKSAnalytIQ builds ecommerce websites for retailers and brands across India.",
+    problem:
+      "A product catalogue is hard to browse, checkout is confusing or staff manage orders manually across several tools.",
+    solution:
+      "Plan the product structure and buying journey, build the agreed store and connect payments, shipping and operational tools supported by your chosen platform.",
+    suitable: "Retailers, manufacturers and consumer brands selling products online.",
+    deliverables: [
+      "Store and catalogue planning",
+      "Responsive product and category pages",
+      "Cart and checkout configuration",
+      "Payment gateway integration",
+      "Shipping and order workflow",
+      "Store administration handover",
+    ],
+    sections: [
+      {
+        title: "Build around your products and operations",
+        text: "Define product variants, stock handling, delivery regions and order statuses before choosing the platform. Identify who provides product photos, descriptions and policy content.",
+      },
+      {
+        title: "Support the purchase journey",
+        text: "Create clear product information, mobile navigation and checkout feedback. Test agreed payment and order scenarios before launch and plan how staff will manage new orders and updates.",
+      },
+      {
+        title: "Based in Noida, working across India",
+        text: "Work with our Noida studio from Delhi, Gurugram, Ghaziabad or Faridabad, or collaborate remotely from elsewhere in India. Share your current setup and priorities so we can propose deliverables, a timeline and a fee.",
+      },
+    ],
+    linkLabel: "ecommerce website development",
+    cta: "Discuss Ecommerce Website Development",
+    related: [],
+    relatedServices: ["web-development", "email-marketing-automation", "website-maintenance"],
+    image: "/media/services/ecommerce-service.svg",
+    imageAlt: "Ecommerce Website Development planning workflow illustration",
+    seoTitle: "Ecommerce Website Development in Noida | MKSAnalytIQ",
+    seoDescription:
+      "Ecommerce website development in Noida, Delhi NCR and India: online stores, catalogues, checkout, payments and order workflows. Discuss your store with us.",
+    faqIds: ["ecommerce-scope", "ecommerce-details"],
+    processTitle: "From your brief to a working service",
+    processSteps: [
+      {
+        n: "01",
+        title: "Review",
+        text: "Review your goals, current tools and the customer journey.",
+      },
+      {
+        n: "02",
+        title: "Plan",
+        text: "Agree deliverables, access, responsibilities, timeline and pricing.",
+      },
+      {
+        n: "03",
+        title: "Implement",
+        text: "Build or configure the agreed work with your feedback.",
+      },
+      {
+        n: "04",
+        title: "Check",
+        text: "Review the important user journeys and hand over the workflow.",
+      },
+      {
+        n: "05",
+        title: "Improve",
+        text: "Review results and agree the next improvements or support plan.",
+      },
+    ],
+  },
+  {
+    id: "crm",
+    slug: "crm-sales-automation",
+    title: "CRM Setup & Sales Automation",
+    h1: "CRM Setup & Sales Automation in Delhi NCR & India",
+    blurb:
+      "Organize incoming enquiries, assign follow-ups and see where deals stand. Our Noida team configures CRM and sales automation workflows for businesses across India.",
+    problem:
+      "Leads arrive from several channels, follow-ups depend on memory and nobody has a reliable view of the pipeline.",
+    solution:
+      "Agree lead stages and responsibilities, configure the CRM and connect supported enquiry sources with clear ownership and reminders.",
+    suitable:
+      "Agencies, consultants, property businesses and sales teams with multiple enquiry sources.",
+    deliverables: [
+      "Sales process and pipeline mapping",
+      "CRM configuration and field design",
+      "Lead capture and assignment",
+      "Follow-up tasks and reminders",
+      "Pipeline dashboards",
+      "Data import and team training",
+    ],
+    sections: [
+      {
+        title: "Give every enquiry a next step",
+        text: "Define the stages from new enquiry to won or closed, assign ownership and agree follow-up rules. Capture the information staff need without overloading the form.",
+      },
+      {
+        title: "Connect the tools your team uses",
+        text: "Review website forms, messaging tools and existing contact data. Plan field mapping, duplicate handling and migration checks so the team can use the system after handover.",
+      },
+      {
+        title: "Based in Noida, working across India",
+        text: "Work with our Noida studio from Delhi, Gurugram, Ghaziabad or Faridabad, or collaborate remotely from elsewhere in India. Share your current setup and priorities so we can propose deliverables, a timeline and a fee.",
+      },
+    ],
+    linkLabel: "crm setup & sales automation",
+    cta: "Discuss CRM Setup",
+    related: [],
+    relatedServices: [
+      "whatsapp-business-automation",
+      "linkedin-automation",
+      "software-development",
+    ],
+    image: "/media/services/crm-service.svg",
+    imageAlt: "CRM Setup & Sales Automation planning workflow illustration",
+    seoTitle: "CRM Setup & Sales Automation in Delhi NCR | MKSAnalytIQ",
+    seoDescription:
+      "CRM setup and sales automation in Delhi NCR and India. Organize enquiries, assign follow-ups and track your pipeline with MKSAnalytIQ. Discuss your workflow.",
+    faqIds: ["crm-scope", "crm-details"],
+    processTitle: "From your brief to a working service",
+    processSteps: [
+      {
+        n: "01",
+        title: "Review",
+        text: "Review your goals, current tools and the customer journey.",
+      },
+      {
+        n: "02",
+        title: "Plan",
+        text: "Agree deliverables, access, responsibilities, timeline and pricing.",
+      },
+      {
+        n: "03",
+        title: "Implement",
+        text: "Build or configure the agreed work with your feedback.",
+      },
+      {
+        n: "04",
+        title: "Check",
+        text: "Review the important user journeys and hand over the workflow.",
+      },
+      {
+        n: "05",
+        title: "Improve",
+        text: "Review results and agree the next improvements or support plan.",
+      },
+    ],
+  },
+  {
+    id: "email",
+    slug: "email-marketing-automation",
+    title: "Email Marketing & Automation",
+    h1: "Email Marketing Automation in Delhi NCR & India",
+    blurb:
+      "Create useful newsletters and timely customer journeys with email marketing automation. MKSAnalytIQ helps businesses across India plan campaigns, segments and reporting.",
+    problem:
+      "Contacts sit in disconnected lists and each campaign starts from scratch without a clear customer journey or reliable reporting.",
+    solution:
+      "Organize permission-based contacts, build reusable email layouts and configure agreed campaigns and automated sequences.",
+    suitable:
+      "Online stores, training providers, SaaS companies and B2B businesses with an opted-in contact list.",
+    deliverables: [
+      "Contact list and segment planning",
+      "Branded email templates",
+      "Welcome and nurture sequences",
+      "Campaign setup and scheduling",
+      "Unsubscribe and suppression handling",
+      "Delivery and conversion reporting",
+    ],
+    sections: [
+      {
+        title: "Send messages matched to the customer journey",
+        text: "Plan welcome emails, educational follow-ups or customer updates around defined triggers. Agree content, timing and the action each email should support.",
+      },
+      {
+        title: "Make delivery and reporting part of setup",
+        text: "Review sender configuration, list quality and available delivery events. Keep unsubscribes and suppressed contacts out of sends, then review clicks and business outcomes alongside delivery data.",
+      },
+      {
+        title: "Based in Noida, working across India",
+        text: "Work with our Noida studio from Delhi, Gurugram, Ghaziabad or Faridabad, or collaborate remotely from elsewhere in India. Share your current setup and priorities so we can propose deliverables, a timeline and a fee.",
+      },
+    ],
+    linkLabel: "email marketing & automation",
+    cta: "Discuss Email Marketing",
+    related: [],
+    relatedServices: ["crm-sales-automation", "ecommerce-website-development", "digital-marketing"],
+    image: "/media/services/email-service.svg",
+    imageAlt: "Email Marketing & Automation planning workflow illustration",
+    seoTitle: "Email Marketing Automation in Delhi NCR | MKSAnalytIQ",
+    seoDescription:
+      "Email marketing automation in Delhi NCR and India: Brevo setup, branded templates, customer segments and welcome sequences. Plan your campaigns with us.",
+    faqIds: ["email-scope", "email-details"],
+    processTitle: "From your brief to a working service",
+    processSteps: [
+      {
+        n: "01",
+        title: "Review",
+        text: "Review your goals, current tools and the customer journey.",
+      },
+      {
+        n: "02",
+        title: "Plan",
+        text: "Agree deliverables, access, responsibilities, timeline and pricing.",
+      },
+      {
+        n: "03",
+        title: "Implement",
+        text: "Build or configure the agreed work with your feedback.",
+      },
+      {
+        n: "04",
+        title: "Check",
+        text: "Review the important user journeys and hand over the workflow.",
+      },
+      {
+        n: "05",
+        title: "Improve",
+        text: "Review results and agree the next improvements or support plan.",
+      },
+    ],
+  },
+  {
+    id: "maintenance",
+    slug: "website-maintenance",
+    title: "Website Maintenance & Speed Optimization",
+    h1: "Website Maintenance & Speed Optimization in Noida",
+    blurb:
+      "Keep your website usable, current and easier to maintain with scheduled updates, backups, bug fixes and performance reviews. Serving Delhi NCR and businesses across India.",
+    problem:
+      "Broken forms, slow pages and unplanned updates make a website harder to use and leave the team unsure who will fix it.",
+    solution:
+      "Audit the site and hosting, prioritize the issues affecting visitors and agree a maintenance schedule with a clear support process.",
+    suitable: "Businesses with an existing website or web application that needs ongoing care.",
+    deliverables: [
+      "Website and dependency review",
+      "Backup and recovery planning",
+      "Agreed updates and bug fixes",
+      "Form and broken-link checks",
+      "Image and page-speed improvements",
+      "Maintenance reports",
+    ],
+    sections: [
+      {
+        title: "Improve the pages visitors actually use",
+        text: "Review mobile layouts, large assets, loading behaviour and important forms. Prioritize fixes using measured performance and the pages that matter to your business.",
+      },
+      {
+        title: "Define ownership and support expectations",
+        text: "Agree who manages hosting, backups, software updates and incidents. The plan sets response windows, included work and how larger changes are estimated.",
+      },
+      {
+        title: "Based in Noida, working across India",
+        text: "Work with our Noida studio from Delhi, Gurugram, Ghaziabad or Faridabad, or collaborate remotely from elsewhere in India. Share your current setup and priorities so we can propose deliverables, a timeline and a fee.",
+      },
+    ],
+    linkLabel: "website maintenance & speed optimization",
+    cta: "Discuss Website Maintenance",
+    related: [],
+    relatedServices: ["web-development", "ecommerce-website-development", "software-development"],
+    image: "/media/services/maintenance-service.svg",
+    imageAlt: "Website Maintenance & Speed Optimization planning workflow illustration",
+    seoTitle: "Website Maintenance & Speed Optimization | MKSAnalytIQ",
+    seoDescription:
+      "Website maintenance in Noida, Delhi NCR and India: updates, backups, form checks, bug fixes and speed optimization. Discuss an ongoing support plan with us.",
+    faqIds: ["maintenance-scope", "maintenance-details"],
+    processTitle: "From your brief to a working service",
+    processSteps: [
+      {
+        n: "01",
+        title: "Review",
+        text: "Review your goals, current tools and the customer journey.",
+      },
+      {
+        n: "02",
+        title: "Plan",
+        text: "Agree deliverables, access, responsibilities, timeline and pricing.",
+      },
+      {
+        n: "03",
+        title: "Implement",
+        text: "Build or configure the agreed work with your feedback.",
+      },
+      {
+        n: "04",
+        title: "Check",
+        text: "Review the important user journeys and hand over the workflow.",
+      },
+      {
+        n: "05",
+        title: "Improve",
+        text: "Review results and agree the next improvements or support plan.",
+      },
+    ],
+  },
+  {
+    id: "linkedin",
+    slug: "linkedin-automation",
+    title: "LinkedIn Automation & B2B Workflows",
+    h1: "LinkedIn Automation Services in Delhi NCR & India",
+    blurb:
+      "Coordinate LinkedIn content, lead capture and sales follow-up with approved tools and CRM workflows. Our Noida team supports B2B businesses and founders across India.",
+    problem:
+      "Content approvals, lead form responses and sales tasks live in separate places, so relevant enquiries receive inconsistent follow-up.",
+    solution:
+      "Plan the content workflow, connect supported lead sources through authorized integrations and create CRM tasks for the sales team.",
+    suitable:
+      "B2B service businesses, agencies, founders and sales teams using LinkedIn in their marketing.",
+    deliverables: [
+      "Profile and company-page review",
+      "Content calendar and approvals",
+      "Native or authorized scheduling setup",
+      "Supported Lead Gen Form integration",
+      "CRM routing and follow-up tasks",
+      "Campaign and pipeline reporting",
+    ],
+    sections: [
+      {
+        title: "Content and lead operations",
+        text: "Build a repeatable process for drafting, reviewing and scheduling content. Where the account and chosen provider support it, route Lead Gen Form submissions to the CRM with the correct owner and source.",
+      },
+      {
+        title: "Clear boundaries for automation",
+        text: "Integration availability is checked before work begins. Account scraping, automated connection requests, auto-comments and unsolicited message bots are outside this service. Your team handles personal conversations.",
+      },
+      {
+        title: "Based in Noida, working across India",
+        text: "Work with our Noida studio from Delhi, Gurugram, Ghaziabad or Faridabad, or collaborate remotely from elsewhere in India. Share your current setup and priorities so we can propose deliverables, a timeline and a fee.",
+      },
+    ],
+    linkLabel: "linkedin automation & b2b workflows",
+    cta: "Discuss LinkedIn Automation",
+    related: [],
+    relatedServices: ["crm-sales-automation", "email-marketing-automation", "social-media"],
+    image: "/media/services/linkedin-service.svg",
+    imageAlt: "LinkedIn Automation & B2B Workflows planning workflow illustration",
+    seoTitle: "LinkedIn Automation Services in Delhi NCR | MKSAnalytIQ",
+    seoDescription:
+      "LinkedIn automation services in Delhi NCR and India: content workflows, supported scheduling, authorized lead integrations and CRM follow-up. Talk to us.",
+    faqIds: ["linkedin-scope", "linkedin-details"],
+    processTitle: "From your brief to a working service",
+    processSteps: [
+      {
+        n: "01",
+        title: "Review",
+        text: "Review your goals, current tools and the customer journey.",
+      },
+      {
+        n: "02",
+        title: "Plan",
+        text: "Agree deliverables, access, responsibilities, timeline and pricing.",
+      },
+      {
+        n: "03",
+        title: "Implement",
+        text: "Build or configure the agreed work with your feedback.",
+      },
+      {
+        n: "04",
+        title: "Check",
+        text: "Review the important user journeys and hand over the workflow.",
+      },
+      {
+        n: "05",
+        title: "Improve",
+        text: "Review results and agree the next improvements or support plan.",
+      },
+    ],
   },
 ];
 
@@ -1500,6 +2186,102 @@ export const timelineOptions = [
 ] as const;
 
 export const faqs: { id: string; q: string; a: string; tags: string[] }[] = [
+  {
+    id: "whatsapp-scope",
+    q: "Can you connect WhatsApp to my existing CRM?",
+    a: "We review the CRM and your WhatsApp provider first. Integration depends on their supported interfaces and account access; the agreed fields and routing rules are listed before work starts.",
+    tags: ["whatsapp"],
+  },
+  {
+    id: "whatsapp-details",
+    q: "Does the service include unsolicited bulk messaging?",
+    a: "Campaigns use an opted-in audience and an agreed preference and opt-out process. The service covers customer communication workflows, not purchased contact lists.",
+    tags: ["whatsapp"],
+  },
+  {
+    id: "chatbot-scope",
+    q: "Can the chatbot answer using my own documents?",
+    a: "Yes, when the source files and their usage are approved. We review their quality and access requirements and choose an appropriate retrieval and update workflow.",
+    tags: ["chatbot"],
+  },
+  {
+    id: "chatbot-details",
+    q: "Will every answer be correct?",
+    a: "AI responses need evaluation and ongoing review. We define limits, test common questions and provide a human escalation path. Model usage and hosting costs are agreed separately.",
+    tags: ["chatbot"],
+  },
+  {
+    id: "local-scope",
+    q: "Can you guarantee a place in the Google Maps top three?",
+    a: "No. We improve profile completeness and consistency, but Google determines visibility. Rankings vary by search, location, relevance and other factors.",
+    tags: ["local"],
+  },
+  {
+    id: "local-details",
+    q: "Can you manage profiles outside Delhi NCR?",
+    a: "Yes. Eligible businesses elsewhere in India can work with us remotely. The business owner retains ownership and grants the access needed for agreed work.",
+    tags: ["local"],
+  },
+  {
+    id: "ecommerce-scope",
+    q: "Can you improve an existing ecommerce store?",
+    a: "Yes. We can review navigation, product pages, checkout and integrations before proposing targeted improvements or a rebuild.",
+    tags: ["ecommerce"],
+  },
+  {
+    id: "ecommerce-details",
+    q: "Are payment, hosting and platform fees included?",
+    a: "The proposal separates development fees from hosting, platform subscriptions, payment charges and third-party tools. Gateway activation depends on the merchant account.",
+    tags: ["ecommerce"],
+  },
+  {
+    id: "crm-scope",
+    q: "Do you build a custom CRM or configure an existing one?",
+    a: "Either can be considered. We review your process, budget and existing tools, then recommend configuration or a custom build with a defined scope.",
+    tags: ["crm"],
+  },
+  {
+    id: "crm-details",
+    q: "Can you move our spreadsheet contacts into the CRM?",
+    a: "Yes, after reviewing the file structure, permissions and data quality. Field mapping, duplicate rules and a sample import are agreed before the full migration.",
+    tags: ["crm"],
+  },
+  {
+    id: "email-scope",
+    q: "Can you set up Brevo email automation?",
+    a: "Yes. We can plan templates, contact attributes, segments and supported workflows in Brevo. Other tools can be assessed against your requirements.",
+    tags: ["email"],
+  },
+  {
+    id: "email-details",
+    q: "Do you supply email lists or guarantee inbox placement?",
+    a: "No. Campaigns use contacts with permission to receive them. Delivery depends on sender reputation, recipient systems and list quality; software subscriptions and send limits are scoped separately.",
+    tags: ["email"],
+  },
+  {
+    id: "maintenance-scope",
+    q: "Can you maintain a website built by another developer?",
+    a: "We first review the technology, hosting and available access. If we can support the stack, we propose an onboarding audit and an ongoing plan.",
+    tags: ["maintenance"],
+  },
+  {
+    id: "maintenance-details",
+    q: "Do you guarantee a perfect speed score?",
+    a: "No. We measure the current site and target practical improvements. Results depend on hosting, third-party scripts, page content and visitor devices.",
+    tags: ["maintenance"],
+  },
+  {
+    id: "linkedin-scope",
+    q: "What do you mean by LinkedIn automation?",
+    a: "Content approval workflows, supported scheduling, authorized lead integrations and CRM reminders. The exact tools and account permissions are confirmed in the proposal.",
+    tags: ["linkedin"],
+  },
+  {
+    id: "linkedin-details",
+    q: "Can every LinkedIn account connect to Lead Sync?",
+    a: "No. Lead Sync access and integrations depend on eligibility, permissions and provider support. We verify those prerequisites and agree an alternative handover process if integration is unavailable.",
+    tags: ["linkedin"],
+  },
   {
     id: "twitter-offer",
     q: "What does your Twitter account growth service include?",
