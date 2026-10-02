@@ -72,6 +72,7 @@ export function businessGraph(description: string) {
   const founder = {
     "@type": "Person",
     name: company.proprietor,
+    sameAs: company.proprietorSocialLinks.map((profile) => profile.url),
   };
   const logo = absoluteUrl("/media/logo.png");
   const image = absoluteUrl("/media/office.jpg");

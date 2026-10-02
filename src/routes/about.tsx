@@ -79,6 +79,18 @@ function About() {
           <a className="mt-6 text-sm font-semibold text-accent" href={company.github}>
             github.com/{company.githubHandle}
           </a>
+          {company.socialProfiles.map((profile) => (
+            <a key={profile.url} className="mt-3 inline-flex min-h-11 items-center text-sm font-semibold text-accent hover:underline"
+              href={profile.url} target="_blank" rel="noopener noreferrer">
+              {company.name} on {profile.platform} · Company
+            </a>
+          ))}
+          {company.proprietorSocialLinks.map((profile) => (
+            <a key={profile.url} className="mt-3 inline-flex min-h-11 items-center text-sm font-semibold text-accent hover:underline"
+              href={profile.url} target="_blank" rel="noopener noreferrer">
+              {company.proprietor} on {profile.platform} · {profile.handle}
+            </a>
+          ))}
         </div>
       </section>
 

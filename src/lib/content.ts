@@ -15,11 +15,18 @@ export const site = {
   legalUpdated: "24 September 2026",
 } as const;
 
+const companySocialProfiles = [
+  { platform: "LinkedIn", url: "https://www.linkedin.com/company/mks-analytiq" },
+];
+
 export const company = {
   name: "MKSAnalytIQ",
   wordLeft: "MKS",
   wordRight: "ANALYTIQ",
   proprietor: "Manoj Kumar Singh",
+  proprietorSocialLinks: [
+    { platform: "X", handle: "@mksanalytiq", url: "https://x.com/mksanalytiq" },
+  ],
   phoneDisplay: "+91 95608 14623",
   phoneTel: "+919560814623",
   whatsapp: "https://wa.me/919560814623",
@@ -34,7 +41,8 @@ export const company = {
   hours: "",
   github: "https://github.com/MKSanalytIQ",
   githubHandle: "MKSanalytIQ",
-  socialLinks: [] as string[],
+  socialProfiles: companySocialProfiles,
+  socialLinks: companySocialProfiles.map((profile) => profile.url),
   twitterHandle: undefined as string | undefined,
 } as const;
 

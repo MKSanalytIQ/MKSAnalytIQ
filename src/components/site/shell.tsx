@@ -274,6 +274,20 @@ export function SiteShell({
                   GitHub · {company.githubHandle}
                 </a>
               </li>
+              {company.socialProfiles.map((profile) => (
+                <li key={profile.url}>
+                  <a className="hover:text-accent" href={profile.url} target="_blank" rel="noopener noreferrer">
+                    {profile.platform} · {company.name} (Company)
+                  </a>
+                </li>
+              ))}
+              {company.proprietorSocialLinks.map((profile) => (
+                <li key={profile.url}>
+                  <a className="hover:text-accent" href={profile.url} target="_blank" rel="noopener noreferrer">
+                    {profile.platform} · {company.proprietor} (Proprietor)
+                  </a>
+                </li>
+              ))}
               {company.hours ? <li className="text-paper/75">{company.hours}</li> : null}
             </ul>
           </div>
