@@ -34,6 +34,7 @@ function markExitIntentSeen() {
 export function ExitIntent() {
   const [open, setOpen] = useState(false);
   const panel = useRef<HTMLDivElement>(null);
+  const shown = useRef(false);
 
   useEffect(() => {
     if (window.matchMedia("(pointer: coarse)").matches) return;
@@ -42,7 +43,8 @@ export function ExitIntent() {
       return;
     }
     const onOut = (event: MouseEvent) => {
-      if (event.clientY > 8 || event.relatedTarget) return;
+      if (shown.current || event.clientY > 8 || event.relatedTarget) return;
+      shown.current = true;
       markExitIntentSeen();
       setOpen(true);
     };
@@ -61,6 +63,12 @@ export function ExitIntent() {
   }, [open]);
 
   if (!open) return null;
+
+  const dismiss = () => {
+    shown.current = true;
+    markExitIntentSeen();
+    setOpen(false);
+  };
 
   return (
     <div className="fixed inset-0 z-50 grid place-items-end bg-ink/50 p-4 sm:place-items-center">
@@ -85,13 +93,13 @@ export function ExitIntent() {
               to="/contact"
               onClick={() => {
                 track("quote_click", { source: "exit" });
-                setOpen(false);
+                dismiss();
               }}
             >
               Request the audit
             </Link>
           </Button>
-          <Button type="button" variant="line" onClick={() => setOpen(false)}>
+          <Button type="button" variant="line" onClick={dismiss}>
             Not now
           </Button>
         </div>
