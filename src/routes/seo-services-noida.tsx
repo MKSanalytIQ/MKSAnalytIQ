@@ -8,7 +8,7 @@ import { breadcrumbSchema, faqSchema, pageMeta, serviceSchema } from "@/lib/seo"
 const path = "/seo-services-noida";
 const title = "SEO Services in Noida | Local SEO Experts | MKSAnalytIQ";
 const description =
-  "Noida SEO services for local businesses: technical checks, useful content and page optimization. MKSAnalytIQ serves Delhi NCR without ranking guarantees.";
+  "SEO services in Noida for local businesses: technical checks, useful content and page optimization. MKSAnalytIQ serves clients across Delhi NCR.";
 
 const geoMeta = [
   { name: "geo.region", content: "IN-UP" },

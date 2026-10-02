@@ -325,7 +325,7 @@ export const services: {
     id: "software",
     slug: "software-development",
     title: "Software Development",
-    h1: "Software Development Company in Noida",
+    h1: "Custom Software Development Company in Noida",
     linkLabel: "custom software development",
     blurb:
       "Custom software, SaaS platforms and business systems your team can run after the handover.",
@@ -378,9 +378,9 @@ export const services: {
     relatedServices: ["web-development", "app-development", "ai-development"],
     image: "/media/devices.jpg",
     imageAlt: "Laptop and phone used for software development at MKSAnalytIQ",
-    seoTitle: "Software Development Company in Noida | MKSAnalytIQ",
+    seoTitle: "Custom Software Development Company in Noida | MKSAnalytIQ",
     seoDescription:
-      "MKSAnalytIQ builds custom software, SaaS platforms, web applications, dashboards and business systems for companies in Noida, Delhi NCR and across India.",
+      "Custom software development company in Noida building SaaS platforms, web applications, dashboards and business systems for teams across Delhi NCR and India.",
     processTitle: "Software Development Process",
     processIntro:
       "Six steps. You approve the scope before development, and support after deployment is included only when that scope says so.",

@@ -8,7 +8,7 @@ import { breadcrumbSchema, faqSchema, pageMeta, serviceSchema } from "@/lib/seo"
 const path = "/google-ads-agency-noida";
 const title = "Google Ads Agency in Noida | PPC Management | MKSAnalytIQ";
 const description =
-  "Google Ads management in Noida with campaign setup, landing pages, conversion tracking and monthly reporting. MKSAnalytIQ serves Delhi NCR with clear scopes.";
+  "Google Ads agency in Noida for campaign setup, landing pages, conversion tracking and monthly reporting. MKSAnalytIQ serves businesses across Delhi NCR.";
 
 const geoMeta = [
   { name: "geo.region", content: "IN-UP" },
@@ -60,7 +60,7 @@ function AdsPage() {
       <JsonLd data={faqSchema(questions)} />
       <JsonLd
         data={serviceSchema({
-          name: "Google Ads management in Noida",
+          name: "Google Ads agency in Noida",
           description,
           serviceType: "Google Ads campaign management",
           path,
@@ -70,7 +70,7 @@ function AdsPage() {
         <div className="mx-auto max-w-6xl px-5 py-14">
           <p className="text-xs font-semibold uppercase tracking-widest text-primary">Noida</p>
           <h1 className="mt-3 max-w-3xl text-4xl font-extrabold tracking-tight sm:text-5xl">
-            Google Ads for Noida businesses
+            Google Ads Agency in Noida
           </h1>
           <p className="mt-4 max-w-2xl text-base leading-relaxed text-mute">
             Campaigns are planned with the page they send people to. MKSAnalytIQ is based at {company.addressOneLine}.
